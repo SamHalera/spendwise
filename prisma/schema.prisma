@@ -22,3 +22,35 @@ model User {
     salt      String
 
 }
+
+model Expense{
+  id  Int     @id @default(autoincrement())
+  label String
+  date DateTime
+  amount Int
+  expenseStatus ExpenseStatus
+  wallet Wallet @relation(fields: [walletId], references: [id])
+  walletId  Int
+}
+
+model Income {
+  id  Int     @id @default(autoincrement())
+  label String
+  date DateTime
+  amount Int
+  expenseStatus ExpenseStatus
+  wallet Wallet @relation(fields: [walletId], references: [id])
+  walletId  Int
+}
+model Wallet {
+  id Int  @id @default(autoincrement())
+  balance Int
+  expense Expense[]
+  income Income[]
+}
+ enum ExpenseStatus {
+  MADE
+  FUTURE
+ }
+
+

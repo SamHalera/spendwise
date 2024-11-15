@@ -1,6 +1,7 @@
 "use client";
 import { signinFormSchema } from "@/types/zodSchemas/authSchemas";
 import React from "react";
+import { signIn } from "next-auth/react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,6 +16,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import logoGoogle from "@/public/images/google_logo.svg";
 
 const LoginForm = () => {
   const form = useForm<z.infer<typeof signinFormSchema>>({
@@ -69,7 +71,24 @@ const LoginForm = () => {
               );
             }}
           />
-          <Button className="self-end">Sign In</Button>
+          <Button className="self-center">Sign In</Button>
+          <Button
+            type="button"
+            className="w-fit my-1 self-center"
+            onClick={() => {
+              signIn("google", { callbackUrl: "/" });
+            }}
+            size="lg"
+            variant="outline"
+          >
+            <img
+              src={logoGoogle.src}
+              alt="Google logo"
+              // className="mr-2"
+              height={30}
+              width={30}
+            />
+          </Button>
         </form>
       </Form>
     </div>

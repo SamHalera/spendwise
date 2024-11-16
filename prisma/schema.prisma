@@ -29,7 +29,7 @@ model Expense{
   label   String
   date    DateTime
   amount  Int
-  expenseStatus ExpenseStatus
+  expenseStatus ExpenseIncomeStatus
   wallet Wallet @relation(fields: [walletId], references: [id])
   walletId  Int
 }
@@ -39,17 +39,18 @@ model Income {
   label String
   date DateTime
   amount Int
-  expenseStatus ExpenseStatus
+  incomeStatus ExpenseIncomeStatus
   wallet Wallet @relation(fields: [walletId], references: [id])
   walletId  Int
 }
 model Wallet {
   id Int  @id @default(autoincrement())
+  name String
   balance Int
   expense Expense[]
   income Income[]
 }
- enum ExpenseStatus {
+ enum ExpenseIncomeStatus {
   MADE
   FUTURE
  }

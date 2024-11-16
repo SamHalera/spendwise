@@ -1,11 +1,13 @@
 import LoginForm from "@/components/authForms/LoginForm";
-import React from "react";
+import React, { Suspense } from "react";
 
 const page = () => {
   return (
     <div>
       PAGE SIGN IN
-      <LoginForm />
+      <Suspense>
+        <LoginForm />
+      </Suspense>
     </div>
   );
 };

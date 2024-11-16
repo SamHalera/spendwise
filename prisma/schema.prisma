@@ -14,21 +14,22 @@ datasource db {
 }
 
 model User {
-    id        Int     @id @default(autoincrement())
-    email     String  @unique
-    firstname String
-    lastname  String
-    password  String
-    salt      String
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  firstname String
+  lastname  String
+  token     String
+  hash      String
+  salt      String
 
 }
 
 model Expense{
-  id  Int     @id @default(autoincrement())
-  label String
-  date DateTime
-  amount Int
-  expenseStatus ExpenseStatus
+  id      Int     @id @default(autoincrement())
+  label   String
+  date    DateTime
+  amount  Int
+  expenseStatus ExpenseIncomeStatus
   wallet Wallet @relation(fields: [walletId], references: [id])
   walletId  Int
 }
@@ -38,17 +39,18 @@ model Income {
   label String
   date DateTime
   amount Int
-  expenseStatus ExpenseStatus
+  incomeStatus ExpenseIncomeStatus
   wallet Wallet @relation(fields: [walletId], references: [id])
   walletId  Int
 }
 model Wallet {
   id Int  @id @default(autoincrement())
+  name String
   balance Int
   expense Expense[]
   income Income[]
 }
- enum ExpenseStatus {
+ enum ExpenseIncomeStatus {
   MADE
   FUTURE
  }

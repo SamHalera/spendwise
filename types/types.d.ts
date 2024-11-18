@@ -7,16 +7,20 @@ type WalletProps = {
 };
 
 type ExpenseProps = {
+  id: number;
   label: string;
   date: Date;
   amount: number;
   expenseStatus: string;
+  paymentMethod: string;
   walletId: number;
 };
 type IncomeProps = {
+  id: number;
   label: string;
   date: Date;
   amount: number;
-  expenseStatus: string;
+  incomeStatus: string;
+  paymentMethod: string;
   walletId: number;
 };

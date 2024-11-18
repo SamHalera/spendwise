@@ -17,7 +17,7 @@ import {
   ChevronRight,
   LayoutDashboard,
   LogOut,
-  PlusCircle,
+  Settings,
   Wallet,
 } from "lucide-react";
 
@@ -28,15 +28,7 @@ import {
 } from "../ui/collapsible";
 import { signOut } from "next-auth/react";
 
-export function AppSidebar({
-  wallets,
-}: {
-  wallets: {
-    id: number;
-    name: string;
-    url: string;
-  }[];
-}) {
+export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader />
@@ -66,28 +58,24 @@ export function AppSidebar({
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {wallets.map((item) => (
-                      <SidebarMenuSubItem key={item.name}>
-                        <SidebarMenuSubButton asChild>
-                          <a href={`/dashboard/wallets/${item.id}`}>
-                            <span>{item.name}</span>
-                          </a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
+                    {wallets &&
+                      wallets.map((item) => (
+                        <SidebarMenuSubItem key={item.name}>
+                          <SidebarMenuSubButton asChild>
+                            <a href={`/dashboard/wallets/${item.id}`}>
+                              <span>{item.name}</span>
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
                   </SidebarMenuSub>
                 </CollapsibleContent>
               </SidebarMenuItem>
             </Collapsible>
             <SidebarMenuItem>
-              <SidebarMenuButton
-                onClick={() => {
-                  console.log("Open CREATE MODAL");
-                }}
-              >
-                <PlusCircle />
-
-                <span>Create Wallet</span>
+              <SidebarMenuButton>
+                <Settings />
+                <a href="/settings">Settings</a>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

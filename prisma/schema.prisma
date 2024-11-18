@@ -30,6 +30,7 @@ model Expense{
   date    DateTime
   amount  Int
   expenseStatus ExpenseIncomeStatus
+  paymentMethod String
   wallet Wallet @relation(fields: [walletId], references: [id])
   walletId  Int
 }
@@ -40,12 +41,13 @@ model Income {
   date DateTime
   amount Int
   incomeStatus ExpenseIncomeStatus
+  paymentMethod String
   wallet Wallet @relation(fields: [walletId], references: [id])
   walletId  Int
 }
 model Wallet {
   id Int  @id @default(autoincrement())
-  name String
+  name String @unique
   balance Int
   expense Expense[]
   income Income[]

@@ -51,7 +51,7 @@ const LoginForm = () => {
         });
       }
       if (!signInData?.error) {
-        const pathToRedirect = prevUrl ? `/${prevUrl}` : "/";
+        const pathToRedirect = prevUrl ? `/${prevUrl}` : "/dashboard";
         router.push(pathToRedirect);
       }
     } catch (error) {

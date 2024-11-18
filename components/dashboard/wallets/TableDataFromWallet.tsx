@@ -9,11 +9,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const TableDataFromWallet = ({ label }: { label: string }) => {
+const TableDataFromWallet = ({
+  label,
+  dataForTable,
+}: {
+  label: string;
+  dataForTable: ExpenseProps[] | IncomeProps[];
+}) => {
   return (
     <div className="w-full">
       <Table>
-        <TableCaption>A list of your recent {label}.</TableCaption>
+        <TableCaption>A list of your recent {label}s.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Date</TableHead>
@@ -23,12 +29,22 @@ const TableDataFromWallet = ({ label }: { label: string }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">01/11/2024</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-          </TableRow>
+          {dataForTable.map((item) => {
+            return (
+              <TableRow key={item.id}>
+                <TableCell className="font-medium">{"item.date"}</TableCell>
+                <TableCell>
+                  {"expenseStatus" in item
+                    ? item.expenseStatus
+                    : item.incomeStatus}
+                </TableCell>
+                <TableCell>{item.paymentMethod}</TableCell>
+                <TableCell className="text-right">
+                  {item.amount.toFixed(2)}€
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>

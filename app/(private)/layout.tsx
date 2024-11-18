@@ -3,6 +3,7 @@ import { AppSidebar } from "@/components/dashboard/AppSidebar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { getWallets } from "@/actions/wallet";
 
 export default async function PrivateLayout({
   children,
@@ -14,18 +15,8 @@ export default async function PrivateLayout({
   if (!session) {
     redirect("/signin?prevUrl=dashboard");
   }
-  const wallets = [
-    {
-      id: 1,
-      name: "LaBanquePostale",
-      url: `/dashboard/wallets/`,
-    },
-    {
-      id: 2,
-      name: "SocieteGenerale",
-      url: `/dashboard/wallets/`,
-    },
-  ];
+
+  const wallets = await getWallets();
   return (
     <SidebarProvider>
       <div className="p-4">

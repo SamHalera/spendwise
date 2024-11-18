@@ -9,7 +9,7 @@ import {
 import { ArrowDown, ArrowUp, BadgeEuro, Coins, HandCoins } from "lucide-react";
 import Link from "next/link";
 
-const CardWallet = ({ wallet }: { wallet: WalletProps }) => {
+const CardItemWalletList = ({ wallet }: { wallet: WalletProps }) => {
   let expensesBalance = 0;
   let incomesBalance = 0;
   wallet.expense.forEach((item) => {
@@ -36,7 +36,7 @@ const CardWallet = ({ wallet }: { wallet: WalletProps }) => {
               </div>
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex gap-6 justify-center">
+          <CardContent className="flex gap-6 justify-around">
             <div className="flex flex-col gap-2 items-center">
               <div className="relative w-10 h-10 bg-blue-200 mb-2 flex items-center justify-center rounded-full p-2">
                 <ArrowUp className="absolute text-blue-200 -top-4" />
@@ -60,12 +60,8 @@ const CardWallet = ({ wallet }: { wallet: WalletProps }) => {
           </CardContent>
         </Card>
       </Link>
-      {/* <div className="flex justify-around">
-        <Button>Add income</Button>
-        <Button>Add income</Button>
-      </div> */}
     </div>
   );
 };
 
-export default CardWallet;
+export default CardItemWalletList;

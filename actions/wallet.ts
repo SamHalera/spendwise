@@ -7,8 +7,7 @@ export const getWalletById = async (id: number) => {
     const wallet = await prisma.wallet.findUnique({
       where: { id },
       include: {
-        income: true,
-        expense: true,
+        transaction: true,
       },
     });
     return wallet;
@@ -21,8 +20,7 @@ export const getWallets = async () => {
   try {
     const wallets = await prisma.wallet.findMany({
       include: {
-        expense: true,
-        income: true,
+        transaction: true,
       },
     });
     return wallets;
@@ -98,7 +96,7 @@ export const deleteWallet = async (id: number) => {
       where: { id },
     });
     return {
-      succes: "Good news! Wallet has been deleted successfully.",
+      success: "Good news! Wallet has been deleted successfully.",
     };
   } catch (error) {
     console.error("Error delete wallet==>", error);

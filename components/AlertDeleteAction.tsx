@@ -19,11 +19,14 @@ import { useRouter } from "next/navigation";
 const AlertDeleteAction = ({
   deleteToContinue,
   id,
+  pathToRedirect,
 }: {
   deleteToContinue: (id: number) => Promise<void>;
   id: number;
+  pathToRedirect: string;
 }) => {
   const router = useRouter();
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -50,7 +53,7 @@ const AlertDeleteAction = ({
             onClick={async () => {
               await deleteToContinue(id);
               console.log("Delete action ");
-              router.push("/dashboard");
+              router.push(pathToRedirect);
             }}
             className="bg-red-200 rounded-sm px-4 text-red-500 text-sm hover:text-red-200 hover:bg-red-500 duration-500"
           >

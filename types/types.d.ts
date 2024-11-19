@@ -2,25 +2,35 @@ type WalletProps = {
   id: number;
   name: string;
   balance: number;
-  expense: ExpenseProps[];
-  income: IncomeProps[];
+  transaction: TransactionProps[];
 };
 
-type ExpenseProps = {
+type TransactionProps = {
   id: number;
   label: string;
+  type: string;
   date: Date;
   amount: number;
-  expenseStatus: string;
+  transactionStatus: string;
   paymentMethod: string;
   walletId: number;
 };
-type IncomeProps = {
+type TransactionFormValuesProps = {
   id: number;
   label: string;
+  type: string;
   date: Date;
-  amount: number;
-  incomeStatus: string;
+  amount: string;
+  transactionStatus: string;
   paymentMethod: string;
   walletId: number;
 };
+// type IncomeProps = {
+//   id: number;
+//   label: string;
+//   date: Date;
+//   amount: number;
+//   incomeStatus: string;
+//   paymentMethod: string;
+//   walletId: number;
+// };

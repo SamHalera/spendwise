@@ -24,37 +24,40 @@ model User {
 
 }
 
-model Expense{
+model Transaction{
   id      Int     @id @default(autoincrement())
   label   String
+  type    TransactionType
   date    DateTime
   amount  Int
-  expenseStatus ExpenseIncomeStatus
-  paymentMethod String
+  transactionStatus TransactionStatus
+  paymentMethod PaymentMethod
   wallet Wallet @relation(fields: [walletId], references: [id])
   walletId  Int
 }
 
-model Income {
-  id  Int     @id @default(autoincrement())
-  label String
-  date DateTime
-  amount Int
-  incomeStatus ExpenseIncomeStatus
-  paymentMethod String
-  wallet Wallet @relation(fields: [walletId], references: [id])
-  walletId  Int
-}
+
 model Wallet {
   id Int  @id @default(autoincrement())
   name String @unique
   balance Int
-  expense Expense[]
-  income Income[]
+  transaction Transaction[]
+
 }
- enum ExpenseIncomeStatus {
-  MADE
-  FUTURE
+ enum TransactionStatus {
+  PAST
+  UPCOMING
+ }
+ enum TransactionType {
+  EXPENSE
+  INCOME
+ }
+ enum PaymentMethod {
+  CARD
+  CASH
+  CHEQUE
+  TRANSFERT_PAYMENT
+
  }
 
 

@@ -6,6 +6,8 @@ import CardItemWalletList from "./CardItemWalletList";
 import dynamic from "next/dynamic";
 import { getWallets } from "@/actions/wallet";
 
+import { SkeletonCard } from "../skeletons/SkeletonCard";
+
 const CreateOrEditWalletModal = dynamic(
   () => import("@/components/dashboard/wallets/CreateOrEditWalletModal")
 );
@@ -19,6 +21,7 @@ const DashboardContent = () => {
       try {
         const wallets = await getWallets();
         console.log("wallets==>", wallets);
+
         if (wallets) setDataWallets(wallets);
       } catch (error) {
         console.error(error);
@@ -34,10 +37,16 @@ const DashboardContent = () => {
         <CreateOrEditWalletModal setRefresh={setRefresh} />
       </div>
       <div className="flex justify-center items-center gap-6 my-10">
-        {dataWallets &&
+        {dataWallets ? (
           dataWallets.map((wallet) => {
             return <CardItemWalletList key={wallet.id} wallet={wallet} />;
-          })}
+          })
+        ) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        )}
       </div>
     </div>
   );

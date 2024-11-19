@@ -1,5 +1,4 @@
 export const computeWalletBalances = (wallet: WalletProps) => {
-  console.log("wallet==>", wallet);
   let walletBalance = wallet.balance;
   const expensesPast = wallet.transaction.filter(
     (elt) => elt.type === "EXPENSE" && elt.transactionStatus === "PAST"

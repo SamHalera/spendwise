@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { deleteTransaction } from "@/actions/transaction";
 import FiltersTransactions from "./FiltersTransactions";
 import clsx from "clsx";
+import SearchBarTransactions from "./SearchBarTransactions";
 
 const TableDataFromWallet = ({
   label,
@@ -28,6 +29,8 @@ const TableDataFromWallet = ({
 }) => {
   const [showPast, setShowPast] = useState<boolean>(true);
   const [showUpcoming, setShowUpcoming] = useState<boolean>(false);
+  const [searchedValue, setSearchedValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
   const { toast } = useToast();
   const handleDeleteTransaction = async (id: number) => {
     try {
@@ -54,15 +57,21 @@ const TableDataFromWallet = ({
       });
     }
   };
-
   return (
     <div className="w-full flex flex-col">
-      <FiltersTransactions
-        showPast={showPast}
-        showUpcoming={showUpcoming}
-        setShowPast={setShowPast}
-        setShowUpcoming={setShowUpcoming}
-      />
+      <div className="flex justify-between items-center">
+        <SearchBarTransactions
+          setSearchedValue={setSearchedValue}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+        />
+        <FiltersTransactions
+          showPast={showPast}
+          showUpcoming={showUpcoming}
+          setShowPast={setShowPast}
+          setShowUpcoming={setShowUpcoming}
+        />
+      </div>
       <Table>
         <TableCaption>A list of your recent {label}s.</TableCaption>
         <TableHeader>
@@ -87,6 +96,19 @@ const TableDataFromWallet = ({
                 if (showUpcoming && !showPast)
                   return elt.transactionStatus === "UPCOMING";
                 else return elt;
+              })
+              .filter((elt) => {
+                if (searchedValue) {
+                  return (
+                    elt.label
+                      .toLowerCase()
+                      .includes(searchedValue.toLowerCase()) ||
+                    elt.paymentMethod
+                      .toLowerCase()
+                      .includes(searchedValue.toLowerCase())
+                  );
+                }
+                return elt;
               })
               .map((item) => {
                 return (

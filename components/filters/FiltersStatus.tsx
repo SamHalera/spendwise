@@ -61,8 +61,11 @@ const FiltersStatus = () => {
       </div>
       <div
         className={clsx(
-          "flex flex-col gap-1 bg-blue-100 border border-slate-200 p-3 rounded-sm shadow-lg absolute w-[150px] z-10 duration-500",
-          { "opacity-100 top-11": dropped, "opacity-0 top-14": !dropped }
+          " flex-col gap-1 bg-blue-100 border border-slate-200 p-3 rounded-sm shadow-lg absolute w-[150px] z-10 duration-500",
+          {
+            "flex opacity-100 top-11": dropped,
+            "hidden opacity-0 top-14": !dropped,
+          }
         )}
       >
         <div className="form-control">

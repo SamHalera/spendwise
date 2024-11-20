@@ -12,20 +12,13 @@ export const createOrEditTransaction = async (
   values: TransactionFormValuesProps
 ) => {
   try {
-    const {
-      id,
-      walletId,
-      label,
-      type,
-      date,
-      amount,
-      transactionStatus,
-      paymentMethod,
-    } = values;
+    const { id, walletId, label, type, date, amount, paymentMethod } = values;
+
+    let transactionStatus = "PAST";
+    if (date > new Date()) transactionStatus = "UPCOMING";
 
     if (id === 0) {
       console.log("create");
-      const { id, ...valuesToPersist } = values;
       const newTransaction = await prisma.transaction.create({
         data: {
           label,
@@ -96,4 +89,28 @@ export const deleteTransaction = async (id: number) => {
         "Oups something went wrong while deleting a transaction. Try again...",
     };
   }
+};
+
+export const handleTransactionStatus = async (wallets: WalletProps[]) => {
+  wallets.forEach((wallet) => {
+    wallet.transaction.forEach(async (elt) => {
+      if (elt.transactionStatus === "UPCOMING" && elt.date <= new Date()) {
+        await prisma.transaction.update({
+          where: { id: elt.id },
+          data: {
+            transactionStatus: "PAST",
+          },
+        });
+      } else if (elt.transactionStatus === "PAST" && elt.date > new Date()) {
+        await prisma.transaction.update({
+          where: { id: elt.id },
+          data: {
+            transactionStatus: "UPCOMING",
+          },
+        });
+      }
+    });
+  });
+
+  return wallets;
 };

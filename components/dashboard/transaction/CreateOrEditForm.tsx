@@ -57,7 +57,7 @@ const CreateOrEditForm = ({
       type: data ? data.type : "EXPENSE",
       date: data?.date ?? new Date(),
       amount: data?.amount.toString() ?? "0",
-      transactionStatus: data?.transactionStatus ?? "PAST",
+      transactionStatus: data?.transactionStatus ?? "",
       paymentMethod: data?.paymentMethod ?? "",
       walletId,
     },
@@ -177,9 +177,21 @@ const CreateOrEditForm = ({
                   Transaction status{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
-                <Select
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="text"
+                    disabled={true}
+                    className={clsx("bg-slate-200", {
+                      "border-red-400": form.formState.errors.id,
+                    })}
+                    value={field.value.toLowerCase()}
+                  />
+                </FormControl>
+                {/* <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -190,7 +202,7 @@ const CreateOrEditForm = ({
                     <SelectItem value="PAST">Past</SelectItem>
                     <SelectItem value="UPCOMING">Upcoming</SelectItem>
                   </SelectContent>
-                </Select>
+                </Select> */}
               </FormItem>
             )}
           />

@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/db";
+import { handleTransactionStatus } from "./transaction";
 
 export const getWalletById = async (id: number) => {
   try {
@@ -10,7 +11,14 @@ export const getWalletById = async (id: number) => {
         transaction: true,
       },
     });
-    return wallet;
+    if (wallet) {
+      const walletsWithUpdatedTransactions = await handleTransactionStatus([
+        wallet,
+      ]);
+
+      return walletsWithUpdatedTransactions[0];
+    }
+    return null;
   } catch (error) {
     console.error("Error create wallet==>", error);
     return null;
@@ -23,7 +31,14 @@ export const getWallets = async () => {
         transaction: true,
       },
     });
-    return wallets;
+    if (wallets) {
+      const walletsWithUpdatedTransactions = await handleTransactionStatus(
+        wallets
+      );
+
+      return walletsWithUpdatedTransactions;
+    }
+    return null;
   } catch (error) {
     console.error("Error create wallet==>", error);
     return null;

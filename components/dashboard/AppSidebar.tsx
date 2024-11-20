@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import {
+  ChartNoAxesCombined,
   ChevronRight,
   LayoutDashboard,
   LogOut,
@@ -72,6 +73,14 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
                 </CollapsibleContent>
               </SidebarMenuItem>
             </Collapsible>
+            <SidebarMenuItem>
+              <a href="/dashboard/stats">
+                <SidebarMenuButton className="text-blue-700 font-semibold">
+                  <ChartNoAxesCombined />
+                  <span>Stats</span>
+                </SidebarMenuButton>
+              </a>
+            </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <Settings />

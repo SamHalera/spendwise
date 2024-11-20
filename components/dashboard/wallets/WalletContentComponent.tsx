@@ -8,6 +8,7 @@ import { getWalletById } from "@/actions/wallet";
 import MenuTabTransactions from "./MenuTabTransactions";
 
 import { SkeletonWalletContent } from "@/components/skeletons/SkeletonWalletContent";
+import { computeWalletBalances } from "@/lib/walletHelpelrs";
 
 const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataWallet, setDataWallet] = useState<WalletProps>();

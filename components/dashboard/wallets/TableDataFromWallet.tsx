@@ -34,6 +34,20 @@ const TableDataFromWallet = ({
   const [inputValue, setInputValue] = useState<string>("");
   const { toast } = useToast();
   const { showPast, showUpcoming, method, date } = useFiltersStore();
+
+  let totalAmountTransactions = 0;
+  const sortedAndFilteredData = filterAndSortDataForTable(
+    dataForTable ?? [],
+    showPast,
+    showUpcoming,
+    method,
+    date,
+    searchedValue
+  );
+  sortedAndFilteredData?.forEach(
+    (data) => (totalAmountTransactions += data.amount)
+  );
+
   const handleDeleteTransaction = async (id: number) => {
     try {
       const response = await deleteTransaction(id);
@@ -79,65 +93,62 @@ const TableDataFromWallet = ({
             <TableHead className="w-80">Label</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="text-center flex flex-col items-center justify-center">
+              Amount{" "}
+              <span className="font-semibold">
+                ({totalAmountTransactions}€)
+              </span>
+            </TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {dataForTable &&
-            filterAndSortDataForTable(
-              dataForTable,
-              showPast,
-              showUpcoming,
-              method,
-              date,
-              searchedValue
-            ).map((item) => {
-              return (
-                <TableRow key={item.id}>
-                  <TableCell className="font-medium">
-                    {dayjs(item.date).format("DD/MM/YYYY")}
-                  </TableCell>
-                  <TableCell>{item.label}</TableCell>
-                  <TableCell className="">
-                    <span
-                      className={clsx("text-xs  px-3 py-1 rounded-full", {
-                        "bg-indigo-300": item.transactionStatus === "PAST",
-                        "bg-indigo-700 text-white":
-                          item.transactionStatus === "UPCOMING",
-                      })}
-                    >
-                      {item.transactionStatus.toLowerCase()}
-                    </span>
-                  </TableCell>
-                  <TableCell>{item.paymentMethod}</TableCell>
-                  <TableCell
-                    className={clsx("text-right", {
-                      "text-red-500": item.type === "EXPENSE",
-                      "text-blue-500": item.type === "INCOME",
+          {sortedAndFilteredData.map((item) => {
+            return (
+              <TableRow key={item.id}>
+                <TableCell className="font-medium">
+                  {dayjs(item.date).format("DD/MM/YYYY")}
+                </TableCell>
+                <TableCell>{item.label}</TableCell>
+                <TableCell className="">
+                  <span
+                    className={clsx("text-xs  px-3 py-1 rounded-full", {
+                      "bg-indigo-300": item.transactionStatus === "PAST",
+                      "bg-indigo-700 text-white":
+                        item.transactionStatus === "UPCOMING",
                     })}
                   >
-                    {item.type === "EXPENSE" ? "-" : "+"}
-                    {item.amount.toFixed(2)}€
-                  </TableCell>
-                  <TableCell className="text-right flex justify-end gap-4">
-                    <CreateOrEditModal
-                      setRefresh={setRefresh}
-                      data={item}
-                      walletId={item.walletId}
-                      dataLabel={label}
-                    />
-                    {/* <div className=" cursor-pointer h-10 w-10 bg-red-200 text-red-700 hover:bg-red-700 hover:text-red-200 p-3 duration-500 flex justify-center items-center rounded-full"> */}
-                    <AlertDeleteAction
-                      id={item.id}
-                      deleteToContinue={handleDeleteTransaction}
-                      pathToRedirect={`/dashboard/wallets/${item.walletId}`}
-                    />
-                    {/* </div> */}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                    {item.transactionStatus.toLowerCase()}
+                  </span>
+                </TableCell>
+                <TableCell>{item.paymentMethod}</TableCell>
+                <TableCell
+                  className={clsx("text-right", {
+                    "text-red-500": item.type === "EXPENSE",
+                    "text-blue-500": item.type === "INCOME",
+                  })}
+                >
+                  {item.type === "EXPENSE" ? "-" : "+"}
+                  {item.amount.toFixed(2)}€
+                </TableCell>
+                <TableCell className="text-right flex justify-end gap-4">
+                  <CreateOrEditModal
+                    setRefresh={setRefresh}
+                    data={item}
+                    walletId={item.walletId}
+                    dataLabel={label}
+                  />
+                  {/* <div className=" cursor-pointer h-10 w-10 bg-red-200 text-red-700 hover:bg-red-700 hover:text-red-200 p-3 duration-500 flex justify-center items-center rounded-full"> */}
+                  <AlertDeleteAction
+                    id={item.id}
+                    deleteToContinue={handleDeleteTransaction}
+                    pathToRedirect={`/dashboard/wallets/${item.walletId}`}
+                  />
+                  {/* </div> */}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>

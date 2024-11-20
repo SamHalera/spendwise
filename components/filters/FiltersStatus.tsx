@@ -26,9 +26,8 @@ const FiltersStatus = () => {
     };
   }, [dropped]);
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
       <div
-        ref={ref}
         onClick={() => {
           setDropped(!dropped);
         }}

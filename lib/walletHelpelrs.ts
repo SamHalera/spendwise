@@ -1,4 +1,5 @@
 import { isAfter, isBefore, isEqual } from "date-fns";
+import dayjs from "dayjs";
 import { DateRange } from "react-day-picker";
 
 export const computeWalletBalances = (wallet: WalletProps) => {
@@ -79,4 +80,113 @@ export const filterAndSortDataForTable = (
       }
       return elt;
     });
+};
+
+export const formatDataForCharts = (wallet: WalletProps) => {
+  const transactionsCharts: TransactionsChartProps[] = [];
+
+  const monthList = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  monthList.forEach((month) => {
+    const transactionsByMonth = wallet.transaction.filter((transactionElt) => {
+      const transactionMonth = dayjs(transactionElt.date).format("MMM");
+      return transactionMonth === month;
+    });
+
+    let totalIncomes = 0;
+    let totalExpenses = 0;
+    transactionsByMonth.forEach((transaction) => {
+      if (transaction.type === "INCOME") {
+        totalIncomes += transaction.amount;
+      }
+      if (transaction.type === "EXPENSE") {
+        totalExpenses += transaction.amount;
+      }
+    });
+    const objectData = {
+      month,
+      incomes: totalIncomes,
+      expenses: totalExpenses,
+    };
+
+    transactionsCharts.push(objectData);
+  });
+  return transactionsCharts;
+};
+
+export const formatTransactionsByMethodForCharts = (
+  walletTransactions: TransactionProps[]
+) => {
+  const transactions: {
+    method: string;
+    occurences: number;
+    incomes: number;
+    expenses: number;
+  }[] = [];
+
+  const transactionMethods =
+    process.env.NEXT_PUBLIC_TRANSACTION_METHODS?.split(",");
+
+  transactionMethods?.forEach((method) => {
+    const transactionByMethodArray = walletTransactions.filter(
+      (elt) => elt.paymentMethod === method
+    );
+    const occurences = transactionByMethodArray.length;
+
+    const { incomes, expenses } = calculateTransactionAmountByMethod(
+      transactionByMethodArray,
+      method
+    );
+    transactions.push({
+      method: `${method} (${occurences})`,
+      occurences,
+      incomes,
+      expenses,
+    });
+  });
+
+  return transactions;
+};
+
+export const createSelectOptionsForYears = (
+  firstYear: number,
+  limit: number
+) => {
+  const yearOptions: { value: string; label: string }[] = [];
+  for (let i = 0; i <= limit; i++) {
+    const value = firstYear + i;
+    yearOptions.push({
+      value: value.toString(),
+      label: value.toString(),
+    });
+  }
+  return yearOptions;
+};
+
+const calculateTransactionAmountByMethod = (
+  transactionsByMethod: TransactionProps[],
+  method: string
+) => {
+  let totalIncomes = 0;
+  let totalExpenses = 0;
+  transactionsByMethod.forEach((transaction) => {
+    if (transaction.paymentMethod === method && transaction.type === "INCOME")
+      totalIncomes += transaction.amount;
+    if (transaction.paymentMethod === method && transaction.type === "EXPENSE")
+      totalExpenses += transaction.amount;
+  });
+  return { expenses: totalExpenses, incomes: totalIncomes };
 };

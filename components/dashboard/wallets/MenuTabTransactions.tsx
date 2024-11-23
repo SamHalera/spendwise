@@ -28,14 +28,16 @@ const MenuTabTransactions = ({
           );
         }}
         className={clsx(
-          "flex items-center gap-4 text-xl hover:text-blue-700 duration-500 font-semibold cursor-pointer",
+          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-red-700 duration-500 font-semibold cursor-pointer",
           {
-            "text-red-700": showExpenses,
+            "text-red-700  border-red-700": showExpenses,
+            "text-muted-foreground border-transparent": !showExpenses,
           }
         )}
       >
         <BadgeEuro /> Expenses
       </div>
+
       <div
         onClick={() => {
           setShowExpenses(false);
@@ -45,9 +47,10 @@ const MenuTabTransactions = ({
           );
         }}
         className={clsx(
-          "flex items-center gap-4 text-xl hover:text-blue-700 duration-500 font-semibold cursor-pointer",
+          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-blue-700 duration-500 font-semibold cursor-pointer",
           {
-            "text-blue-700": !showExpenses,
+            "text-blue-700 border-blue-700": !showExpenses,
+            "text-muted-foreground border-transparent": showExpenses,
           }
         )}
       >

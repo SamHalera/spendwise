@@ -19,9 +19,7 @@ export const transactionFormSchema = z.object({
     .refine((val) => val.search(/\D/) === -1, {
       message: "Only positive numbers",
     }),
-  transactionStatus: z
-    .string()
-    .min(1, { message: "A transaction status is required" }),
+  transactionStatus: z.string(),
   paymentMethod: z
     .string()
     .min(1, { message: "A payment method for your transaction is required" }),

@@ -25,12 +25,9 @@ type TransactionFormValuesProps = {
   paymentMethod: string;
   walletId: number;
 };
-// type IncomeProps = {
-//   id: number;
-//   label: string;
-//   date: Date;
-//   amount: number;
-//   incomeStatus: string;
-//   paymentMethod: string;
-//   walletId: number;
-// };
+
+type TransactionsChartProps = {
+  month: string;
+  incomes: number;
+  expenses: number;
+};

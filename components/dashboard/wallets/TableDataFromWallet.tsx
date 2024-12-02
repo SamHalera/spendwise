@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -18,7 +18,7 @@ import FiltersTransactions from "../../filters/FiltersTransactions";
 import clsx from "clsx";
 import SearchBarTransactions from "./SearchBarTransactions";
 import { useFiltersStore } from "@/stores/filters";
-import { isAfter, isBefore } from "date-fns";
+
 import { filterAndSortDataForTable } from "@/lib/walletHelpelrs";
 import { useRefreshStore } from "@/stores/refresh";
 import { TransactionProps } from "@/types/types";
@@ -30,19 +30,13 @@ const TableDataFromWallet = ({
   label: string;
   dataForTable?: TransactionProps[];
 }) => {
-  const [inputValue, setInputValue] = useState<string>("");
+  const { showPast, showUpcoming, method, date, searchedValue } =
+    useFiltersStore();
+  const [inputValue, setInputValue] = useState<string>(searchedValue);
+
   const { toast } = useToast();
-  const {
-    showPast,
-    showUpcoming,
-    method,
-    date,
-    searchedValue,
-    setSearchedValue,
-  } = useFiltersStore();
   const { setRefresh } = useRefreshStore();
 
-  let totalAmountTransactions = 0;
   const sortedAndFilteredData = filterAndSortDataForTable(
     dataForTable ?? [],
     showPast,
@@ -51,6 +45,9 @@ const TableDataFromWallet = ({
     date,
     searchedValue
   );
+
+  let totalAmountTransactions = 0;
+
   sortedAndFilteredData?.forEach(
     (data) => (totalAmountTransactions += data.amount)
   );

@@ -38,7 +38,7 @@ type TransactionsChartProps = {
 type FiltersObjProps = {
   showPast: boolean;
   showUpcoming: boolean;
-  method: ["CASH", "CHEQUE", "CARD", "TRANSFERT_PAYMENT"];
+  method: string[];
   date: DateRange | undefined;
   searchedValue: string;
 };

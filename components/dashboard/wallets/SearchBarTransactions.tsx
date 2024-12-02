@@ -11,7 +11,8 @@ const SearchBarTransactions = ({
   inputValue: string;
   setInputValue: React.Dispatch<SetStateAction<string>>;
 }) => {
-  const { setSearchedValue } = useFiltersStore();
+  const { searchedValue, setSearchedValue } = useFiltersStore();
+
   const handleSearch = useDebouncedCallback((value: string) => {
     setSearchedValue(value);
   }, 500);

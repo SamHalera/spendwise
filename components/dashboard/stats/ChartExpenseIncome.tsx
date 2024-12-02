@@ -25,6 +25,7 @@ import {
 
 import { useState } from "react";
 import FilterByMonthYear from "./FilterByMonthYear";
+import { WalletProps } from "@/types/types";
 
 const chartConfigExpensesIncomes = {
   expenses: {

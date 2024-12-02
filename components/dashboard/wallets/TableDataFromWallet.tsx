@@ -21,6 +21,7 @@ import { useFiltersStore } from "@/stores/filters";
 import { isAfter, isBefore } from "date-fns";
 import { filterAndSortDataForTable } from "@/lib/walletHelpelrs";
 import { useRefreshStore } from "@/stores/refresh";
+import { TransactionProps } from "@/types/types";
 
 const TableDataFromWallet = ({
   label,
@@ -29,10 +30,16 @@ const TableDataFromWallet = ({
   label: string;
   dataForTable?: TransactionProps[];
 }) => {
-  const [searchedValue, setSearchedValue] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const { toast } = useToast();
-  const { showPast, showUpcoming, method, date } = useFiltersStore();
+  const {
+    showPast,
+    showUpcoming,
+    method,
+    date,
+    searchedValue,
+    setSearchedValue,
+  } = useFiltersStore();
   const { setRefresh } = useRefreshStore();
 
   let totalAmountTransactions = 0;
@@ -78,7 +85,6 @@ const TableDataFromWallet = ({
     <div className="w-full flex flex-col">
       <div className="sticky top-2 flex justify-around items-center gap-4 z-10 bg-slate-100 py-6 px-8 rounded-md">
         <SearchBarTransactions
-          setSearchedValue={setSearchedValue}
           inputValue={inputValue}
           setInputValue={setInputValue}
         />

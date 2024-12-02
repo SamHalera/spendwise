@@ -20,6 +20,7 @@ import clsx from "clsx";
 import React, { SetStateAction } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import { WalletProps } from "@/types/types";
 
 const CreateWalletForm = ({
   setOpen,

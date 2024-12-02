@@ -8,6 +8,7 @@ import { getWallets } from "@/actions/wallet";
 
 import { SkeletonCard } from "../skeletons/SkeletonCard";
 import { useRefreshStore } from "@/stores/refresh";
+import { WalletProps } from "@/types/types";
 
 const CreateOrEditWalletModal = dynamic(
   () => import("@/components/dashboard/wallets/CreateOrEditWalletModal")

@@ -1,3 +1,8 @@
+import {
+  TransactionProps,
+  TransactionsChartProps,
+  WalletProps,
+} from "@/types/types";
 import { isAfter, isBefore, isEqual } from "date-fns";
 import dayjs from "dayjs";
 import { DateRange } from "react-day-picker";
@@ -190,3 +195,5 @@ const calculateTransactionAmountByMethod = (
   });
   return { expenses: totalExpenses, incomes: totalIncomes };
 };
+
+export const saveFiltersValeForLocalStorage = () => {};

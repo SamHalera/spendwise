@@ -36,6 +36,7 @@ import { z } from "zod";
 import { CalendarIcon } from "lucide-react";
 import dayjs from "dayjs";
 import { useRefreshStore } from "@/stores/refresh";
+import { TransactionProps } from "@/types/types";
 
 const CreateOrEditForm = ({
   setOpen,

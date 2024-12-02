@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/db";
+import { TransactionFormValuesProps, WalletProps } from "@/types/types";
 import {
   PaymentMethod,
   TransactionStatus,

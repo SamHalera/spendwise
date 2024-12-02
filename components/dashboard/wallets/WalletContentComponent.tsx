@@ -8,8 +8,9 @@ import { getWalletById } from "@/actions/wallet";
 import MenuTabTransactions from "./MenuTabTransactions";
 
 import { SkeletonWalletContent } from "@/components/skeletons/SkeletonWalletContent";
-import { computeWalletBalances } from "@/lib/walletHelpelrs";
+
 import { useRefreshStore } from "@/stores/refresh";
+import { TransactionProps, WalletProps } from "@/types/types";
 
 const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataWallet, setDataWallet] = useState<WalletProps>();
@@ -29,7 +30,7 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
           setDataWallet(wallet);
           setDataForTable(
             wallet.transaction.filter(
-              (data) => data.type === dataLabel.toUpperCase()
+              (data: TransactionProps) => data.type === dataLabel.toUpperCase()
             )
           );
         }

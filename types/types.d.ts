@@ -1,3 +1,6 @@
+import { PaymentMethod } from "@prisma/client";
+import { DateRange } from "react-day-picker";
+
 type WalletProps = {
   id: number;
   name: string;
@@ -30,4 +33,12 @@ type TransactionsChartProps = {
   month: string;
   incomes: number;
   expenses: number;
+};
+
+type FiltersObjProps = {
+  showPast: boolean;
+  showUpcoming: boolean;
+  method: ["CASH", "CHEQUE", "CARD", "TRANSFERT_PAYMENT"];
+  date: DateRange | undefined;
+  searchedValue: string;
 };

@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import CreateWalletForm from "./CreateWalletForm";
 import { Pencil, Plus } from "lucide-react";
 import clsx from "clsx";
+import { WalletProps } from "@/types/types";
 
 const CreateOrEditWalletModal = ({ wallet }: { wallet?: WalletProps }) => {
   const [open, setOpen] = useState(false);

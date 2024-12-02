@@ -30,6 +30,7 @@ import {
   formatDataForCharts,
   formatTransactionsByMethodForCharts,
 } from "@/lib/walletHelpelrs";
+import { WalletProps } from "@/types/types";
 
 const chartTransactiosConfig = {
   expenses: {

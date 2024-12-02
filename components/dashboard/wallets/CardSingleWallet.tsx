@@ -12,6 +12,7 @@ import { toast } from "@/hooks/use-toast";
 import AlertDeleteAction from "@/components/AlertDeleteAction";
 import CreateOrEditWalletModal from "./CreateOrEditWalletModal";
 import { computeWalletBalances } from "@/lib/walletHelpelrs";
+import { WalletProps } from "@/types/types";
 import dayjs from "dayjs";
 
 const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {

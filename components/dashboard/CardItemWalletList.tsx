@@ -9,7 +9,8 @@ import {
 import { Coins } from "lucide-react";
 import Link from "next/link";
 import { computeWalletBalances } from "@/lib/walletHelpelrs";
-import TransactionSumUpSection from "./wallets/TRansactionSumUpSection";
+import TransactionSumUpSection from "./wallets/TransactionSumUpSection";
+import { WalletProps } from "@/types/types";
 
 const CardItemWalletList = ({ wallet }: { wallet: WalletProps }) => {
   const balances = computeWalletBalances(wallet);

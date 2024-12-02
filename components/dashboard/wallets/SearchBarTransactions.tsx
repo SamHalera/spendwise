@@ -1,17 +1,17 @@
 import { Input } from "@/components/ui/input";
+import { useFiltersStore } from "@/stores/filters";
 import { CircleX, Cross, Search } from "lucide-react";
 import React, { SetStateAction } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 const SearchBarTransactions = ({
-  setSearchedValue,
   inputValue,
   setInputValue,
 }: {
-  setSearchedValue: React.Dispatch<SetStateAction<string>>;
   inputValue: string;
   setInputValue: React.Dispatch<SetStateAction<string>>;
 }) => {
+  const { setSearchedValue } = useFiltersStore();
   const handleSearch = useDebouncedCallback((value: string) => {
     setSearchedValue(value);
   }, 500);

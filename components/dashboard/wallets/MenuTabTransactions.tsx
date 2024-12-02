@@ -1,3 +1,4 @@
+import { TransactionProps, WalletProps } from "@/types/types";
 import clsx from "clsx";
 import { BadgeEuro, HandCoins } from "lucide-react";
 import React, { SetStateAction } from "react";

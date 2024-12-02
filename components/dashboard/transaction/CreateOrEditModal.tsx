@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import clsx from "clsx";
 import CreateOrEditForm from "./CreateOrEditForm";
+import { TransactionProps } from "@/types/types";
 
 const CreateOrEditModal = ({
   data,

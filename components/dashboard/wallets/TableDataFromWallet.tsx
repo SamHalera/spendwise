@@ -20,20 +20,20 @@ import SearchBarTransactions from "./SearchBarTransactions";
 import { useFiltersStore } from "@/stores/filters";
 import { isAfter, isBefore } from "date-fns";
 import { filterAndSortDataForTable } from "@/lib/walletHelpelrs";
+import { useRefreshStore } from "@/stores/refresh";
 
 const TableDataFromWallet = ({
   label,
   dataForTable,
-  setRefresh,
 }: {
   label: string;
   dataForTable?: TransactionProps[];
-  setRefresh: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   const [searchedValue, setSearchedValue] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const { toast } = useToast();
   const { showPast, showUpcoming, method, date } = useFiltersStore();
+  const { setRefresh } = useRefreshStore();
 
   let totalAmountTransactions = 0;
   const sortedAndFilteredData = filterAndSortDataForTable(
@@ -133,7 +133,6 @@ const TableDataFromWallet = ({
                 </TableCell>
                 <TableCell className="text-right flex justify-end gap-4">
                   <CreateOrEditModal
-                    setRefresh={setRefresh}
                     data={item}
                     walletId={item.walletId}
                     dataLabel={label}

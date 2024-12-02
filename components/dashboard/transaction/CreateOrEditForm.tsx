@@ -35,20 +35,20 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { CalendarIcon } from "lucide-react";
 import dayjs from "dayjs";
+import { useRefreshStore } from "@/stores/refresh";
 
 const CreateOrEditForm = ({
   setOpen,
-  setRefresh,
+
   data,
   walletId,
 }: {
-  setRefresh: React.Dispatch<SetStateAction<boolean>>;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   data?: TransactionProps;
   walletId: number;
 }) => {
   const { toast } = useToast();
-
+  const { setRefresh } = useRefreshStore();
   const form = useForm<z.infer<typeof transactionFormSchema>>({
     resolver: zodResolver(transactionFormSchema),
     defaultValues: {

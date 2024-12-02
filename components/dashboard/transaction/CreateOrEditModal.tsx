@@ -16,12 +16,10 @@ import clsx from "clsx";
 import CreateOrEditForm from "./CreateOrEditForm";
 
 const CreateOrEditModal = ({
-  setRefresh,
   data,
   dataLabel,
   walletId,
 }: {
-  setRefresh: React.Dispatch<SetStateAction<boolean>>;
   data?: TransactionProps;
   dataLabel: string;
   walletId: number;
@@ -56,7 +54,6 @@ const CreateOrEditModal = ({
           <AlertDialogDescription></AlertDialogDescription>
           <div>
             <CreateOrEditForm
-              setRefresh={setRefresh}
               setOpen={setOpen}
               data={data}
               walletId={walletId}

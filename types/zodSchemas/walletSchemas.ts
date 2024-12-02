@@ -8,7 +8,13 @@ export const createWalletSchema = z.object({
   balance: z
     .string()
     .min(1, { message: "Balance is required" })
-    .refine((val) => val.search(/\D/) === -1, {
-      message: "Only positive numbers",
-    }),
+    .refine(
+      (val) =>
+        Math.sign(parseFloat(val)) === 1 ||
+        Math.sign(parseFloat(val)) === -1 ||
+        Math.sign(parseFloat(val)) === 0,
+      {
+        message: "Only numbers (positive or negative)",
+      }
+    ),
 });

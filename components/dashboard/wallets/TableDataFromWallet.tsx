@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -18,24 +18,25 @@ import FiltersTransactions from "../../filters/FiltersTransactions";
 import clsx from "clsx";
 import SearchBarTransactions from "./SearchBarTransactions";
 import { useFiltersStore } from "@/stores/filters";
-import { isAfter, isBefore } from "date-fns";
+
 import { filterAndSortDataForTable } from "@/lib/walletHelpelrs";
+import { useRefreshStore } from "@/stores/refresh";
+import { TransactionProps } from "@/types/types";
 
 const TableDataFromWallet = ({
   label,
   dataForTable,
-  setRefresh,
 }: {
   label: string;
   dataForTable?: TransactionProps[];
-  setRefresh: React.Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [searchedValue, setSearchedValue] = useState<string>("");
-  const [inputValue, setInputValue] = useState<string>("");
-  const { toast } = useToast();
-  const { showPast, showUpcoming, method, date } = useFiltersStore();
+  const { showPast, showUpcoming, method, date, searchedValue } =
+    useFiltersStore();
+  const [inputValue, setInputValue] = useState<string>(searchedValue);
 
-  let totalAmountTransactions = 0;
+  const { toast } = useToast();
+  const { setRefresh } = useRefreshStore();
+
   const sortedAndFilteredData = filterAndSortDataForTable(
     dataForTable ?? [],
     showPast,
@@ -44,6 +45,9 @@ const TableDataFromWallet = ({
     date,
     searchedValue
   );
+
+  let totalAmountTransactions = 0;
+
   sortedAndFilteredData?.forEach(
     (data) => (totalAmountTransactions += data.amount)
   );
@@ -78,7 +82,6 @@ const TableDataFromWallet = ({
     <div className="w-full flex flex-col">
       <div className="sticky top-2 flex justify-around items-center gap-4 z-10 bg-slate-100 py-6 px-8 rounded-md">
         <SearchBarTransactions
-          setSearchedValue={setSearchedValue}
           inputValue={inputValue}
           setInputValue={setInputValue}
         />
@@ -133,7 +136,6 @@ const TableDataFromWallet = ({
                 </TableCell>
                 <TableCell className="text-right flex justify-end gap-4">
                   <CreateOrEditModal
-                    setRefresh={setRefresh}
                     data={item}
                     walletId={item.walletId}
                     dataLabel={label}

@@ -1,5 +1,19 @@
-import { isAfter, isBefore, isEqual } from "date-fns";
+import {
+  FiltersObjProps,
+  TransactionProps,
+  TransactionsChartProps,
+  WalletProps,
+} from "@/types/types";
+import {
+  addDays,
+  getDaysInMonth,
+  isAfter,
+  isBefore,
+  isEqual,
+  startOfMonth,
+} from "date-fns";
 import dayjs from "dayjs";
+import { WineOff } from "lucide-react";
 import { DateRange } from "react-day-picker";
 
 export const computeWalletBalances = (wallet: WalletProps) => {
@@ -36,50 +50,6 @@ export const computeWalletBalances = (wallet: WalletProps) => {
     expensesPastBalance,
     expensesUpcomingBalance,
   };
-};
-
-export const filterAndSortDataForTable = (
-  dataForTable: TransactionProps[],
-  showPast: boolean,
-  showUpcoming: boolean,
-  method: string[],
-  date: DateRange | undefined,
-  searchedValue: string
-) => {
-  return dataForTable
-    .sort((a, b) => {
-      return a.date.getTime() - b.date.getTime();
-    })
-    .filter((elt) => {
-      if (showPast && !showUpcoming) return elt.transactionStatus === "PAST";
-      if (showUpcoming && !showPast)
-        return elt.transactionStatus === "UPCOMING";
-      else return elt;
-    })
-    .filter((elt: TransactionProps) => {
-      if (method.length > 0) return method.includes(elt.paymentMethod);
-      else return elt;
-    })
-    .filter((elt) => {
-      if (date && date.from && date.to) {
-        return (
-          isEqual(elt.date, date.from) ||
-          isEqual(elt.date, date.to) ||
-          (isAfter(elt.date, date.from) && isBefore(elt.date, date.to))
-        );
-      } else {
-        return elt;
-      }
-    })
-    .filter((elt) => {
-      if (searchedValue) {
-        return (
-          elt.label.toLowerCase().includes(searchedValue.toLowerCase()) ||
-          elt.paymentMethod.toLowerCase().includes(searchedValue.toLowerCase())
-        );
-      }
-      return elt;
-    });
 };
 
 export const formatDataForCharts = (wallet: WalletProps) => {
@@ -189,4 +159,98 @@ const calculateTransactionAmountByMethod = (
       totalExpenses += transaction.amount;
   });
   return { expenses: totalExpenses, incomes: totalIncomes };
+};
+
+export const filterAndSortDataForTable = (
+  dataForTable: TransactionProps[],
+  showPast: boolean,
+  showUpcoming: boolean,
+  method: string[],
+  date: DateRange | undefined,
+  searchedValue: string
+) => {
+  return dataForTable
+    .sort((a, b) => {
+      return a.date.getTime() - b.date.getTime();
+    })
+    .filter((elt) => {
+      if (showPast && !showUpcoming) return elt.transactionStatus === "PAST";
+      if (showUpcoming && !showPast)
+        return elt.transactionStatus === "UPCOMING";
+      else return elt;
+    })
+    .filter((elt: TransactionProps) => {
+      if (method.length > 0) {
+        return method.includes(elt.paymentMethod);
+      } else {
+        return elt;
+      }
+    })
+    .filter((elt) => {
+      if (date && date.from && date.to) {
+        return (
+          isEqual(elt.date, date.from) ||
+          isEqual(elt.date, date.to) ||
+          (isAfter(elt.date, date.from) && isBefore(elt.date, date.to))
+        );
+      } else {
+        return elt;
+      }
+    })
+    .filter((elt) => {
+      if (searchedValue) {
+        return (
+          elt.label.toLowerCase().includes(searchedValue.toLowerCase()) ||
+          elt.paymentMethod.toLowerCase().includes(searchedValue.toLowerCase())
+        );
+      }
+      return elt;
+    });
+};
+export const saveFiltersValeForLocalStorage = (values: FiltersObjProps) => {
+  const filterValues = values;
+
+  window.localStorage.setItem("filterValues", JSON.stringify(filterValues));
+  const localStorageValues = window.localStorage.getItem("filterValues");
+  if (localStorageValues) {
+    const pasedValues: FiltersObjProps = JSON.parse(localStorageValues);
+    return pasedValues;
+  }
+  return null;
+};
+
+export const parseFiltersFromLocalStorage = () => {
+  if (typeof window !== "undefined") {
+    const values = window.localStorage.getItem("filterValues");
+
+    if (values) {
+      const pasedValues: FiltersObjProps = JSON.parse(values);
+      return pasedValues;
+    }
+  }
+  return null;
+};
+
+export const resetFilters = () => {
+  if (typeof window !== "undefined") {
+    const values = window.localStorage.getItem("filterValues");
+
+    if (values) {
+      const parsedValues: FiltersObjProps = JSON.parse(values);
+
+      parsedValues.searchedValue = "";
+      parsedValues.method = [];
+      parsedValues.showPast = false;
+      parsedValues.showUpcoming = false;
+      parsedValues.date = {
+        from: startOfMonth(new Date()),
+        to: addDays(startOfMonth(new Date()), getDaysInMonth(new Date()) - 1),
+      };
+
+      window.localStorage.setItem("filterValues", JSON.stringify(parsedValues));
+
+      return parsedValues;
+    }
+  }
+  return null;
 };

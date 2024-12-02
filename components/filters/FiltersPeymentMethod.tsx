@@ -71,6 +71,7 @@ const FiltersPeymentMethod = () => {
                     if (method.includes(checkedValue)) {
                       const index = method.indexOf(checkedValue);
                       method.splice(index, 1);
+
                       setMethod(method);
                     } else {
                       setMethod([...method, checkedValue]);

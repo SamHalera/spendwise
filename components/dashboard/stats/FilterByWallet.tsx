@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { WalletProps } from "@/types/types";
 import React, { SetStateAction } from "react";
 
 const FilterByWallet = ({

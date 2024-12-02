@@ -13,15 +13,11 @@ import { Button } from "@/components/ui/button";
 import CreateWalletForm from "./CreateWalletForm";
 import { Pencil, Plus } from "lucide-react";
 import clsx from "clsx";
+import { WalletProps } from "@/types/types";
 
-const CreateOrEditWalletModal = ({
-  setRefresh,
-  wallet,
-}: {
-  setRefresh: React.Dispatch<SetStateAction<boolean>>;
-  wallet?: WalletProps;
-}) => {
+const CreateOrEditWalletModal = ({ wallet }: { wallet?: WalletProps }) => {
   const [open, setOpen] = useState(false);
+
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
@@ -44,11 +40,7 @@ const CreateOrEditWalletModal = ({
           </AlertDialogTitle>
           <AlertDialogDescription></AlertDialogDescription>
           <div>
-            <CreateWalletForm
-              setRefresh={setRefresh}
-              setOpen={setOpen}
-              wallet={wallet}
-            />
+            <CreateWalletForm setOpen={setOpen} wallet={wallet} />
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>

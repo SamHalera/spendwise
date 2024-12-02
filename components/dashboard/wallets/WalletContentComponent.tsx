@@ -8,7 +8,9 @@ import { getWalletById } from "@/actions/wallet";
 import MenuTabTransactions from "./MenuTabTransactions";
 
 import { SkeletonWalletContent } from "@/components/skeletons/SkeletonWalletContent";
-import { computeWalletBalances } from "@/lib/walletHelpelrs";
+
+import { useRefreshStore } from "@/stores/refresh";
+import { TransactionProps, WalletProps } from "@/types/types";
 
 const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataWallet, setDataWallet] = useState<WalletProps>();
@@ -17,7 +19,7 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataForTable, setDataForTable] = useState<TransactionProps[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [refresh, setRefresh] = useState<boolean>(false);
+  const { refresh, setRefresh } = useRefreshStore();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +30,7 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
           setDataWallet(wallet);
           setDataForTable(
             wallet.transaction.filter(
-              (data) => data.type === dataLabel.toUpperCase()
+              (data: TransactionProps) => data.type === dataLabel.toUpperCase()
             )
           );
         }
@@ -64,15 +66,10 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
               setDataLabel={setDataLabel}
             />
             <div className="p-10">
-              <CreateOrEditModal
-                setRefresh={setRefresh}
-                dataLabel={dataLabel}
-                walletId={walletId}
-              />
+              <CreateOrEditModal dataLabel={dataLabel} walletId={walletId} />
               <TableDataFromWallet
                 label={dataLabel}
                 dataForTable={dataForTable}
-                setRefresh={setRefresh}
               />
             </div>
           </div>

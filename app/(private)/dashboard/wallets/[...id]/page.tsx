@@ -8,7 +8,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   const wallet = await getWalletById(parseFloat(id));
 
   if (!wallet) return notFound();
-  console.log("revalidate");
+
   return (
     <div className="w-full">
       <WalletContentComponent walletId={parseFloat(id)} />

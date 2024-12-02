@@ -14,14 +14,13 @@ import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import clsx from "clsx";
 import CreateOrEditForm from "./CreateOrEditForm";
+import { TransactionProps } from "@/types/types";
 
 const CreateOrEditModal = ({
-  setRefresh,
   data,
   dataLabel,
   walletId,
 }: {
-  setRefresh: React.Dispatch<SetStateAction<boolean>>;
   data?: TransactionProps;
   dataLabel: string;
   walletId: number;
@@ -56,7 +55,6 @@ const CreateOrEditModal = ({
           <AlertDialogDescription></AlertDialogDescription>
           <div>
             <CreateOrEditForm
-              setRefresh={setRefresh}
               setOpen={setOpen}
               data={data}
               walletId={walletId}

@@ -5,6 +5,7 @@ import ChartExpenseIncome from "./ChartExpenseIncome";
 import ChartTransacionsByMethod from "./ChartTransacionsByMethod";
 import FilterData from "./FilterByWallet";
 import ChartExpenseIncomeByMonth from "./ChartExpenseIncomeByMonth";
+import { WalletProps } from "@/types/types";
 
 const StatsContent = ({ wallets }: { wallets?: WalletProps[] | null }) => {
   const [walletData, setWalletData] = useState<

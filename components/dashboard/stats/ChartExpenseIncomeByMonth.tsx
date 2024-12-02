@@ -23,6 +23,7 @@ import dayjs from "dayjs";
 
 import { monthSelectOptions } from "@/assets/selectOptions";
 import FilterByMonthYear from "./FilterByMonthYear";
+import { WalletProps } from "@/types/types";
 
 const chartConfigExpensesIncomes = {
   total_amount: {

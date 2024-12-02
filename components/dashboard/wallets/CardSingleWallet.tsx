@@ -12,12 +12,12 @@ import { toast } from "@/hooks/use-toast";
 import AlertDeleteAction from "@/components/AlertDeleteAction";
 import CreateOrEditWalletModal from "./CreateOrEditWalletModal";
 import { computeWalletBalances } from "@/lib/walletHelpelrs";
+import { WalletProps } from "@/types/types";
 import dayjs from "dayjs";
 
 const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
   const balances = computeWalletBalances(wallet);
   const { walletBalance } = balances;
-  const [refresh, setRefresh] = useState<boolean>(false);
 
   const handleDeleteWallet = async (id: number) => {
     try {
@@ -43,11 +43,11 @@ const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
       });
     }
   };
-  console.info("refresh==>", refresh);
+
   return (
     <Card className="lg:sticky lg:top-20 shadow-sm border border-slate-100 flex flex-col items-center w-72 mb-10">
       <div className="flex justify-around w-full pt-4">
-        <CreateOrEditWalletModal setRefresh={setRefresh} wallet={wallet} />
+        <CreateOrEditWalletModal wallet={wallet} />
         <AlertDeleteAction
           deleteToContinue={handleDeleteWallet}
           id={wallet.id}

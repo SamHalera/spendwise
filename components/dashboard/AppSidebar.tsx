@@ -30,6 +30,7 @@ import {
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { WalletProps } from "@/types/types";
 
 export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
   const pathname = usePathname();

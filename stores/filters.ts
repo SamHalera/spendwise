@@ -3,6 +3,8 @@ import { DateRange } from "react-day-picker";
 import { create } from "zustand";
 
 type FiltersStore = {
+  searchedValue: string;
+  setSearchedValue: (searchedValue: string) => void;
   date: DateRange | undefined;
   setDate: (date: DateRange | undefined) => void;
   method: string[];
@@ -14,6 +16,7 @@ type FiltersStore = {
 };
 
 export const useFiltersStore = create<FiltersStore>()((set) => ({
+  searchedValue: "",
   date: {
     from: startOfMonth(new Date()),
     to: addDays(startOfMonth(new Date()), getDaysInMonth(new Date()) - 1),
@@ -32,5 +35,8 @@ export const useFiltersStore = create<FiltersStore>()((set) => ({
   },
   setDate: (date: DateRange | undefined) => {
     set({ date });
+  },
+  setSearchedValue: (searchedValue: string) => {
+    set({ searchedValue });
   },
 }));

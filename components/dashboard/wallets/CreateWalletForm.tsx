@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { useRefreshStore } from "@/stores/refresh";
 import { createWalletSchema } from "@/types/zodSchemas/walletSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
@@ -19,17 +20,19 @@ import clsx from "clsx";
 import React, { SetStateAction } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import { WalletProps } from "@/types/types";
 
 const CreateWalletForm = ({
   setOpen,
-  setRefresh,
+
   wallet,
 }: {
-  setRefresh: React.Dispatch<SetStateAction<boolean>>;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   wallet?: WalletProps;
 }) => {
+  const { refresh, setRefresh } = useRefreshStore();
   const { toast } = useToast();
+
   const form = useForm<z.infer<typeof createWalletSchema>>({
     resolver: zodResolver(createWalletSchema),
     defaultValues: {
@@ -95,7 +98,7 @@ const CreateWalletForm = ({
                 <FormControl>
                   <Input
                     {...field}
-                    type="number"
+                    type="hidden"
                     disabled={true}
                     className={clsx("bg-slate-200", {
                       "border-red-400": form.formState.errors.id,

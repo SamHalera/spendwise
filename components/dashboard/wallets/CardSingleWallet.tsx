@@ -45,7 +45,8 @@ const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
   };
 
   return (
-    <Card className="lg:sticky lg:top-20 shadow-sm border border-slate-100 flex flex-col items-center w-72 mb-10">
+    // className="bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 py-6 text-white"
+    <Card className="lg:sticky lg:top-20 shadow-sm border border-slate-100 flex flex-col items-center w-72 mb-10 bg-gradient-to-b from-blue-950/90 via-blue-800/90 to-indigo-800/50">
       <div className="flex justify-around w-full pt-4">
         <CreateOrEditWalletModal wallet={wallet} />
         <AlertDeleteAction
@@ -56,7 +57,7 @@ const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
       </div>
       <CardHeader className="flex felx-col">
         <CardTitle className="text-center">
-          <span className="text-blue-700 font-semibold text-xl mb-10">
+          <span className="text-white font-semibold text-xl mb-10">
             {wallet.name}
           </span>
         </CardTitle>
@@ -64,10 +65,10 @@ const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
       <CardContent className="flex gap-6 justify-around">
         <CardDescription>
           <div className="flex flex-col gap-3 items-center font-semibold ">
-            <div className="flex items-center gap-2 text-blue-300 text-xl">
+            <div className="flex items-center gap-2 text-blue-200 text-xl">
               <Coins size={30} /> Balance:
             </div>
-            <div className="text-indigo-700 text-xl flex flex-col gap-2 items-center">
+            <div className="text-indigo-100 text-xl flex flex-col gap-2 items-center">
               {walletBalance.toFixed(2)}€
               <span className="italic text-sm">
                 at the {dayjs(new Date()).format("DD/MM/YYYY")}

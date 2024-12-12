@@ -25,9 +25,6 @@ export default async function PrivateLayout({
       <div className="w-full">
         <div className="flex gap-3 items-start">
           <SidebarTrigger className="my-4" />
-          <h1 className="text-blue-700 text-2xl font-semibold my-4">
-            SpendWise
-          </h1>
         </div>
         {children}
       </div>

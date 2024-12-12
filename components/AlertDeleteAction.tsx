@@ -32,7 +32,7 @@ const AlertDeleteAction = ({
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className=" bg-red-200 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-red-400 duration-500 group"
+          className=" bg-red-100 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-red-400 duration-500 group"
         >
           {" "}
           <Trash2 className="text-red-400 group-hover:text-red-200 duration-500" />

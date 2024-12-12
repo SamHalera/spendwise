@@ -1,3 +1,6 @@
+import Hero from "@/components/home/Hero";
+import HomeContent from "@/components/home/HomeContent";
+
 export default function Home() {
-  return <div className="">MAIN PAGE</div>;
+  return <HomeContent />;
 }

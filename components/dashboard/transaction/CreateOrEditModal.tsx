@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-import { Pencil } from "lucide-react";
+import { BadgeEuro, HandCoins, Pencil } from "lucide-react";
 import clsx from "clsx";
 import CreateOrEditForm from "./CreateOrEditForm";
 import { TransactionProps } from "@/types/types";
@@ -35,18 +35,23 @@ const CreateOrEditModal = ({
           </div>
         ) : (
           <Button
-            className={clsx("mb-4", {
-              "bg-red-200 text-red-500 hover:bg-red-500 hover:text-red-200":
+            className={clsx("mb-4 border bg-transparent duration-500", {
+              "border-red-200 text-red-500 hover:bg-red-400 hover:text-white":
                 dataLabel === "expense",
-              "bg-blue-200 text-blue-500 hover:bg-blue-500 hover:text-blue-200":
+              "border-blue-200 text-blue-500 hover:bg-blue-400 hover:text-white":
                 dataLabel === "income",
             })}
           >
+            {dataLabel === "expense" ? (
+              <BadgeEuro className=" text-red-700" />
+            ) : (
+              <HandCoins className=" text-blue-700" />
+            )}
             New {dataLabel}
           </Button>
         )}
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="w-[350px]">
         <AlertDialogHeader>
           <AlertDialogTitle>
             {" "}

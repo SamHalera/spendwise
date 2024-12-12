@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import logoGoogle from "@/public/images/google_logo.svg";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const LoginForm = () => {
   const { toast } = useToast();
@@ -65,8 +66,7 @@ const LoginForm = () => {
     }
   };
   return (
-    <div className="p-8 ">
-      <h1>Sign In</h1>
+    <div className="p-8 w-2/3 rounded-lg bg-black/40">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -78,11 +78,12 @@ const LoginForm = () => {
             render={({ field }) => {
               return (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="text-white text-xl flex gap-3 items-center">
+                    Email <FormMessage />
+                  </FormLabel>
                   <FormControl>
                     <Input type="email" placeholder="meail here" {...field} />
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               );
             }}
@@ -93,7 +94,9 @@ const LoginForm = () => {
             render={({ field }) => {
               return (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="text-white text-xl flex gap-3 items-center">
+                    Password <FormMessage />
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
@@ -101,12 +104,13 @@ const LoginForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               );
             }}
           />
-          <Button className="self-center">Sign In</Button>
+          <Button size="lg" variant="custom" className="self-center">
+            Sign In
+          </Button>
           <Button
             type="button"
             className="w-fit my-1 self-center"
@@ -124,6 +128,18 @@ const LoginForm = () => {
               width={30}
             />
           </Button>
+          <hr></hr>
+          <div className="text-center flex gap-2 items-center justify-center">
+            <span className="text-center text-white italic">
+              You do not have an account yet?
+            </span>
+            <Link
+              className="text-blue-200 font-bold hover:text-white duration-500"
+              href={"/signup"}
+            >
+              Signup
+            </Link>
+          </div>
         </form>
       </Form>
     </div>

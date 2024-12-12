@@ -18,7 +18,7 @@ const SearchBarTransactions = ({
   }, 500);
 
   return (
-    <div className="relative w-1/3">
+    <div className="relative lg:w-1/3">
       {inputValue ? (
         <CircleX
           onClick={() => {

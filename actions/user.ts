@@ -3,6 +3,9 @@ import prisma from "@/db";
 import { SHA256 } from "crypto-js";
 import uid2 from "uid2";
 import encBase64 from "crypto-js/enc-base64";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+
 export const registerUser = async (values: {
   email: string;
   password: string;
@@ -43,4 +46,15 @@ export const registerUser = async (values: {
       error: "Oups! Something went wrong! Sorry for that. Pleas, try again...",
     };
   }
+};
+
+export const getSessionUser = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) return;
+  const userEmail = session?.user?.email;
+  const currentUser = await prisma.user.findFirst({
+    where: { email: userEmail },
+  });
+
+  return currentUser;
 };

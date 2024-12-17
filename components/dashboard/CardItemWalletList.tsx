@@ -24,13 +24,13 @@ const CardItemWalletList = ({ wallet }: { wallet: WalletProps }) => {
   return (
     <div>
       <Link href={`/dashboard/wallets/${wallet.id}`} className="group">
-        <Card className=" shadow-sm border border-slate-100 group-hover:bg-blue-50 duration-500">
+        <Card className=" shadow-sm border border-slate-100 group-hover:bg-blue-500 duration-500 bg-gradient-to-b from-blue-950/90 via-blue-800/90 to-indigo-800/50">
           <CardHeader>
-            <CardTitle className="text-center mb-4">
+            <CardTitle className="text-center mb-4 text-white">
               <span className="">{wallet.name}</span>
             </CardTitle>
             <CardDescription>
-              <div className="flex gap-3 items-center text-blue-700 font-semibold text-xl">
+              <div className="flex gap-3 items-center text-blue-200 font-semibold text-xl">
                 <Coins size={30} /> Balance :{" "}
                 <span>{walletBalance.toFixed(2)}€</span>
               </div>

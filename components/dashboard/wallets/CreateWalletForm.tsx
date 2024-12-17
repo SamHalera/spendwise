@@ -46,26 +46,26 @@ const CreateWalletForm = ({
     values: z.infer<typeof createWalletSchema>
   ) => {
     try {
-      let response:
-        | { error: string; succes?: undefined }
-        | { succes: string; error?: undefined } = {
-        succes: "success",
-        error: undefined,
-      };
+      let response: { error: string | null; success: string | null } | null =
+        // | { succes: string; error?: undefined }
+        {
+          success: "success",
+          error: null,
+        };
       if (wallet) {
         response = await editWallet(values);
       } else {
         response = await createWallet(values);
       }
-      if (response.succes) {
+      if (response?.success) {
         toast({
           variant: "default",
-          description: response.succes,
+          description: response.success,
         });
         setRefresh(true);
         setOpen(false);
       }
-      if (response.error) {
+      if (response?.error) {
         toast({
           variant: "destructive",
           description: response.error,

@@ -4,7 +4,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -31,19 +30,24 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { WalletProps } from "@/types/types";
+import logoImg from "@/public/images/logo.png";
+import Link from "next/link";
 
-export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
+export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
   const pathname = usePathname();
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader />
-      <SidebarContent>
+      <SidebarContent className="bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 py-6 text-white">
         <SidebarGroup>
           <SidebarMenu>
+            <Link href={"/dashboard"} className="mb-4">
+              <img src={logoImg.src} alt="" className="w-20" />
+            </Link>
+
             <SidebarMenuItem
-              className={clsx(" ", {
-                "text-blue-700": pathname === "/dashboard",
+              className={clsx(" text-white", {
+                "bg-indigo-500 rounded-md": pathname === "/dashboard",
               })}
             >
               <a href="/dashboard">
@@ -58,11 +62,7 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
               defaultOpen={true}
               className="group/collapsible"
             >
-              <SidebarMenuItem
-                className={clsx("", {
-                  "text-blue-700": pathname.includes("/dashboard/wallet"),
-                })}
-              >
+              <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton tooltip="Wallets">
                     <Wallet />
@@ -76,8 +76,8 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
                       wallets.map((item) => (
                         <SidebarMenuSubItem key={item.name}>
                           <SidebarMenuSubButton
-                            className={clsx({
-                              "text-blue-700":
+                            className={clsx("text-white", {
+                              "bg-indigo-500 rounded-md":
                                 pathname === `/dashboard/wallets/${item.id}`,
                             })}
                             asChild
@@ -94,7 +94,7 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
             </Collapsible>
             <SidebarMenuItem
               className={clsx("", {
-                "text-blue-700": pathname === "/dashboard/stats",
+                "bg-indigo-500 rounded-md": pathname === "/dashboard/stats",
               })}
             >
               <a href="/dashboard/stats">
@@ -106,7 +106,7 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
             </SidebarMenuItem>
             <SidebarMenuItem
               className={clsx("", {
-                "text-blue-700": pathname === "/settings",
+                "bg-indigo-500 rounded-md": pathname === "/settings",
               })}
             >
               <SidebarMenuButton>
@@ -121,7 +121,7 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
             <SidebarMenuItem className="flex items-center gap-1">
               <SidebarMenuButton
                 onClick={async () => {
-                  signOut();
+                  signOut({ callbackUrl: process.env.NEXT_PUBLIC_FRONT });
                 }}
               >
                 <LogOut /> Logout

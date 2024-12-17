@@ -15,7 +15,6 @@ const CreateOrEditWalletModal = dynamic(
 );
 
 const DashboardContent = () => {
-  // const [refresh, setRefresh] = useState<boolean>(false);
   const [dataWallets, setDataWallets] = useState<WalletProps[]>();
 
   const { refresh } = useRefreshStore();
@@ -24,7 +23,6 @@ const DashboardContent = () => {
     const fetchData = async () => {
       try {
         const wallets = await getWallets();
-        console.log("wallets==>", wallets);
 
         if (wallets) setDataWallets(wallets);
       } catch (error) {

@@ -22,6 +22,7 @@ import { useFiltersStore } from "@/stores/filters";
 import { filterAndSortDataForTable } from "@/lib/walletHelpelrs";
 import { useRefreshStore } from "@/stores/refresh";
 import { TransactionProps } from "@/types/types";
+import { ShoppingBasket } from "lucide-react";
 
 const TableDataFromWallet = ({
   label,
@@ -80,7 +81,7 @@ const TableDataFromWallet = ({
 
   return (
     <div className="w-full flex flex-col">
-      <div className="sticky top-2 flex justify-around items-center gap-4 z-10 bg-slate-100 py-6 px-8 rounded-md">
+      <div className="sticky top-2 flex flex-col lg:flex-row justify-around items-center gap-4 z-10 bg-slate-100 py-6 px-4 rounded-md w-full">
         <SearchBarTransactions
           inputValue={inputValue}
           setInputValue={setInputValue}
@@ -112,12 +113,15 @@ const TableDataFromWallet = ({
                 <TableCell className="font-medium">
                   {dayjs(item.date).format("DD/MM/YYYY")}
                 </TableCell>
-                <TableCell>{item.label}</TableCell>
+                <TableCell className="flex items-center gap-2">
+                  <ShoppingBasket />
+                  {item.label}
+                </TableCell>
                 <TableCell className="">
                   <span
                     className={clsx("text-xs  px-3 py-1 rounded-full", {
-                      "bg-indigo-300": item.transactionStatus === "PAST",
-                      "bg-indigo-700 text-white":
+                      "bg-blue-300": item.transactionStatus === "PAST",
+                      "bg-blue-700 text-white":
                         item.transactionStatus === "UPCOMING",
                     })}
                   >

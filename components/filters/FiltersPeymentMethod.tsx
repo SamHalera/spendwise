@@ -26,7 +26,7 @@ const FiltersPeymentMethod = () => {
           setDropped(!dropped);
         }}
         className={clsx(
-          "flex justify-between gap-3 items-center border border-slate-200 px-4 py-1 rounded-sm cursor-pointer w-36 h-[40px]",
+          "flex justify-between gap-3 items-center border border-slate-200 px-4 py-1 rounded-sm cursor-pointer lg:w-36 h-[40px]",
           {
             "bg-blue-200 shadow-md": method.length > 0,
             "bg-white": method.length < 1,

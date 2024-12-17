@@ -34,15 +34,15 @@ const TransactionSumUpSection = ({
           </>
         )}
       </div>
-      <span className="text-blue-500">{label}</span>
+      <span className="text-white">{label}</span>
       <div className="font-semibold text-slate-700 flex flex-col">
         <div className="flex justify-between">
-          <span className="italic text-sm">Past:</span>
-          <span className="text-blue-500">{pastBalance.toFixed(2)}€</span>
+          <span className="italic text-sm text-indigo-200">Past:</span>
+          <span className="text-blue-200">{pastBalance.toFixed(2)}€</span>
         </div>
         <div className="flex gap-2 justify-between">
-          <span className="italic text-sm">Upcoming:</span>{" "}
-          <span className="text-blue-500">{upcomingBalance.toFixed(2)}€</span>
+          <span className="italic text-sm text-indigo-200">Upcoming:</span>{" "}
+          <span className="text-blue-200">{upcomingBalance.toFixed(2)}€</span>
         </div>
       </div>
     </div>

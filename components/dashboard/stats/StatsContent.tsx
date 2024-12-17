@@ -1,18 +1,35 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChartExpenseIncome from "./ChartExpenseIncome";
 
 import ChartTransacionsByMethod from "./ChartTransacionsByMethod";
 import FilterData from "./FilterByWallet";
 import ChartExpenseIncomeByMonth from "./ChartExpenseIncomeByMonth";
 import { WalletProps } from "@/types/types";
+import { getWallets } from "@/actions/wallet";
+import Loader from "@/components/Loader";
 
-const StatsContent = ({ wallets }: { wallets?: WalletProps[] | null }) => {
+const StatsContent = () => {
+  const [wallets, setWallets] = useState<WalletProps[]>();
   const [walletData, setWalletData] = useState<
     WalletProps | null | undefined
   >();
 
-  return (
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const walletsFromDB = await getWallets();
+
+        if (walletsFromDB) setWallets(walletsFromDB);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+  return !wallets ? (
+    <Loader />
+  ) : (
     <div>
       {wallets ? (
         <>

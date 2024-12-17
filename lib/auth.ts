@@ -43,7 +43,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("credentials==>", credentials);
         if (!credentials?.email || !credentials.password) {
           return null;
         }
@@ -52,7 +51,7 @@ export const authOptions: NextAuthOptions = {
             email: credentials.email,
           },
         });
-        console.log("user==>", userFromDB);
+
         if (!userFromDB) {
           return null;
         }

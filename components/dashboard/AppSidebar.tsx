@@ -4,7 +4,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -31,26 +30,21 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { WalletProps } from "@/types/types";
-import Image from "next/image";
 import logoImg from "@/public/images/logo.png";
 import Link from "next/link";
 
-export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
+export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
   const pathname = usePathname();
 
   return (
     <Sidebar collapsible="icon">
-      {/* <SidebarHeader /> */}
-
       <SidebarContent className="bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 py-6 text-white">
         <SidebarGroup>
           <SidebarMenu>
             <Link href={"/dashboard"} className="mb-4">
               <img src={logoImg.src} alt="" className="w-20" />
             </Link>
-            {/* <h1 className="text-blue-200 text-2xl font-semibold my-4">
-              ExpenseEye
-            </h1> */}
+
             <SidebarMenuItem
               className={clsx(" text-white", {
                 "bg-indigo-500 rounded-md": pathname === "/dashboard",
@@ -70,13 +64,7 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
             >
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton
-                    tooltip="Wallets"
-                    // className={clsx("", {
-                    //   "bg-indigo-500 rounded-md":
-                    //     pathname.includes("/dashboard/wallet"),
-                    // })}
-                  >
+                  <SidebarMenuButton tooltip="Wallets">
                     <Wallet />
                     <span>Wallets</span>
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -133,7 +121,7 @@ export function AppSidebar({ wallets }: { wallets: WalletProps[] | null }) {
             <SidebarMenuItem className="flex items-center gap-1">
               <SidebarMenuButton
                 onClick={async () => {
-                  signOut();
+                  signOut({ callbackUrl: process.env.NEXT_PUBLIC_FRONT });
                 }}
               >
                 <LogOut /> Logout

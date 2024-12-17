@@ -71,12 +71,14 @@ const SignupForm = () => {
     }
   };
   return (
-    <div className="p-8 flex-1 bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 h-screen flex flex-col gap-8 justify-center items-center">
-      <h2 className="text-4xl text-white">Create your account</h2>
+    <div className="p-8 flex-1 bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 h-auto lg:h-screen flex flex-col gap-8 justify-center items-center">
+      <h2 className="text-3xl md:text-4xl text-center text-white mt-6">
+        Create your account
+      </h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex justify-center mx-auto flex-col gap-8 w-2/3 "
+          className="flex justify-center mx-auto flex-col gap-8 md:w-2/3 "
         >
           <FormField
             control={form.control}

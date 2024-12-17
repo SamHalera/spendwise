@@ -53,7 +53,8 @@ const LoginForm = () => {
       }
       if (!signInData?.error) {
         const pathToRedirect = prevUrl ? `/${prevUrl}` : "/dashboard";
-        router.push(pathToRedirect);
+
+        router.push("/dashboard");
       }
     } catch (error) {
       console.error("error==>", error);
@@ -66,11 +67,11 @@ const LoginForm = () => {
     }
   };
   return (
-    <div className="p-8 w-2/3 rounded-lg bg-black/40">
+    <div className=" p-8 md:w-2/3 rounded-lg bg-black/40">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex justify-center mx-auto flex-col gap-8 w-2/3"
+          className="flex justify-center mx-auto flex-col gap-8 md:w-2/3"
         >
           <FormField
             control={form.control}

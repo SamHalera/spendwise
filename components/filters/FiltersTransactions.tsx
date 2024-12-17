@@ -7,8 +7,8 @@ import FiltersPeymentMethod from "./FiltersPeymentMethod";
 
 const FiltersTransactions = () => {
   return (
-    <div className="flex flex-col items-center gap-4  ">
-      <div className="flex flex-col lg:flex-row gap-3">
+    <div className="flex flex-col items-center gap-4  flex-1">
+      <div className="flex flex-col lg:flex-row gap-2">
         <FiltersDate />
         <FiltersStatus />
         <FiltersPeymentMethod />

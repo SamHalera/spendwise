@@ -24,7 +24,7 @@ const CardItemWalletList = ({ wallet }: { wallet: WalletProps }) => {
   return (
     <div>
       <Link href={`/dashboard/wallets/${wallet.id}`} className="group">
-        <Card className=" shadow-sm border border-slate-100 group-hover:bg-blue-50 duration-500 bg-gradient-to-b from-blue-950/90 via-blue-800/90 to-indigo-800/50">
+        <Card className=" shadow-sm border border-slate-100 group-hover:bg-blue-500 duration-500 bg-gradient-to-b from-blue-950/90 via-blue-800/90 to-indigo-800/50">
           <CardHeader>
             <CardTitle className="text-center mb-4 text-white">
               <span className="">{wallet.name}</span>

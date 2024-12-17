@@ -81,7 +81,7 @@ const TableDataFromWallet = ({
 
   return (
     <div className="w-full flex flex-col">
-      <div className="sticky top-2 flex flex-col lg:flex-row justify-around items-center gap-4 z-10 bg-slate-100 py-6 px-8 rounded-md w-full">
+      <div className="sticky top-2 flex flex-col lg:flex-row justify-around items-center gap-4 z-10 bg-slate-100 py-6 px-4 rounded-md w-full">
         <SearchBarTransactions
           inputValue={inputValue}
           setInputValue={setInputValue}

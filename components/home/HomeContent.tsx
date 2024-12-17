@@ -10,7 +10,7 @@ const HomeContent = () => {
   return (
     <>
       <Hero />
-      <MockupSection />
+      {/* <MockupSection /> */}
       <FeaturesSections />
       <OptionsSection />
       <LastOption />

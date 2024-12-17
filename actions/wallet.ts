@@ -2,6 +2,9 @@
 
 import prisma from "@/db";
 import { handleTransactionStatus } from "./transaction";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { getSessionUser } from "./user";
 
 export const getWalletById = async (id: number) => {
   try {
@@ -26,7 +29,12 @@ export const getWalletById = async (id: number) => {
 };
 export const getWallets = async () => {
   try {
+    const currentUser = await getSessionUser();
+    if (!currentUser) return;
     const wallets = await prisma.wallet.findMany({
+      where: {
+        userId: currentUser?.id,
+      },
       include: {
         transaction: true,
       },
@@ -51,25 +59,35 @@ export const createWallet = async (values: {
   try {
     const { name, balance } = values;
 
+    const currentUser = await getSessionUser();
+    if (!currentUser) return null;
     const newWallet = await prisma.wallet.create({
       data: {
         name,
         balance: parseFloat(balance),
+        user: {
+          connect: {
+            id: currentUser?.id,
+          },
+        },
       },
     });
 
     if (!newWallet) {
       return {
         error: "Oups! something went wrong! Try to submit the form again...",
+        success: null,
       };
     }
     return {
-      succes: "Good news! A new wallet has been created successfully.",
+      success: "Good news! A new wallet has been created successfully.",
+      error: null,
     };
   } catch (error) {
     console.error("Error create wallet==>", error);
     return {
       error: "Oups! something went wrong! Try to submit the form again...",
+      success: null,
     };
   }
 };
@@ -92,15 +110,18 @@ export const editWallet = async (values: {
     if (!newWallet) {
       return {
         error: "Oups! something went wrong! Try to submit the form again...",
+        success: null,
       };
     }
     return {
-      succes: "Good news! The wallet has been updated successfully.",
+      success: "Good news! The wallet has been updated successfully.",
+      error: null,
     };
   } catch (error) {
     console.error("Error update wallet==>", error);
     return {
       error: "Oups! something went wrong! Try to submit the form again...",
+      success: null,
     };
   }
 };

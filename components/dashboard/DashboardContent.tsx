@@ -23,8 +23,12 @@ const DashboardContent = () => {
     const fetchData = async () => {
       try {
         const wallets = await getWallets();
-
-        if (wallets) setDataWallets(wallets);
+        console.log(wallets);
+        if (wallets) {
+          setDataWallets(wallets);
+        } else {
+          setDataWallets([]);
+        }
       } catch (error) {
         console.error(error);
       }

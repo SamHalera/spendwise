@@ -156,23 +156,7 @@ const SignupForm = () => {
           <Button size="lg" variant="custom" className="self-center">
             Sign up
           </Button>
-          <Button
-            type="button"
-            className="w-fit my-1 self-center"
-            onClick={() => {
-              signIn("google", { callbackUrl: "/" });
-            }}
-            size="lg"
-            variant="outline"
-          >
-            <img
-              src={logoGoogle.src}
-              alt="Google logo"
-              // className="mr-2"
-              height={30}
-              width={30}
-            />
-          </Button>
+
           <hr></hr>
           <div className="text-center flex gap-2 items-center justify-center">
             <span className="text-center text-white italic">

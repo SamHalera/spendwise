@@ -24,7 +24,7 @@ const OptionItem = ({
         className={clsx(
           "flex flex-col lg:flex-row items-center justify-around",
           {
-            "flex-row-reverse": index % 2 !== 0,
+            "lg:flex-row-reverse": index % 2 !== 0,
           }
         )}
       >

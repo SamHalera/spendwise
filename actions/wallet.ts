@@ -56,9 +56,11 @@ export const createWallet = async (values: {
   name: string;
   balance: string;
 }) => {
+  console.log("create==>", values);
   try {
     const { name, balance } = values;
 
+    console.log("currentUser");
     const currentUser = await getSessionUser();
     if (!currentUser) return null;
     const newWallet = await prisma.wallet.create({
@@ -128,6 +130,11 @@ export const editWallet = async (values: {
 
 export const deleteWallet = async (id: number) => {
   try {
+    await prisma.transaction.deleteMany({
+      where: {
+        walletId: id,
+      },
+    });
     await prisma.wallet.delete({
       where: { id },
     });

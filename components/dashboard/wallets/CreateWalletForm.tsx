@@ -53,8 +53,10 @@ const CreateWalletForm = ({
           error: null,
         };
       if (wallet) {
+        console.log("values update==>", values);
         response = await editWallet(values);
       } else {
+        console.log("values create==>", values);
         response = await createWallet(values);
       }
       if (response?.success) {

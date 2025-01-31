@@ -1,4 +1,5 @@
 import { PaymentMethod } from "@prisma/client";
+import { Decimal } from "@prisma/client/runtime/library";
 import { DateRange } from "react-day-picker";
 
 type WalletProps = {
@@ -12,8 +13,9 @@ type TransactionProps = {
   id: number;
   label: string;
   type: string;
+  isFixed: boolean;
   date: Date;
-  amount: number;
+  amount: Decimal;
   transactionStatus: string;
   paymentMethod: string;
   walletId: number;
@@ -22,6 +24,7 @@ type TransactionFormValuesProps = {
   id: number;
   label: string;
   type: string;
+  isFixed: boolean;
   date: Date;
   amount: string;
   transactionStatus: string;

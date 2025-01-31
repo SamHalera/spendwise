@@ -16,13 +16,14 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import logoGoogle from "@/public/images/google_logo.svg";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useRefreshStore } from "@/stores/refresh";
 
 const LoginForm = () => {
   const { toast } = useToast();
+  const { refresh, setRefresh } = useRefreshStore();
   const router = useRouter();
   const searchParms = useSearchParams();
   const prevUrl = searchParms.get("prevUrl");
@@ -54,7 +55,7 @@ const LoginForm = () => {
       if (!signInData?.error) {
         const pathToRedirect = prevUrl ? `/${prevUrl}` : "/dashboard";
 
-        router.push("/dashboard");
+        router.refresh();
       }
     } catch (error) {
       console.error("error==>", error);

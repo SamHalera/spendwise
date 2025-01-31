@@ -67,6 +67,7 @@ export const createWallet = async (values: {
       data: {
         name,
         balance: parseFloat(balance),
+        createdAt: new Date(),
         user: {
           connect: {
             id: currentUser?.id,

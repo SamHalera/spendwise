@@ -11,10 +11,18 @@ import {
   isBefore,
   isEqual,
   startOfMonth,
+  daysToWeeks,
+  getWeeksInMonth,
+  lastDayOfMonth,
+  setDate,
+  getMonth,
 } from "date-fns";
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 import { WineOff } from "lucide-react";
 import { DateRange } from "react-day-picker";
+
+dayjs.extend(duration);
 
 export const computeWalletBalances = (wallet: WalletProps) => {
   let walletBalance = wallet.balance;
@@ -36,11 +44,19 @@ export const computeWalletBalances = (wallet: WalletProps) => {
   let expensesUpcomingBalance = 0;
   let incomesUpcomingBalance = 0;
 
-  expensesPast.forEach((item) => (expensesPastBalance += item.amount));
-  expensesUpcoming.forEach((item) => (expensesUpcomingBalance += item.amount));
+  expensesPast.forEach(
+    (item) => (expensesPastBalance += parseFloat(item.amount.toString()))
+  );
+  expensesUpcoming.forEach(
+    (item) => (expensesUpcomingBalance += parseFloat(item.amount.toString()))
+  );
 
-  incomesPast.forEach((item) => (incomesPastBalance += item.amount));
-  incomesUpcoming.forEach((item) => (incomesUpcomingBalance += item.amount));
+  incomesPast.forEach(
+    (item) => (incomesPastBalance += parseFloat(item.amount.toString()))
+  );
+  incomesUpcoming.forEach(
+    (item) => (incomesUpcomingBalance += parseFloat(item.amount.toString()))
+  );
 
   walletBalance += incomesPastBalance - expensesPastBalance;
   return {
@@ -80,10 +96,10 @@ export const formatDataForCharts = (wallet: WalletProps) => {
     let totalExpenses = 0;
     transactionsByMonth.forEach((transaction) => {
       if (transaction.type === "INCOME") {
-        totalIncomes += transaction.amount;
+        totalIncomes += parseFloat(transaction.amount.toString());
       }
       if (transaction.type === "EXPENSE") {
-        totalExpenses += transaction.amount;
+        totalExpenses += parseFloat(transaction.amount.toString());
       }
     });
     const objectData = {
@@ -154,9 +170,9 @@ const calculateTransactionAmountByMethod = (
   let totalExpenses = 0;
   transactionsByMethod.forEach((transaction) => {
     if (transaction.paymentMethod === method && transaction.type === "INCOME")
-      totalIncomes += transaction.amount;
+      totalIncomes += parseFloat(transaction.amount.toString());
     if (transaction.paymentMethod === method && transaction.type === "EXPENSE")
-      totalExpenses += transaction.amount;
+      totalExpenses += parseFloat(transaction.amount.toString());
   });
   return { expenses: totalExpenses, incomes: totalIncomes };
 };
@@ -169,6 +185,9 @@ export const filterAndSortDataForTable = (
   date: DateRange | undefined,
   searchedValue: string
 ) => {
+  const dayAfterDateTo = new Date(date?.to ?? new Date());
+  dayAfterDateTo.setDate(dayAfterDateTo.getDate() + 1);
+
   return dataForTable
     .sort((a, b) => {
       return a.date.getTime() - b.date.getTime();
@@ -191,7 +210,7 @@ export const filterAndSortDataForTable = (
         return (
           isEqual(elt.date, date.from) ||
           isEqual(elt.date, date.to) ||
-          (isAfter(elt.date, date.from) && isBefore(elt.date, date.to))
+          (isAfter(elt.date, date.from) && isBefore(elt.date, dayAfterDateTo))
         );
       } else {
         return elt;
@@ -253,4 +272,37 @@ export const resetFilters = () => {
     }
   }
   return null;
+};
+
+export const calculateBudgets = (wallet: WalletProps, currentDate: Date) => {
+  const currentMonth = dayjs().month();
+
+  let sumOfMonthExpenses = 0;
+  let sumOfMonthIncomes = 0;
+
+  wallet.transaction.forEach((transaction) => {
+    const transactionMonth = getMonth(transaction.date);
+    if (transactionMonth === currentMonth) {
+      if (transaction.type === "EXPENSE") {
+        sumOfMonthExpenses += parseFloat(transaction.amount.toString());
+      }
+      if (transaction.type === "INCOME") {
+        sumOfMonthIncomes += parseFloat(transaction.amount.toString());
+      }
+    }
+  });
+
+  const daysPerMonth = getDaysInMonth(currentDate);
+  const weeksPerMonth = getWeeksInMonth(currentDate);
+
+  const monthBudget = wallet.balance + sumOfMonthIncomes - sumOfMonthExpenses;
+  const weekBudget = monthBudget / weeksPerMonth;
+  const dayBudget = monthBudget / daysPerMonth;
+  const budgets = {
+    perMonth: monthBudget.toFixed(2),
+    perWeek: weekBudget.toFixed(2),
+    perDay: dayBudget.toFixed(2),
+  };
+
+  return budgets;
 };

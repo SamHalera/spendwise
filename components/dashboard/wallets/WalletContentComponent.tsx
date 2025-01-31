@@ -11,6 +11,13 @@ import { SkeletonWalletContent } from "@/components/skeletons/SkeletonWalletCont
 
 import { useRefreshStore } from "@/stores/refresh";
 import { TransactionProps, WalletProps } from "@/types/types";
+import { Button } from "@/components/ui/button";
+import { Trash } from "lucide-react";
+import { deleteAllTransactions } from "@/actions/transaction";
+import { TransactionType } from "@prisma/client";
+import { useToast } from "@/hooks/use-toast";
+import AlertDeleteAction from "@/components/AlertDeleteAction";
+import CardSingleBudget from "./CardSingleBudget";
 
 const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataWallet, setDataWallet] = useState<WalletProps>();
@@ -20,7 +27,39 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { refresh, setRefresh } = useRefreshStore();
-
+  const { toast } = useToast();
+  const handleDeleteAllTransacions = async (
+    walletId: number,
+    type?: TransactionType
+  ) => {
+    const typeForTransactions = dataLabel === "expense" ? "EXPENSE" : "INCOME";
+    try {
+      const response = await deleteAllTransactions(
+        walletId,
+        typeForTransactions
+      );
+      if (response.success) {
+        setRefresh(true);
+        toast({
+          variant: "default",
+          description: response.success,
+        });
+      }
+      if (response.error) {
+        toast({
+          variant: "destructive",
+          description: response.error,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        description:
+          "Oups! something went wrong while deleting transaction! Try to submit the form again...",
+      });
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,8 +91,13 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
       ) : (
         <>
           {dataWallet && (
-            <div className="mt-8 pr-4 lg:border-r lg:border-blue-200 mx-auto">
-              <CardSingleWallet wallet={dataWallet} />
+            <div className="flex flex-col">
+              <div className="mt-8 pr-4 lg:border-r lg:border-blue-200 mx-auto">
+                <CardSingleWallet wallet={dataWallet} />
+              </div>
+              <div className=" pr-4 lg:border-r lg:border-blue-200 mx-auto">
+                <CardSingleBudget wallet={dataWallet} />
+              </div>
             </div>
           )}
 
@@ -66,7 +110,19 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
               setDataLabel={setDataLabel}
             />
             <div className="p-6">
-              <CreateOrEditModal dataLabel={dataLabel} walletId={walletId} />
+              <div className="flex justify-between">
+                <CreateOrEditModal dataLabel={dataLabel} walletId={walletId} />
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-red-600">
+                    delete all {dataLabel}s
+                  </span>
+                  <AlertDeleteAction
+                    id={walletId}
+                    deleteToContinue={handleDeleteAllTransacions}
+                    pathToRedirect={`/dashboard/wallets/${walletId}`}
+                  />
+                </div>
+              </div>
               <TableDataFromWallet
                 label={dataLabel}
                 dataForTable={dataForTable}

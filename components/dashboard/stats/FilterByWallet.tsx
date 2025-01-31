@@ -14,12 +14,15 @@ import React, { SetStateAction } from "react";
 const FilterByWallet = ({
   wallets,
   setWalletData,
+  label,
 }: {
   wallets: WalletProps[] | null;
   setWalletData: React.Dispatch<SetStateAction<WalletProps | null | undefined>>;
+  label?: string;
 }) => {
   return (
-    <div className="mb-10 self-start rounded-md shadow-md">
+    <div className="mb-10 self-start">
+      <label className="mb-5 block">{label}</label>
       <Select
         onValueChange={(value) => {
           const selectedWallet = wallets?.find(
@@ -32,7 +35,7 @@ const FilterByWallet = ({
           <SelectValue placeholder="Select a wallet" id="wallet" />
         </SelectTrigger>
 
-        <SelectContent>
+        <SelectContent className="rounded-md shadow-md">
           {wallets &&
             wallets.map((wallet) => {
               return (

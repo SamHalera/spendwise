@@ -2,7 +2,15 @@ import SignupForm from "@/components/authForms/SignupForm";
 import React from "react";
 import imageSignup from "@/public/images/image-signup.jpg";
 import logoImg from "@/public/images/logo.png";
-const page = () => {
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+const page = async () => {
+  const session = await getServerSession(authOptions);
+  console.log("session==>", session);
+  if (session) {
+    redirect("/dashboard");
+  }
   return (
     <div className="flex h-auto lg:h-screen mt-20">
       <div

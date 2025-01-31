@@ -46,12 +46,18 @@ const TableDataFromWallet = ({
     date,
     searchedValue
   );
-
+  const formatAmount = (amount: number) => {
+    const formatValue = new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "EUR",
+    }).format(amount);
+    return formatValue;
+  };
   let totalAmountTransactions = 0;
 
-  sortedAndFilteredData?.forEach(
-    (data) => (totalAmountTransactions += data.amount)
-  );
+  sortedAndFilteredData?.forEach((data) => {
+    totalAmountTransactions += parseFloat(data.amount.toString());
+  });
 
   const handleDeleteTransaction = async (id: number) => {
     try {
@@ -93,29 +99,43 @@ const TableDataFromWallet = ({
         <TableCaption>A list of your recent {label}s.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Date</TableHead>
-            <TableHead className="w-80">Label</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
+            <TableHead className="w-[100px] text-center">Date</TableHead>
+            <TableHead className="w-80 text-center">Label</TableHead>
+            <TableHead className=" text-center">Fixed</TableHead>
+            <TableHead className=" text-center">Status</TableHead>
+            <TableHead className=" text-center">Method</TableHead>
             <TableHead className="text-center flex flex-col items-center justify-center">
               Amount{" "}
               <span className="font-semibold">
                 ({totalAmountTransactions}€)
               </span>
             </TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead className="text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {sortedAndFilteredData.map((item) => {
             return (
-              <TableRow key={item.id}>
-                <TableCell className="font-medium">
+              <TableRow key={item.id} className="text-center">
+                <TableCell className="font-medium text-center">
                   {dayjs(item.date).format("DD/MM/YYYY")}
                 </TableCell>
-                <TableCell className="flex items-center gap-2">
+                <TableCell className="flex items-center gap-2 justify-center">
                   <ShoppingBasket />
                   {item.label}
+                </TableCell>
+                <TableCell>
+                  <span
+                    className={clsx(
+                      "text-xs px-3 py-2 flex justify-center items-center rounded-full w-20",
+                      {
+                        "bg-orange-300": item.isFixed,
+                        "bg-slate-300": !item.isFixed,
+                      }
+                    )}
+                  >
+                    {item.isFixed ? "fixed" : "variable"}
+                  </span>
                 </TableCell>
                 <TableCell className="">
                   <span
@@ -136,7 +156,8 @@ const TableDataFromWallet = ({
                   })}
                 >
                   {item.type === "EXPENSE" ? "-" : "+"}
-                  {item.amount.toFixed(2)}€
+
+                  {formatAmount(parseFloat(item.amount.toString()))}
                 </TableCell>
                 <TableCell className="text-right flex justify-end gap-4">
                   <CreateOrEditModal

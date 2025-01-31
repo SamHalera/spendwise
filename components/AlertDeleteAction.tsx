@@ -15,13 +15,14 @@ import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { Trash2 } from "lucide-react";
 
 import { useRouter } from "next/navigation";
+import { TransactionType } from "@prisma/client";
 
 const AlertDeleteAction = ({
   deleteToContinue,
   id,
   pathToRedirect,
 }: {
-  deleteToContinue: (id: number) => Promise<void>;
+  deleteToContinue: (id: number, type?: TransactionType) => Promise<void>;
   id: number;
   pathToRedirect: string;
 }) => {
@@ -32,7 +33,7 @@ const AlertDeleteAction = ({
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className=" bg-red-100 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-red-400 duration-500 group"
+          className="border-red-400 bg-red-100 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-red-400 duration-500 group"
         >
           {" "}
           <Trash2 className="text-red-400 group-hover:text-red-200 duration-500" />

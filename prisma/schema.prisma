@@ -30,7 +30,9 @@ model Transaction{
   label   String
   type    TransactionType
   date    DateTime
-  amount  Int
+  createdAt DateTime
+  amount  Decimal
+  isFixed Boolean
   transactionStatus TransactionStatus
   paymentMethod PaymentMethod
   wallet Wallet @relation(fields: [walletId], references: [id])
@@ -41,6 +43,7 @@ model Transaction{
 model Wallet {
   id Int  @id @default(autoincrement())
   name String @unique
+  createdAt DateTime
   balance Int
   transaction Transaction[]
   user User @relation(fields: [userId], references: [id])

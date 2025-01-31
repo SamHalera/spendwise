@@ -37,6 +37,7 @@ import { CalendarIcon } from "lucide-react";
 import dayjs from "dayjs";
 import { useRefreshStore } from "@/stores/refresh";
 import { TransactionProps } from "@/types/types";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const CreateOrEditForm = ({
   setOpen,
@@ -56,6 +57,7 @@ const CreateOrEditForm = ({
       id: data?.id ?? 0,
       label: data?.label ?? "",
       type: data ? data.type : "EXPENSE",
+      isFixed: false,
       date: data?.date ?? new Date(),
       amount: data?.amount.toString() ?? "0",
       transactionStatus: data?.transactionStatus ?? "",
@@ -297,6 +299,30 @@ const CreateOrEditForm = ({
                       })}
                     />
                   </FormControl>
+                </FormItem>
+              );
+            }}
+          />
+          <FormField
+            name="isFixed"
+            control={form.control}
+            render={({ field }) => {
+              console.log("field==>", field.value);
+              return (
+                <FormItem>
+                  <FormLabel className="flex gap-2">
+                    Transaction is fixed each month ?{" "}
+                    <FormMessage className="italic text-xs font-semibold" />
+                  </FormLabel>
+                  <div className="flex flex-row items-center justify-start gap-3">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div>is fixed</div>
+                  </div>
                 </FormItem>
               );
             }}

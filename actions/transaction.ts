@@ -7,25 +7,31 @@ import {
   TransactionStatus,
   TransactionType,
 } from "@prisma/client";
+import { Decimal } from "@prisma/client/runtime/library";
 import { revalidatePath } from "next/cache";
 
 export const createOrEditTransaction = async (
   values: TransactionFormValuesProps
 ) => {
   try {
-    const { id, walletId, label, type, date, amount, paymentMethod } = values;
+    const { id, walletId, label, type, date, amount, paymentMethod, isFixed } =
+      values;
 
     let transactionStatus = "PAST";
     if (date > new Date()) transactionStatus = "UPCOMING";
 
     if (id === 0) {
-      console.log("create");
+      console.log("create==> ", values);
+      let amountStr = parseAmount(amount);
+
       const newTransaction = await prisma.transaction.create({
         data: {
           label,
           date,
           type: type as keyof typeof TransactionType,
-          amount: parseFloat(amount),
+          createdAt: new Date(),
+          isFixed: isFixed ?? false,
+          amount: new Decimal(amountStr),
           transactionStatus:
             transactionStatus as keyof typeof TransactionStatus,
           paymentMethod: paymentMethod as keyof typeof PaymentMethod,
@@ -40,13 +46,14 @@ export const createOrEditTransaction = async (
         };
       }
     } else if (id > 0) {
+      let amountStr = parseAmount(amount);
       const updatedTransaction = await prisma.transaction.update({
         where: { id },
         data: {
           label,
           date,
           type: type as keyof typeof TransactionType,
-          amount: parseFloat(amount),
+          amount: new Decimal(amountStr),
           transactionStatus:
             transactionStatus as keyof typeof TransactionStatus,
           paymentMethod: paymentMethod as keyof typeof PaymentMethod,
@@ -91,6 +98,22 @@ export const deleteTransaction = async (id: number) => {
     };
   }
 };
+export const deleteAllTransactions = async (walletId: number, type: string) => {
+  try {
+    const deleted = await prisma.transaction.deleteMany({
+      where: { walletId, type: type as keyof typeof TransactionType },
+    });
+    return {
+      success: "Good news! Transactions have been deleted!",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      error:
+        "Oups something went wrong while deleting a transaction. Try again...",
+    };
+  }
+};
 
 export const handleTransactionStatus = async (wallets: WalletProps[]) => {
   wallets.forEach((wallet) => {
@@ -114,4 +137,26 @@ export const handleTransactionStatus = async (wallets: WalletProps[]) => {
   });
 
   return wallets;
+};
+
+const parseAmount = (value: string) => {
+  const strToArr = value.split("");
+
+  const parsedStr = strToArr
+    .map((item, index) => {
+      if (index === 0 && item === "0") {
+        return;
+      } else if (item === "," || item === ".") {
+        return ".";
+      }
+      return item;
+    })
+    .filter((item) => {
+      if (item && (!isNaN(parseInt(item)) || item === ".")) {
+        return true;
+      }
+    })
+    .join("");
+
+  return parseFloat(parsedStr);
 };

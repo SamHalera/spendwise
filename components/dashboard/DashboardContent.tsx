@@ -18,7 +18,7 @@ const DashboardContent = () => {
   const [dataWallets, setDataWallets] = useState<WalletProps[]>();
 
   const { refresh } = useRefreshStore();
-
+  console.log("refresh=>", refresh);
   useEffect(() => {
     const fetchData = async () => {
       try {

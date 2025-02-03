@@ -19,15 +19,14 @@ export default async function PrivateLayout({
   const wallets = await getWallets();
   return (
     <SidebarProvider>
-      <div className="p-4">
-        <AppSidebar wallets={wallets} />
+      <AppSidebar wallets={wallets} />
+
+      {/* <div className="w-full"> */}
+      <div className="flex gap-3 items-start">
+        <SidebarTrigger className="my-4" />
       </div>
-      <div className="w-full">
-        <div className="flex gap-3 items-start">
-          <SidebarTrigger className="my-4" />
-        </div>
-        {children}
-      </div>
+      {children}
+      {/* </div> */}
     </SidebarProvider>
   );
 }

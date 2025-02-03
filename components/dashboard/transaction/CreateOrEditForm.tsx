@@ -37,14 +37,16 @@ import { CalendarIcon } from "lucide-react";
 import dayjs from "dayjs";
 import { useRefreshStore } from "@/stores/refresh";
 import { TransactionProps } from "@/types/types";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const CreateOrEditForm = ({
   setOpen,
-
+  dataLabel,
   data,
   walletId,
 }: {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  dataLabel: string;
   data?: TransactionProps;
   walletId: number;
 }) => {
@@ -55,10 +57,11 @@ const CreateOrEditForm = ({
     defaultValues: {
       id: data?.id ?? 0,
       label: data?.label ?? "",
-      type: data ? data.type : "EXPENSE",
+      type: data ? data.type : dataLabel.toUpperCase(),
+      isFixed: false,
       date: data?.date ?? new Date(),
       amount: data?.amount.toString() ?? "0",
-      transactionStatus: data?.transactionStatus ?? "",
+      transactionStatus: data?.transactionStatus ?? "PAST",
       paymentMethod: data?.paymentMethod ?? "",
       walletId,
     },
@@ -143,7 +146,7 @@ const CreateOrEditForm = ({
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             name="type"
             control={form.control}
             render={({ field }) => (
@@ -168,8 +171,8 @@ const CreateOrEditForm = ({
                 </Select>
               </FormItem>
             )}
-          />
-          <FormField
+          /> */}
+          {/* <FormField
             name="transactionStatus"
             control={form.control}
             render={({ field }) => (
@@ -189,24 +192,10 @@ const CreateOrEditForm = ({
                     value={field.value.toLowerCase()}
                   />
                 </FormControl>
-                {/* <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  disabled
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a transaction status" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="PAST">Past</SelectItem>
-                    <SelectItem value="UPCOMING">Upcoming</SelectItem>
-                  </SelectContent>
-                </Select> */}
+                
               </FormItem>
             )}
-          />
+          /> */}
           <FormField
             name="paymentMethod"
             control={form.control}
@@ -297,6 +286,30 @@ const CreateOrEditForm = ({
                       })}
                     />
                   </FormControl>
+                </FormItem>
+              );
+            }}
+          />
+          <FormField
+            name="isFixed"
+            control={form.control}
+            render={({ field }) => {
+              console.log("field==>", field.value);
+              return (
+                <FormItem>
+                  <FormLabel className="flex gap-2">
+                    Transaction is fixed each month ?{" "}
+                    <FormMessage className="italic text-xs font-semibold" />
+                  </FormLabel>
+                  <div className="flex flex-row items-center justify-start gap-3">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div>is fixed</div>
+                  </div>
                 </FormItem>
               );
             }}

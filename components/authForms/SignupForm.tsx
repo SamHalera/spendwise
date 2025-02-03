@@ -56,7 +56,7 @@ const SignupForm = () => {
             title: "Welcome!",
             description: response.success,
           });
-          router.push("/dashboard");
+          router.refresh();
         }
       }
       if (response?.error) {

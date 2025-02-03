@@ -97,6 +97,18 @@ export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
                 "bg-indigo-500 rounded-md": pathname === "/dashboard/stats",
               })}
             >
+              <a href="/dashboard/budgets">
+                <SidebarMenuButton>
+                  <ChartNoAxesCombined />
+                  <span>Budgets</span>
+                </SidebarMenuButton>
+              </a>
+            </SidebarMenuItem>
+            <SidebarMenuItem
+              className={clsx("", {
+                "bg-indigo-500 rounded-md": pathname === "/dashboard/stats",
+              })}
+            >
               <a href="/dashboard/stats">
                 <SidebarMenuButton>
                   <ChartNoAxesCombined />

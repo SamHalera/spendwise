@@ -14,6 +14,7 @@ import CreateOrEditWalletModal from "./CreateOrEditWalletModal";
 import { computeWalletBalances } from "@/lib/walletHelpelrs";
 import { WalletProps } from "@/types/types";
 import dayjs from "dayjs";
+import clsx from "clsx";
 
 const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
   const balances = computeWalletBalances(wallet);
@@ -68,7 +69,12 @@ const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
             <div className="flex items-center gap-2 text-blue-200 text-xl">
               <Coins size={30} /> Balance:
             </div>
-            <div className="text-indigo-100 text-xl flex flex-col gap-2 items-center">
+            <div
+              className={clsx("text-xl flex flex-col gap-2 items-center", {
+                "text-indigo-100 ": walletBalance > 0,
+                "text-red-500 ": walletBalance < 0,
+              })}
+            >
               {walletBalance.toFixed(2)}€
               <span className="italic text-sm">
                 at the {dayjs(new Date()).format("DD/MM/YYYY")}

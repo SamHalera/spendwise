@@ -63,6 +63,7 @@ const CreateOrEditModal = ({
               setOpen={setOpen}
               data={data}
               walletId={walletId}
+              dataLabel={dataLabel}
             />
           </div>
         </AlertDialogHeader>

@@ -11,6 +11,9 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="w-full">
+      <h1 className="text-3xl text-blue-500 font-bold text-center my-6">
+        Wallet
+      </h1>
       <WalletContentComponent walletId={parseFloat(id)} />
     </div>
   );

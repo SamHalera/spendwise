@@ -36,13 +36,13 @@ const DashboardContent = () => {
     fetchData();
   }, [refresh]);
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center px-3 w-full">
       <h2 className="text-2xl text-blue-500 mb-4">My Wallets</h2>
       <div className="flex flex-col items-center">
         <span className="mb-2">add a wallet</span>
         <CreateOrEditWalletModal />
       </div>
-      <div className="flex justify-center items-center gap-6 my-10">
+      <div className="flex flex-wrap justify-center items-center gap-6 my-10 w-full">
         {dataWallets ? (
           dataWallets.map((wallet) => {
             return <CardItemWalletList key={wallet.id} wallet={wallet} />;

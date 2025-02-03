@@ -1,10 +1,16 @@
 "use server";
 
 import prisma from "@/db";
-import { handleTransactionStatus } from "./transaction";
+import {
+  convertAmountDecimalToNumber,
+  handleTransactionStatus,
+} from "./transaction";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getSessionUser } from "./user";
+import { WalletProps } from "@/types/types";
+import { getFixedTransactionFromWallet } from "./fixedTransaction";
+import { getMonth } from "date-fns";
 
 export const getWalletById = async (id: number) => {
   try {
@@ -15,15 +21,31 @@ export const getWalletById = async (id: number) => {
       },
     });
     if (wallet) {
-      const walletsWithUpdatedTransactions = await handleTransactionStatus([
+      const currentMonth = getMonth(new Date());
+      const currentMonthTransactions = wallet.transaction.filter(
+        (transaction) => getMonth(transaction.date) === currentMonth
+      );
+      let fixedTransactions = null;
+
+      if (currentMonthTransactions.length === 0) {
+        fixedTransactions = await getFixedTransactionFromWallet(wallet);
+      }
+
+      const walletWithUpdatedTransactions = await handleTransactionStatus([
         wallet,
       ]);
 
-      return walletsWithUpdatedTransactions[0];
+      const result = {
+        wallet: walletWithUpdatedTransactions[0],
+        hasFixedTransactions: fixedTransactions
+          ? fixedTransactions.length > 0
+          : false,
+      };
+      return result;
     }
     return null;
   } catch (error) {
-    console.error("Error create wallet==>", error);
+    console.error("Error getting wallet==>", error);
     return null;
   }
 };
@@ -129,6 +151,31 @@ export const editWallet = async (values: {
   }
 };
 
+export const updateWalletWithFixedTransactions = async (
+  walllet: WalletProps
+) => {
+  try {
+    const fixedTransactions = await getFixedTransactionFromWallet(walllet);
+    const currentMonth = getMonth(new Date());
+    fixedTransactions?.forEach(async (elt) => {
+      if (getMonth(elt.transaction.date) === currentMonth - 1) {
+        const cloneTransaction = { ...elt.transaction };
+
+        cloneTransaction.createdAt = new Date();
+
+        cloneTransaction.date.setMonth(currentMonth);
+
+        const { id, ...partialTransaction } = cloneTransaction;
+
+        const newTransaction = await prisma.transaction.create({
+          data: partialTransaction,
+        });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 export const deleteWallet = async (id: number) => {
   try {
     await prisma.transaction.deleteMany({

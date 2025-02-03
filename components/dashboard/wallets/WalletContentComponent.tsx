@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TableDataFromWallet from "./TableDataFromWallet";
 import CardSingleWallet from "./CardSingleWallet";
 
@@ -11,13 +11,13 @@ import { SkeletonWalletContent } from "@/components/skeletons/SkeletonWalletCont
 
 import { useRefreshStore } from "@/stores/refresh";
 import { TransactionProps, WalletProps } from "@/types/types";
-import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
 import { deleteAllTransactions } from "@/actions/transaction";
 import { TransactionType } from "@prisma/client";
 import { useToast } from "@/hooks/use-toast";
 import AlertDeleteAction from "@/components/AlertDeleteAction";
 import CardSingleBudget from "./CardSingleBudget";
+import DrawerForMobile from "./DrawerForMobile";
+import ModalFixedTransactions from "@/components/ModalFixedTransactions";
 
 const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataWallet, setDataWallet] = useState<WalletProps>();
@@ -25,9 +25,21 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataLabel, setDataLabel] = useState<string>("expense");
   const [dataForTable, setDataForTable] = useState<TransactionProps[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement | null>(null);
   const { refresh, setRefresh } = useRefreshStore();
   const { toast } = useToast();
+  const transitionsLength: (type: string) => TransactionProps[] = (
+    type: string
+  ) => {
+    const transitions =
+      dataWallet?.transaction.filter(
+        (item) => item.type === type.toUpperCase()
+      ) ?? [];
+    return transitions;
+  };
+
   const handleDeleteAllTransacions = async (
     walletId: number,
     type?: TransactionType
@@ -60,18 +72,22 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
       });
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const wallet = await getWalletById(walletId);
+        const result = await getWalletById(walletId);
 
-        if (wallet) {
-          setDataWallet(wallet);
+        if (result?.wallet) {
+          setDataWallet(result.wallet);
           setDataForTable(
-            wallet.transaction.filter(
+            result.wallet.transaction.filter(
               (data: TransactionProps) => data.type === dataLabel.toUpperCase()
             )
           );
+        }
+        if (result?.hasFixedTransactions) {
+          setOpenModal(true);
         }
         setRefresh(false);
 
@@ -85,20 +101,34 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   }, [refresh]);
 
   return (
-    <div className="w-full flex flex-col  lg:flex-row justify-around">
+    <div className="w-full flex flex-col lg:flex-row justify-around py-4 relative">
       {isLoading ? (
         <SkeletonWalletContent />
       ) : (
         <>
           {dataWallet && (
-            <div className="flex flex-col">
-              <div className="mt-8 pr-4 lg:border-r lg:border-blue-200 mx-auto">
-                <CardSingleWallet wallet={dataWallet} />
+            <>
+              <ModalFixedTransactions
+                wallet={dataWallet}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+              />
+              <div className="z-50 fixed bottom-28 ">
+                <DrawerForMobile
+                  openDrawer={openDrawer}
+                  setOpenDrawer={setOpenDrawer}
+                  wallet={dataWallet}
+                />
               </div>
-              <div className=" pr-4 lg:border-r lg:border-blue-200 mx-auto">
-                <CardSingleBudget wallet={dataWallet} />
-              </div>
-            </div>
+              {/* <div className="hidden lg:flex  flex-wrap flex-col">
+                <div className="lg:mt-8 lg:pr-4 lg:border-r lg:border-blue-200 mx-auto ">
+                  <CardSingleWallet wallet={dataWallet} />
+                </div>
+                <div className=" lg:pr-4 lg:border-r lg:border-blue-200 mx-auto ">
+                  <CardSingleBudget wallet={dataWallet} />
+                </div>
+              </div> */}
+            </>
           )}
 
           <div className="flex flex-col flex-1 relative">
@@ -109,19 +139,22 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
               setDataForTable={setDataForTable}
               setDataLabel={setDataLabel}
             />
-            <div className="p-6">
-              <div className="flex justify-between">
+            <div className="p-4">
+              <div className="flex justify-around">
                 <CreateOrEditModal dataLabel={dataLabel} walletId={walletId} />
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-red-600">
-                    delete all {dataLabel}s
-                  </span>
-                  <AlertDeleteAction
-                    id={walletId}
-                    deleteToContinue={handleDeleteAllTransacions}
-                    pathToRedirect={`/dashboard/wallets/${walletId}`}
-                  />
-                </div>
+
+                {transitionsLength(dataLabel).length > 0 && (
+                  <div className="flex flex-col md:flex-row items-center gap-2">
+                    <span className="text-xs text-red-600">
+                      delete all {dataLabel}s
+                    </span>
+                    <AlertDeleteAction
+                      id={walletId}
+                      deleteToContinue={handleDeleteAllTransacions}
+                      pathToRedirect={`/dashboard/wallets/${walletId}`}
+                    />
+                  </div>
+                )}
               </div>
               <TableDataFromWallet
                 label={dataLabel}

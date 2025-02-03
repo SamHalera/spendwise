@@ -63,7 +63,7 @@ const CardSingleBudget = ({ wallet }: { wallet: WalletProps }) => {
 
   return (
     // className="bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 py-6 text-white"
-    <Card className="lg:sticky lg:top-20 shadow-sm border border-slate-100 flex flex-col items-center w-72 mb-10 bg-gradient-to-b from-blue-950/90 via-blue-800/90 to-indigo-800/50">
+    <Card className="lg:sticky lg:top-20 shadow-sm border border-slate-100 flex flex-col items-center  lg:w-72 mb-10 bg-gradient-to-b from-blue-950/90 via-blue-800/90 to-indigo-800/50">
       <div className="flex justify-around w-full pt-4">
         <CreateOrEditWalletModal wallet={wallet} />
         <AlertDeleteAction
@@ -82,7 +82,7 @@ const CardSingleBudget = ({ wallet }: { wallet: WalletProps }) => {
       <CardContent className="flex gap-6 justify-around">
         <CardDescription>
           <div className="flex flex-col gap-3 items-center font-semibold ">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-row lg:flex-col gap-2">
               <div className="flex flex-col gap-2 items-center bg-slate-300 p-3 rounded-md">
                 <div className="text-indigo-600 flex items-center gap-2">
                   <CalendarClock /> Per day

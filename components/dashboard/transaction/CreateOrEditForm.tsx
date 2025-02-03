@@ -41,11 +41,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const CreateOrEditForm = ({
   setOpen,
-
+  dataLabel,
   data,
   walletId,
 }: {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  dataLabel: string;
   data?: TransactionProps;
   walletId: number;
 }) => {
@@ -56,11 +57,11 @@ const CreateOrEditForm = ({
     defaultValues: {
       id: data?.id ?? 0,
       label: data?.label ?? "",
-      type: data ? data.type : "EXPENSE",
+      type: data ? data.type : dataLabel.toUpperCase(),
       isFixed: false,
       date: data?.date ?? new Date(),
       amount: data?.amount.toString() ?? "0",
-      transactionStatus: data?.transactionStatus ?? "",
+      transactionStatus: data?.transactionStatus ?? "PAST",
       paymentMethod: data?.paymentMethod ?? "",
       walletId,
     },
@@ -145,7 +146,7 @@ const CreateOrEditForm = ({
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             name="type"
             control={form.control}
             render={({ field }) => (
@@ -170,8 +171,8 @@ const CreateOrEditForm = ({
                 </Select>
               </FormItem>
             )}
-          />
-          <FormField
+          /> */}
+          {/* <FormField
             name="transactionStatus"
             control={form.control}
             render={({ field }) => (
@@ -191,24 +192,10 @@ const CreateOrEditForm = ({
                     value={field.value.toLowerCase()}
                   />
                 </FormControl>
-                {/* <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  disabled
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a transaction status" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="PAST">Past</SelectItem>
-                    <SelectItem value="UPCOMING">Upcoming</SelectItem>
-                  </SelectContent>
-                </Select> */}
+                
               </FormItem>
             )}
-          />
+          /> */}
           <FormField
             name="paymentMethod"
             control={form.control}

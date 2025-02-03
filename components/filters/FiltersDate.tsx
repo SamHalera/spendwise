@@ -17,7 +17,7 @@ import { useFiltersStore } from "@/stores/filters";
 
 const FiltersDate = () => {
   const { date, setDate } = useFiltersStore();
-  console.log("date==>", date);
+
   return (
     <div>
       <Popover>

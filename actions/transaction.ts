@@ -1,14 +1,21 @@
 "use server";
 
 import prisma from "@/db";
-import { TransactionFormValuesProps, WalletProps } from "@/types/types";
+import {
+  TransactionFormValuesProps,
+  TransactionProps,
+  WalletProps,
+} from "@/types/types";
 import {
   PaymentMethod,
   TransactionStatus,
   TransactionType,
 } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
+import { getMonth } from "date-fns";
+
 import { revalidatePath } from "next/cache";
+import { persistFixedTransaction } from "./fixedTransaction";
 
 export const createOrEditTransaction = async (
   values: TransactionFormValuesProps
@@ -44,6 +51,10 @@ export const createOrEditTransaction = async (
         return {
           error: "Oups! something went wrong! Try to submit the form again...",
         };
+      } else {
+        if (newTransaction.isFixed) {
+          await persistFixedTransaction(newTransaction);
+        }
       }
     } else if (id > 0) {
       let amountStr = parseAmount(amount);
@@ -100,9 +111,20 @@ export const deleteTransaction = async (id: number) => {
 };
 export const deleteAllTransactions = async (walletId: number, type: string) => {
   try {
-    const deleted = await prisma.transaction.deleteMany({
+    const fixedTransactionFromWallet = await prisma.fixedTransaction.findMany({
+      where: {
+        walletId,
+      },
+    });
+    fixedTransactionFromWallet.forEach(async (item) => {
+      await prisma.fixedTransaction.delete({
+        where: { id: item.id },
+      });
+    });
+    const deletedAll = await prisma.transaction.deleteMany({
       where: { walletId, type: type as keyof typeof TransactionType },
     });
+
     return {
       success: "Good news! Transactions have been deleted!",
     };
@@ -116,6 +138,7 @@ export const deleteAllTransactions = async (walletId: number, type: string) => {
 };
 
 export const handleTransactionStatus = async (wallets: WalletProps[]) => {
+  console.log("handle status");
   wallets.forEach((wallet) => {
     wallet.transaction.forEach(async (elt) => {
       if (elt.transactionStatus === "UPCOMING" && elt.date <= new Date()) {
@@ -159,4 +182,13 @@ const parseAmount = (value: string) => {
     .join("");
 
   return parseFloat(parsedStr);
+};
+
+export const convertAmountDecimalToNumber = (
+  transactions: TransactionProps[]
+) => {
+  transactions.forEach((elt) => {
+    elt.amount.toNumber();
+  });
+  return transactions;
 };

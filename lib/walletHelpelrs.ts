@@ -25,18 +25,32 @@ import { DateRange } from "react-day-picker";
 dayjs.extend(duration);
 
 export const computeWalletBalances = (wallet: WalletProps) => {
+  console.log(wallet);
+  const currentMonth = dayjs().month();
   let walletBalance = wallet.balance;
   const expensesPast = wallet.transaction.filter(
-    (elt) => elt.type === "EXPENSE" && elt.transactionStatus === "PAST"
+    (elt) =>
+      elt.type === "EXPENSE" &&
+      elt.transactionStatus === "PAST" &&
+      getMonth(elt.date) === currentMonth
   );
   const incomesPast = wallet.transaction.filter(
-    (elt) => elt.type === "INCOME" && elt.transactionStatus === "PAST"
+    (elt) =>
+      elt.type === "INCOME" &&
+      elt.transactionStatus === "PAST" &&
+      getMonth(elt.date) === currentMonth
   );
   const expensesUpcoming = wallet.transaction.filter(
-    (elt) => elt.type === "EXPENSE" && elt.transactionStatus === "UPCOMING"
+    (elt) =>
+      elt.type === "EXPENSE" &&
+      elt.transactionStatus === "UPCOMING" &&
+      getMonth(elt.date) === currentMonth
   );
   const incomesUpcoming = wallet.transaction.filter(
-    (elt) => elt.type === "INCOME" && elt.transactionStatus === "UPCOMING"
+    (elt) =>
+      elt.type === "INCOME" &&
+      elt.transactionStatus === "UPCOMING" &&
+      getMonth(elt.date) === currentMonth
   );
 
   let expensesPastBalance = 0;
@@ -58,6 +72,8 @@ export const computeWalletBalances = (wallet: WalletProps) => {
     (item) => (incomesUpcomingBalance += parseFloat(item.amount.toString()))
   );
 
+  console.log("incomesPastBalance=+>", incomesPastBalance);
+  console.log("expensesPastBalance=+>", expensesPastBalance);
   walletBalance += incomesPastBalance - expensesPastBalance;
   return {
     walletBalance,
@@ -295,6 +311,9 @@ export const calculateBudgets = (wallet: WalletProps, currentDate: Date) => {
   const daysPerMonth = getDaysInMonth(currentDate);
   const weeksPerMonth = getWeeksInMonth(currentDate);
 
+  console.log("wallet.balance==>", wallet.balance);
+  console.log("sumOfMonthIncomes==>", sumOfMonthIncomes);
+  console.log("sumOfMonthExpenses==>", sumOfMonthExpenses);
   const monthBudget = wallet.balance + sumOfMonthIncomes - sumOfMonthExpenses;
   const weekBudget = monthBudget / weeksPerMonth;
   const dayBudget = monthBudget / daysPerMonth;

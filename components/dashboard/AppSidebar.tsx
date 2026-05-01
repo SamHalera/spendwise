@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import {
+  BabyIcon,
   ChartNoAxesCombined,
   ChevronRight,
   LayoutDashboard,
@@ -94,13 +95,26 @@ export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
             </Collapsible>
             <SidebarMenuItem
               className={clsx("", {
-                "bg-indigo-500 rounded-md": pathname === "/dashboard/stats",
+                "bg-indigo-500 rounded-md": pathname === "/dashboard/budgets",
               })}
             >
               <a href="/dashboard/budgets">
                 <SidebarMenuButton>
                   <ChartNoAxesCombined />
                   <span>Budgets</span>
+                </SidebarMenuButton>
+              </a>
+            </SidebarMenuItem>
+            <SidebarMenuItem
+              className={clsx("", {
+                "bg-indigo-500 rounded-md":
+                  pathname === "/dashboard/baby-sitter",
+              })}
+            >
+              <a href="/dashboard/baby-sitter">
+                <SidebarMenuButton>
+                  <BabyIcon />
+                  <span>Baby-sitter</span>
                 </SidebarMenuButton>
               </a>
             </SidebarMenuItem>

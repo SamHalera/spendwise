@@ -168,7 +168,7 @@ const SignupForm = () => {
           <Button size="lg" variant="custom" className="self-center">
             Sign up
           </Button>
-          <Button
+          {/* <Button
             type="button"
             className="w-fit my-1 self-center"
             onClick={() => {
@@ -184,7 +184,7 @@ const SignupForm = () => {
               height={30}
               width={30}
             />
-          </Button>
+          </Button> */}
           <hr></hr>
           <div className="text-center flex gap-2 items-center justify-center">
             <span className="text-center text-white italic">

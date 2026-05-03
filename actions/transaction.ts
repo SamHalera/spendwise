@@ -1,12 +1,9 @@
 "use server";
 
 import prisma from "@/db";
+import { PaymentMethod, TransactionStatus, TransactionType } from "@/generated/prisma";
 import { TransactionFormValuesProps, WalletProps } from "@/types/types";
-import {
-  PaymentMethod,
-  TransactionStatus,
-  TransactionType,
-} from "@prisma/client";
+
 import { revalidatePath } from "next/cache";
 
 export const createOrEditTransaction = async (

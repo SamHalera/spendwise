@@ -103,7 +103,7 @@ export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
                 </SidebarMenuButton>
               </a>
             </SidebarMenuItem>
-            <SidebarMenuItem
+            {/* <SidebarMenuItem
               className={clsx("", {
                 "bg-indigo-500 rounded-md": pathname === "/settings",
               })}
@@ -112,7 +112,7 @@ export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
                 <Settings />
                 <a href="/settings">Settings</a>
               </SidebarMenuButton>
-            </SidebarMenuItem>
+            </SidebarMenuItem> */}
           </SidebarMenu>
         </SidebarGroup>
         <SidebarGroup>

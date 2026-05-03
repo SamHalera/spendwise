@@ -47,11 +47,11 @@ const CreateWalletForm = ({
   ) => {
     try {
       let response: { error: string | null; success: string | null } | null =
-        // | { succes: string; error?: undefined }
-        {
-          success: "success",
-          error: null,
-        };
+      // | { succes: string; error?: undefined }
+      {
+        success: "success",
+        error: null,
+      };
       if (wallet) {
         response = await editWallet(values);
       } else {

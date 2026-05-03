@@ -47,6 +47,7 @@ const SignupForm = () => {
           redirect: false,
         });
         if (signInData?.error) {
+
           toast({
             variant: "destructive",
             title: "Bad news!",

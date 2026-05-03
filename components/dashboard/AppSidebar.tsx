@@ -31,10 +31,28 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { WalletProps } from "@/types/types";
 import Link from "next/link";
+import { useRefreshStore } from "@/stores/refresh";
+import { useEffect, useState } from "react";
+import { getWallets } from "@/actions/wallet";
 
-export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
+// export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
+export function AppSidebar() {
+  const [dataWallets, setDataWallets] = useState<WalletProps[]>();
+  const { refresh, setRefresh } = useRefreshStore();
   const pathname = usePathname();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const wallets = await getWallets();
+
+        if (wallets) setDataWallets(wallets);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [refresh]);
   return (
     <Sidebar collapsible="icon">
       <SidebarContent className="bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 py-6 text-white">
@@ -71,8 +89,8 @@ export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {wallets &&
-                      wallets.map((item) => (
+                    {dataWallets &&
+                      dataWallets.map((item) => (
                         <SidebarMenuSubItem key={item.name}>
                           <SidebarMenuSubButton
                             className={clsx("text-white", {

@@ -15,6 +15,7 @@ import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { Trash2 } from "lucide-react";
 
 import { useRouter } from "next/navigation";
+import { useRefreshStore } from "@/stores/refresh";
 
 const AlertDeleteAction = ({
   deleteToContinue,
@@ -26,6 +27,7 @@ const AlertDeleteAction = ({
   pathToRedirect: string;
 }) => {
   const router = useRouter();
+  const { refresh, setRefresh } = useRefreshStore();
 
   return (
     <AlertDialog>
@@ -52,7 +54,7 @@ const AlertDeleteAction = ({
           <AlertDialogAction
             onClick={async () => {
               await deleteToContinue(id);
-              console.log("Delete action ");
+              setRefresh(true)
               router.push(pathToRedirect);
             }}
             className="bg-red-200 rounded-sm px-4 text-red-500 text-sm hover:text-red-200 hover:bg-red-500 duration-500"

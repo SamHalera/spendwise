@@ -79,6 +79,7 @@ export const createWallet = async (values: {
         success: null,
       };
     }
+
     return {
       success: "Good news! A new wallet has been created successfully.",
       error: null,

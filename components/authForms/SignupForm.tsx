@@ -1,6 +1,6 @@
 "use client";
 import { signupFormSchema } from "@/types/zodSchemas/authSchemas";
-import React from "react";
+import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 
 import { z } from "zod";
@@ -21,8 +21,10 @@ import { registerUser } from "@/actions/user";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Eye, EyeClosed } from "lucide-react";
 
 const SignupForm = () => {
+  const [isShowPass, setIsShowPass] = useState<boolean>(false)
   const form = useForm<z.infer<typeof signupFormSchema>>({
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
@@ -142,13 +144,23 @@ const SignupForm = () => {
                   <FormLabel className="text-white text-xl flex gap-3 items-center">
                     Password <FormMessage />
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password here"
-                      {...field}
-                    />
-                  </FormControl>
+                  <div className="relative">
+
+                    <FormControl>
+                      <Input
+                        type={isShowPass ? "text" : "password"}
+                        placeholder="Password here"
+                        {...field}
+                      />
+                    </FormControl>
+                    {isShowPass ?
+
+                      <EyeClosed onClick={() => setIsShowPass(!isShowPass)} className="absolute top-2 right-2" />
+                      :
+
+                      <Eye onClick={() => setIsShowPass(!isShowPass)} className="absolute top-2 right-2" />
+                    }
+                  </div>
                 </FormItem>
               );
             }}

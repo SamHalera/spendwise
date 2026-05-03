@@ -28,7 +28,7 @@ const Footer = () => {
           </h2>
         </div>
       </div>
-      <span className="block text-white">© 2024 Spendwise</span>
+      <span className="block text-white">© {new Date().getFullYear()} Spendwise</span>
     </footer>
   );
 };

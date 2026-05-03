@@ -1,6 +1,6 @@
 "use client";
 import { signinFormSchema } from "@/types/zodSchemas/authSchemas";
-import React from "react";
+import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 
 import { z } from "zod";
@@ -20,8 +20,10 @@ import logoGoogle from "@/public/images/google_logo.svg";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { Eye, EyeClosed } from "lucide-react";
 
 const LoginForm = () => {
+  const [isShowPass, setIsShowPass] = useState<boolean>(false)
   const { toast } = useToast();
   const router = useRouter();
   const searchParms = useSearchParams();
@@ -98,13 +100,23 @@ const LoginForm = () => {
                   <FormLabel className="text-white text-xl flex gap-3 items-center">
                     Password <FormMessage />
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password here"
-                      {...field}
-                    />
-                  </FormControl>
+                  <div className="relative">
+
+                    <FormControl>
+                      <Input
+                        type={isShowPass ? "text" : "password"}
+                        placeholder="Password here"
+                        {...field}
+                      />
+                    </FormControl>
+                    {isShowPass ?
+
+                      <EyeClosed onClick={() => setIsShowPass(!isShowPass)} className="absolute top-2 right-2" />
+                      :
+
+                      <Eye onClick={() => setIsShowPass(!isShowPass)} className="absolute top-2 right-2" />
+                    }
+                  </div>
                 </FormItem>
               );
             }}

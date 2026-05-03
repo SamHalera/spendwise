@@ -28,7 +28,6 @@ const LoginForm = () => {
   const router = useRouter();
   const searchParms = useSearchParams();
   const prevUrl = searchParms.get("prevUrl");
-  console.log("prevUrl==>", prevUrl);
   const form = useForm<z.infer<typeof signinFormSchema>>({
     resolver: zodResolver(signinFormSchema),
     defaultValues: {
@@ -39,14 +38,13 @@ const LoginForm = () => {
 
   const onSubmit = async (values: z.infer<typeof signinFormSchema>) => {
     try {
-      console.log(values);
       const signInData = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
       if (signInData?.error) {
-        console.log("error");
+        console.error("error");
         toast({
           variant: "destructive",
           title: "Bad news!",

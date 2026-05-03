@@ -19,7 +19,6 @@ export const createOrEditTransaction = async (
     if (date > new Date()) transactionStatus = "UPCOMING";
 
     if (id === 0) {
-      console.log("create");
       const newTransaction = await prisma.transaction.create({
         data: {
           label,

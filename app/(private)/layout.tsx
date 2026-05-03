@@ -16,11 +16,11 @@ export default async function PrivateLayout({
     redirect("/signin?prevUrl=dashboard");
   }
 
-  const wallets = await getWallets();
+  // const wallets = await getWallets();
   return (
     <SidebarProvider>
       <div className="p-4">
-        <AppSidebar wallets={wallets} />
+        <AppSidebar />
       </div>
       <div className="w-full">
         <div className="flex gap-3 items-start">

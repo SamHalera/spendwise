@@ -9,14 +9,10 @@ export const transactionFormSchema = z.object({
   type: z.string().min(1, { message: "Type for your transaction is required" }),
   date: z.date({ required_error: "Date field is required" }),
 
-  // amount: z
-  //   .string()
-  //   .transform((val) => parseFloat(val))
-  //   .refine((val) => !isNaN(val), { message: "Invalid number" }),
   amount: z
     .string()
     .min(1, { message: "Balance is required" })
-    .refine((val) => val.search(/\D/) === -1, {
+    .refine((val) => /^\d+([.,]\d+)?$/.test(val), {
       message: "Only positive numbers",
     }),
   transactionStatus: z.string(),

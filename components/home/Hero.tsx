@@ -6,7 +6,7 @@ import { HandCoins, Laptop, PieChart } from "lucide-react";
 const Hero = () => {
   return (
     <div
-      className="h-auto md:h-screen  bg-scroll lg:bg-fixed my-20"
+      className="h-auto md:h-screen  bg-scroll lg:bg-fixed"
       style={{
         backgroundImage: `url(${heroImg.src})`,
         backgroundRepeat: "no-repeat",

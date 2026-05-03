@@ -91,6 +91,7 @@ export const ChartExpenseIncome = ({
                 offset={10}
                 className="fill-blue-700"
                 fontSize={12}
+                formatter={(value: number) => value.toFixed(2)}
               />
             </Bar>
             <Bar
@@ -104,6 +105,7 @@ export const ChartExpenseIncome = ({
                 offset={10}
                 className="fill-blue-700"
                 fontSize={12}
+                formatter={(value: number) => value.toFixed(2)}
               />
             </Bar>
           </BarChart>

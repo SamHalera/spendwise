@@ -100,7 +100,7 @@ const TableDataFromWallet = ({
             <TableHead className="text-center flex flex-col items-center justify-center">
               Amount{" "}
               <span className="font-semibold">
-                ({totalAmountTransactions}€)
+                {totalAmountTransactions.toFixed(2)}€
               </span>
             </TableHead>
             <TableHead className="text-right">Actions</TableHead>

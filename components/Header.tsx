@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import logoImg from "@/public/images/logo-white-bg.png";
 
 import Link from "next/link";
 
@@ -8,7 +7,7 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm border-slate-300 h-auto p-3 flex justify-between items-center fixed w-full z-50">
       <Link href={"/"}>
-        <img src={logoImg.src} alt="" className="w-14" />
+        <img src="/images/logo-white-bg.svg" alt="Spendwise" className="h-10" />
       </Link>
 
       <div className="flex gap-6">

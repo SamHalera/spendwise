@@ -30,7 +30,6 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { WalletProps } from "@/types/types";
-import logoImg from "@/public/images/logo.png";
 import Link from "next/link";
 
 export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
@@ -42,7 +41,7 @@ export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
         <SidebarGroup>
           <SidebarMenu>
             <Link href={"/dashboard"} className="mb-4">
-              <img src={logoImg.src} alt="" className="w-20" />
+              <img src="/images/logo-dark.svg" alt="Spendwise" className="h-10" />
             </Link>
 
             <SidebarMenuItem

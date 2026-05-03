@@ -25,7 +25,7 @@ export const createOrEditTransaction = async (
           label,
           date,
           type: type as keyof typeof TransactionType,
-          amount: parseFloat(amount),
+          amount: parseFloat(amount.replace(",", ".")),
           transactionStatus:
             transactionStatus as keyof typeof TransactionStatus,
           paymentMethod: paymentMethod as keyof typeof PaymentMethod,
@@ -46,7 +46,7 @@ export const createOrEditTransaction = async (
           label,
           date,
           type: type as keyof typeof TransactionType,
-          amount: parseFloat(amount),
+          amount: parseFloat(amount.replace(",", ".")),
           transactionStatus:
             transactionStatus as keyof typeof TransactionStatus,
           paymentMethod: paymentMethod as keyof typeof PaymentMethod,

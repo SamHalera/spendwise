@@ -112,11 +112,11 @@ const LoginForm = () => {
           <Button size="lg" variant="custom" className="self-center">
             Sign In
           </Button>
-          <Button
+          {/* <Button
             type="button"
             className="w-fit my-1 self-center"
             onClick={() => {
-              signIn("google", { callbackUrl: "/" });
+              signIn("google", { callbackUrl: "/dashboard" });
             }}
             size="lg"
             variant="outline"
@@ -128,7 +128,7 @@ const LoginForm = () => {
               height={30}
               width={30}
             />
-          </Button>
+          </Button> */}
           <hr></hr>
           <div className="text-center flex gap-2 items-center justify-center">
             <span className="text-center text-white italic">

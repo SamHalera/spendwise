@@ -110,7 +110,7 @@ export const ChartExpenseIncomeByMonth = ({
                       dominantBaseline={props.dominantBaseline}
                       className=" fill-blue-700"
                     >
-                      {payload.type} {payload.total_amount}
+                      {payload.type} {Number(payload.total_amount).toFixed(2)}
                     </text>
                   );
                 }}

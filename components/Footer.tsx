@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "@/public/images/logo.png";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
 
@@ -8,7 +7,7 @@ const Footer = () => {
     <footer className="bg-blue-500 py-6 px-10 flex flex-col gap-8 justify-center items-center">
       <div className="flex flex-col gap-6 md:gap-3 md:flex-row justify-between items-center w-full">
         <div className="flex-1">
-          <img src={logo.src} alt="" className="w-20" />
+          <img src="/images/logo-dark.svg" alt="Spendwise" className="h-10" />
         </div>
         {/* <div className="flex flex-col gap-3">
         </div> */}
@@ -25,11 +24,11 @@ const Footer = () => {
         </div>
         <div className="flex justify-center flex-1">
           <h2 className="text-white text-2xl md:w-72 text-center md:text-start">
-            Monitor your expenses with ExpenseEye
+            Monitor your expenses with Spendwise
           </h2>
         </div>
       </div>
-      <span className="block text-white">© 2024 ExpenseEye</span>
+      <span className="block text-white">© 2024 Spendwise</span>
     </footer>
   );
 };

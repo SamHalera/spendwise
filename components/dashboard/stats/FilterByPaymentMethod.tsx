@@ -32,7 +32,6 @@ const FilterByPaymentMethod = ({
     <div className="mb-10 self-start">
       <Select
         onValueChange={(value) => {
-          console.log(value);
           setDataByMonth(value);
         }}
         defaultValue={dataByMonth}

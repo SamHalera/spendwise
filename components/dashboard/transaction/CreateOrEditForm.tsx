@@ -280,7 +280,6 @@ const CreateOrEditForm = ({
             name="amount"
             control={form.control}
             render={({ field }) => {
-              console.log("field==>", field.value);
               return (
                 <FormItem>
                   <FormLabel className="flex gap-2">

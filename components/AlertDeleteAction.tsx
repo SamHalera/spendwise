@@ -27,7 +27,7 @@ const AlertDeleteAction = ({
   pathToRedirect: string;
 }) => {
   const router = useRouter();
-  const { refresh, setRefresh } = useRefreshStore();
+  const { triggerRefresh } = useRefreshStore();
 
   return (
     <AlertDialog>
@@ -54,7 +54,7 @@ const AlertDeleteAction = ({
           <AlertDialogAction
             onClick={async () => {
               await deleteToContinue(id);
-              setRefresh(true)
+              triggerRefresh()
               router.push(pathToRedirect);
             }}
             className="bg-red-200 rounded-sm px-4 text-red-500 text-sm hover:text-red-200 hover:bg-red-500 duration-500"

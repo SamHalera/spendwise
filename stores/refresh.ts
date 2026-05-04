@@ -1,13 +1,11 @@
 import { create } from "zustand";
 
 type RefreshStore = {
-  refresh: boolean;
-  setRefresh: (refresh: boolean) => void;
+  refreshCount: number;
+  triggerRefresh: () => void;
 };
 
 export const useRefreshStore = create<RefreshStore>()((set) => ({
-  refresh: false,
-  setRefresh: (refresh: boolean) => {
-    set({ refresh });
-  },
+  refreshCount: 0,
+  triggerRefresh: () => set((state) => ({ refreshCount: state.refreshCount + 1 })),
 }));

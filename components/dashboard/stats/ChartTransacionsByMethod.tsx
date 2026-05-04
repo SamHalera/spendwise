@@ -87,6 +87,7 @@ export const ChartTransactionsByMethod = ({
                 offset={-15}
                 className="fill-white"
                 fontSize={12}
+                formatter={(value: number) => value.toFixed(2)}
               />
             </Bar>
             <Bar
@@ -100,6 +101,7 @@ export const ChartTransactionsByMethod = ({
                 offset={-15}
                 className="fill-white"
                 fontSize={12}
+                formatter={(value: number) => value.toFixed(2)}
               />
             </Bar>
           </BarChart>

@@ -46,7 +46,8 @@ export const ChartExpenseIncome = ({
 }: {
   walletData?: WalletProps | null;
 }) => {
-  const [dataYear, setDataYear] = useState<string>("2024");
+  const year = new Date().getFullYear().toString()
+  const [dataYear, setDataYear] = useState<string>(year);
   if (!walletData) return;
 
   const transactionsCharts = formatDataForCharts(walletData);
@@ -75,7 +76,7 @@ export const ChartExpenseIncome = ({
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              // tickFormatter={(value) => value.slice(0, 3)}
+            // tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip content={<ChartTooltipContent />} />
 

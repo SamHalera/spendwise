@@ -38,7 +38,7 @@ import { getWallets } from "@/actions/wallet";
 // export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
 export function AppSidebar() {
   const [dataWallets, setDataWallets] = useState<WalletProps[]>();
-  const { refresh, setRefresh } = useRefreshStore();
+  const { refreshCount } = useRefreshStore();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export function AppSidebar() {
       }
     };
     fetchData();
-  }, [refresh]);
+  }, [refreshCount]);
   return (
     <Sidebar collapsible="icon">
       <SidebarContent className="bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 py-6 text-white">

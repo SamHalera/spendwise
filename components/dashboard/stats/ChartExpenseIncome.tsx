@@ -52,7 +52,7 @@ export const ChartExpenseIncome = ({
   const transactionsCharts = formatDataForCharts(walletData);
   const yearsSelectOptions = createSelectOptionsForYears(2024, 10);
   return (
-    <Card className="">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Expenses/Incomes</CardTitle>
         <CardDescription className="text-blue-500 font-semibold">

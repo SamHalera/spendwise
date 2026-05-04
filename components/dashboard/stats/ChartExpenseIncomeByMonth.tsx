@@ -69,8 +69,8 @@ export const ChartExpenseIncomeByMonth = ({
   ];
 
   return (
-    <div className="">
-      <Card>
+    <div className="w-full">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle className="flex gap-1 text-xl">
             <span>Expenses/Incomes </span>

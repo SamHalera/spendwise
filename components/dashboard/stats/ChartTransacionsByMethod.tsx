@@ -55,7 +55,7 @@ export const ChartTransactionsByMethod = ({
   const data = formatTransactionsByMethodForCharts(walletData.transaction);
 
   return (
-    <Card className="">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>My payment methods</CardTitle>
         <CardDescription></CardDescription>

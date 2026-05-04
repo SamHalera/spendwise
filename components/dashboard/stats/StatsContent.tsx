@@ -33,15 +33,15 @@ const StatsContent = () => {
     <div>
       {wallets ? (
         <>
-          <div className="flex">
+          <div className="w-full max-w-xs mb-2">
             <FilterData wallets={wallets} setWalletData={setWalletData} />
           </div>
           <h1 className="text-xl text-blue-700 font-semibold text-center mb-4">
             {walletData?.name}
           </h1>
 
-          <div className="flex flex-col items-center flex-nowrap gap-8">
-            <div className="flex gap-8">
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <ChartExpenseIncome walletData={walletData} />
               <ChartExpenseIncomeByMonth walletData={walletData} />
             </div>

@@ -46,13 +46,13 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   }, [refresh]);
 
   return (
-    <div className="w-full flex flex-col  lg:flex-row justify-around">
+    <div className="w-full flex flex-col">
       {isLoading ? (
         <SkeletonWalletContent />
       ) : (
         <>
           {dataWallet && (
-            <div className="mt-8 pr-4 lg:border-r lg:border-blue-200 mx-auto">
+            <div className="mt-4 px-4">
               <CardSingleWallet wallet={dataWallet} />
             </div>
           )}

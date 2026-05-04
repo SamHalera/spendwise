@@ -67,7 +67,7 @@ const CreateOrEditModal = ({
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel className=" border border-red-500 text-red-500 self-start hover:bg-red-500 hover:text-white transition-all">Cancel</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

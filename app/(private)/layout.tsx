@@ -19,7 +19,7 @@ export default async function PrivateLayout({
   // const wallets = await getWallets();
   return (
     <SidebarProvider>
-      <div className="p-4">
+      <div className="">
         <AppSidebar />
       </div>
       <div className="w-full">

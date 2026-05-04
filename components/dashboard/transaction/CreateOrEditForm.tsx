@@ -49,7 +49,7 @@ const CreateOrEditForm = ({
   walletId: number;
 }) => {
   const { toast } = useToast();
-  const { setRefresh } = useRefreshStore();
+  const { triggerRefresh } = useRefreshStore();
   const form = useForm<z.infer<typeof transactionFormSchema>>({
     resolver: zodResolver(transactionFormSchema),
     defaultValues: {
@@ -75,7 +75,7 @@ const CreateOrEditForm = ({
           variant: "default",
           description: response.success,
         });
-        setRefresh(true);
+        triggerRefresh();
         setOpen(false);
       }
       if (response.error) {

@@ -19,31 +19,30 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
   const [dataForTable, setDataForTable] = useState<TransactionProps[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const { refresh, setRefresh } = useRefreshStore();
+  const { refreshCount } = useRefreshStore();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const wallet = await getWalletById(walletId);
-
-        if (wallet) {
-          setDataWallet(wallet);
-          setDataForTable(
-            wallet.transaction.filter(
-              (data: TransactionProps) => data.type === dataLabel.toUpperCase()
-            )
-          );
-        }
-        setRefresh(false);
-
-        setDataLabel(dataLabel);
+        if (wallet) setDataWallet(wallet);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [refresh]);
+  }, [refreshCount, walletId]);
+
+  useEffect(() => {
+    if (dataWallet) {
+      setDataForTable(
+        dataWallet.transaction.filter(
+          (data: TransactionProps) => data.type === dataLabel.toUpperCase()
+        )
+      );
+    }
+  }, [dataLabel, dataWallet]);
 
   return (
     <div className="w-full flex flex-col">

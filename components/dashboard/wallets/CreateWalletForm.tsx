@@ -30,7 +30,7 @@ const CreateWalletForm = ({
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   wallet?: WalletProps;
 }) => {
-  const { refresh, setRefresh } = useRefreshStore();
+  const { triggerRefresh } = useRefreshStore();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof createWalletSchema>>({
@@ -62,7 +62,7 @@ const CreateWalletForm = ({
           variant: "default",
           description: response.success,
         });
-        setRefresh(true);
+        triggerRefresh();
         setOpen(false);
       }
       if (response?.error) {

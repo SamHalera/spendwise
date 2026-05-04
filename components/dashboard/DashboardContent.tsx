@@ -17,7 +17,7 @@ const CreateOrEditWalletModal = dynamic(
 const DashboardContent = () => {
   const [dataWallets, setDataWallets] = useState<WalletProps[]>();
 
-  const { refresh } = useRefreshStore();
+  const { refreshCount } = useRefreshStore();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +30,7 @@ const DashboardContent = () => {
       }
     };
     fetchData();
-  }, [refresh]);
+  }, [refreshCount]);
   return (
     <div className="flex flex-col items-center">
       <h2 className="text-2xl text-blue-500 mb-4">My Wallets</h2>

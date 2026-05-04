@@ -36,7 +36,7 @@ const TableDataFromWallet = ({
   const [inputValue, setInputValue] = useState<string>(searchedValue);
 
   const { toast } = useToast();
-  const { setRefresh } = useRefreshStore();
+  const { triggerRefresh } = useRefreshStore();
 
   const sortedAndFilteredData = filterAndSortDataForTable(
     dataForTable ?? [],
@@ -57,7 +57,7 @@ const TableDataFromWallet = ({
     try {
       const response = await deleteTransaction(id);
       if (response.success) {
-        setRefresh(true);
+        triggerRefresh();
         toast({
           variant: "default",
           description: response.success,

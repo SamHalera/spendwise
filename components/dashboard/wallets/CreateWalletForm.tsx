@@ -100,8 +100,8 @@ const CreateWalletForm = ({
                     {...field}
                     type="hidden"
                     disabled={true}
-                    className={clsx("bg-slate-200", {
-                      "border-red-400": form.formState.errors.id,
+                    className={clsx("bg-neutral-light", {
+                      "border-tertiary": form.formState.errors.id,
                     })}
                   />
                 </FormControl>
@@ -123,7 +123,7 @@ const CreateWalletForm = ({
                     type="text"
                     placeholder="Give a name for your wallet"
                     className={clsx({
-                      "border-red-400": form.formState.errors.name,
+                      "border-tertiary": form.formState.errors.name,
                     })}
                   />
                 </FormControl>
@@ -145,7 +145,7 @@ const CreateWalletForm = ({
                     type="string"
                     placeholder="Give an amount or put 0"
                     className={clsx({
-                      "border-red-400": form.formState.errors.balance,
+                      "border-tertiary": form.formState.errors.balance,
                     })}
                   />
                 </FormControl>
@@ -154,7 +154,7 @@ const CreateWalletForm = ({
           />
 
           <Button
-            className="self-end"
+            className="self-end bg-slate-900 border border-slate-900 text-white transition-all hover:bg-transparent hover:text-slate-900"
             variant={"default"}
             disabled={!form.formState.isDirty}
           >

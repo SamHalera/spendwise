@@ -33,7 +33,7 @@ const DashboardContent = () => {
   }, [refreshCount]);
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-2xl text-blue-500 mb-4">My Wallets</h2>
+      <h2 className="text-2xl text-emerald-500 mb-4">My Wallets</h2>
       <div className="flex flex-col items-center">
         <span className="mb-2">add a wallet</span>
         <CreateOrEditWalletModal />

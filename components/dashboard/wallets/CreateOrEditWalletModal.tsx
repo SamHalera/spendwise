@@ -25,7 +25,7 @@ const CreateOrEditWalletModal = ({ wallet }: { wallet?: WalletProps }) => {
           variant="spendwise"
           size={"icon"}
           className={clsx(
-            "bg-blue-200 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-blue-400 duration-500 group",
+            "bg-emerald-200 text-primary w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-emerald-400 duration-500 group",
             {}
           )}
         >
@@ -44,7 +44,7 @@ const CreateOrEditWalletModal = ({ wallet }: { wallet?: WalletProps }) => {
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className=" border border-red-500 text-red-500 self-start hover:bg-red-500 hover:text-white transition-all">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className=" border border-tertiary text-tertiary self-start hover:bg-tertiary hover:text-tertiary-foreground transition-all">Cancel</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

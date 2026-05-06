@@ -22,14 +22,16 @@ import { useFiltersStore } from "@/stores/filters";
 import { filterAndSortDataForTable } from "@/lib/walletHelpelrs";
 import { useRefreshStore } from "@/stores/refresh";
 import { TransactionProps } from "@/types/types";
-import { ShoppingBasket } from "lucide-react";
+import { ArrowDownLeft, ArrowDownRight, ArrowUpLeft, ArrowUpRight, ShoppingBasket } from "lucide-react";
 
 const TableDataFromWallet = ({
   label,
   dataForTable,
+  walletId
 }: {
   label: string;
   dataForTable?: TransactionProps[];
+  walletId: number
 }) => {
   const { showPast, showUpcoming, method, date, searchedValue } =
     useFiltersStore();
@@ -81,13 +83,16 @@ const TableDataFromWallet = ({
 
   return (
     <div className="w-full flex flex-col">
-      <div className="sticky top-2 flex flex-col lg:flex-row justify-around items-center gap-4 z-10 bg-slate-100 py-6 px-4 rounded-md w-full">
+      <div className="sticky top-2 flex flex-col justify-around items-center gap-4 z-10 bg-white py-6 px-4 rounded-md w-full">
         <SearchBarTransactions
           inputValue={inputValue}
           setInputValue={setInputValue}
         />
+        <div className="flex justify-between w-full items-center">
+          <CreateOrEditModal dataLabel={label} walletId={walletId} />
+          <FiltersTransactions />
+        </div>
 
-        <FiltersTransactions />
       </div>
       <Table>
         <TableCaption>A list of your recent {label}s.</TableCaption>
@@ -113,16 +118,28 @@ const TableDataFromWallet = ({
                 <TableCell className="font-medium">
                   {dayjs(item.date).format("DD/MM/YYYY")}
                 </TableCell>
-                <TableCell className="flex items-center gap-2">
-                  <ShoppingBasket />
+                <TableCell className={clsx("flex items-center gap-2", {
+                  "text-tertiary": item.type === "EXPENSE",
+                  "text-emerald-500": item.type === "INCOME",
+                })}>
+                  {/* <ShoppingBasket /> */}
+                  {item.type === "EXPENSE" ?
+                    <ArrowDownLeft />
+                    :
+
+                    <ArrowUpRight />
+                  }
                   {item.label}
                 </TableCell>
                 <TableCell className="">
                   <span
                     className={clsx("text-xs  px-3 py-1 rounded-full", {
-                      "bg-blue-300": item.transactionStatus === "PAST",
-                      "bg-blue-700 text-white":
-                        item.transactionStatus === "UPCOMING",
+                      "bg-tertiary/20": item.transactionStatus === "PAST" && item.type === "EXPENSE",
+                      "bg-emerald-200": item.transactionStatus === "PAST" && item.type === "INCOME",
+                      "bg-tertiary-dark text-tertiary-foreground":
+                        item.transactionStatus === "UPCOMING" && item.type === "EXPENSE",
+                      "bg-emerald-700 text-white":
+                        item.transactionStatus === "UPCOMING" && item.type === "INCOME",
                     })}
                   >
                     {item.transactionStatus.toLowerCase()}
@@ -131,8 +148,8 @@ const TableDataFromWallet = ({
                 <TableCell>{item.paymentMethod}</TableCell>
                 <TableCell
                   className={clsx("text-right", {
-                    "text-red-500": item.type === "EXPENSE",
-                    "text-blue-500": item.type === "INCOME",
+                    "text-tertiary": item.type === "EXPENSE",
+                    "text-emerald-500": item.type === "INCOME",
                   })}
                 >
                   {item.type === "EXPENSE" ? "-" : "+"}

@@ -145,7 +145,7 @@ const LoginForm = () => {
               You do not have an account yet?
             </span>
             <Link
-              className="text-blue-200 font-bold hover:text-white duration-500"
+              className="text-emerald-300 font-bold hover:text-white duration-500"
               href={"/signup"}
             >
               Signup

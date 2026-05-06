@@ -56,7 +56,7 @@ export const ChartExpenseIncome = ({
     <Card className="w-full">
       <CardHeader>
         <CardTitle>Expenses/Incomes</CardTitle>
-        <CardDescription className="text-blue-500 font-semibold">
+        <CardDescription className="text-emerald-500 font-semibold">
           <FilterByMonthYear
             dataValue={dataYear}
             setDataValue={setDataYear}
@@ -90,7 +90,7 @@ export const ChartExpenseIncome = ({
               <LabelList
                 position="top"
                 offset={10}
-                className="fill-blue-700"
+                className="fill-emerald-700"
                 fontSize={12}
                 formatter={(value: number) => value.toFixed(2)}
               />
@@ -104,7 +104,7 @@ export const ChartExpenseIncome = ({
               <LabelList
                 position="top"
                 offset={10}
-                className="fill-blue-700"
+                className="fill-emerald-700"
                 fontSize={12}
                 formatter={(value: number) => value.toFixed(2)}
               />

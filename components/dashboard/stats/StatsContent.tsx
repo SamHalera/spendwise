@@ -36,7 +36,7 @@ const StatsContent = () => {
           <div className="w-full max-w-xs mb-2">
             <FilterData wallets={wallets} setWalletData={setWalletData} />
           </div>
-          <h1 className="text-xl text-blue-700 font-semibold text-center mb-4">
+          <h1 className="text-xl text-emerald-600 font-semibold text-center mb-4">
             {walletData?.name}
           </h1>
 

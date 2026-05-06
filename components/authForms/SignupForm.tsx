@@ -74,7 +74,7 @@ const SignupForm = () => {
     }
   };
   return (
-    <div className="p-8 flex-1 bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 h-auto lg:h-screen flex flex-col gap-8 justify-center items-center">
+    <div className="p-8 flex-1 bg-slate-900 h-auto lg:h-screen flex flex-col gap-8 justify-center items-center">
       <h2 className="text-3xl md:text-4xl text-center text-white mt-6">
         Create your account
       </h2>
@@ -192,7 +192,7 @@ const SignupForm = () => {
               You have already an account?{" "}
             </span>
             <Link
-              className="text-blue-200 font-bold hover:text-white duration-500"
+              className="text-emerald-300 font-bold hover:text-white duration-500"
               href={"/signin"}
             >
               Login

@@ -29,9 +29,9 @@ const MenuTabTransactions = ({
           );
         }}
         className={clsx(
-          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-red-700 duration-500 font-semibold cursor-pointer",
+          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-tertiary duration-500 font-semibold cursor-pointer",
           {
-            "text-red-700  border-red-700": showExpenses,
+            "text-tertiary border-tertiary": showExpenses,
             "text-muted-foreground border-transparent": !showExpenses,
           }
         )}
@@ -48,9 +48,9 @@ const MenuTabTransactions = ({
           );
         }}
         className={clsx(
-          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-blue-700 duration-500 font-semibold cursor-pointer",
+          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-emerald-600 duration-500 font-semibold cursor-pointer",
           {
-            "text-blue-700 border-blue-700": !showExpenses,
+            "text-emerald-600 border-emerald-600": !showExpenses,
             "text-muted-foreground border-transparent": showExpenses,
           }
         )}

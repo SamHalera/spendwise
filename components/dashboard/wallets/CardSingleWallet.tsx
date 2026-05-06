@@ -37,9 +37,9 @@ const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
   };
 
   return (
-    <div className="w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-950/90 via-blue-800/90 to-indigo-800/70 rounded-xl mb-4">
+    <div className="w-full flex items-center justify-between px-6 py-4 bg-slate-900 rounded-xl mb-4">
       <span className="text-white font-bold text-xl">{wallet.name}</span>
-      <div className="flex items-center gap-2 text-blue-100 font-semibold text-lg">
+      <div className="flex items-center gap-2 text-emerald-400 font-semibold text-lg">
         <Coins size={20} />
         <span>{walletBalance.toFixed(2)}€</span>
       </div>

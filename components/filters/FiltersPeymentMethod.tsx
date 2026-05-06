@@ -28,14 +28,14 @@ const FiltersPeymentMethod = () => {
         className={clsx(
           "flex justify-between gap-3 items-center border border-slate-200 px-4 py-1 rounded-sm cursor-pointer lg:w-36 h-[40px]",
           {
-            "bg-blue-200 shadow-md": method.length > 0,
+            "bg-emerald-100 shadow-md": method.length > 0,
             "bg-white": method.length < 1,
           }
         )}
       >
         <span
           className={clsx(
-            "text-xs bg-blue-600 text-white justify-center items-center p-1 rounded-full h-5 w-5",
+            "text-xs bg-slate-900 text-white justify-center items-center p-1 rounded-full h-5 w-5",
             {
               flex: method.length > 0,
               hidden: method.length < 1,
@@ -53,7 +53,7 @@ const FiltersPeymentMethod = () => {
       </div>
       <div
         className={clsx(
-          " flex-col gap-1 bg-blue-100 border border-slate-200 p-3 rounded-sm shadow-lg absolute top-10 w-60 z-10 opacity-0 duration-500",
+          " flex-col gap-1 bg-neutral-light border border-slate-200 p-3 rounded-sm shadow-lg absolute top-10 w-60 z-10 opacity-0 duration-500",
           {
             "flex opacity-100 top-11": dropped,
             "hidden opacity-0 top-14": !dropped,
@@ -78,7 +78,7 @@ const FiltersPeymentMethod = () => {
                     }
                   }}
                   type="checkbox"
-                  className="checkbox checkbox-primary checkbox-sm"
+                  className="checkbox checkbox-ternary checkbox-sm"
                   value={methodElt}
                   defaultChecked={method.includes(methodElt)}
                 />

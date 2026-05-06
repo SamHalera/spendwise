@@ -22,7 +22,7 @@ export default async function PrivateLayout({
       <div className="">
         <AppSidebar />
       </div>
-      <div className="w-full">
+      <div className="w-full bg-neutral-light/60 ">
         <div className="flex gap-3 items-start">
           <SidebarTrigger className="my-4" />
         </div>

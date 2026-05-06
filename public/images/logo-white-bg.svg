@@ -1,10 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" fill="none">
-  <!-- Icon: "SW" in rounded square -->
-  <rect x="0" y="4" width="48" height="48" rx="12" fill="#3b82f6"/>
-  <text x="24" y="35" text-anchor="middle" font-family="'Segoe UI', system-ui, Arial, sans-serif" font-size="18" font-weight="800" fill="white" letter-spacing="-1">SW</text>
+  <rect x="0" y="4" width="48" height="48" rx="12" fill="#10B981"/>
+  <text x="24" y="35" text-anchor="middle" font-family="Manrope, 'Segoe UI', system-ui, Arial, sans-serif" font-size="18" font-weight="800" fill="white" letter-spacing="-1">SW</text>
 
-  <!-- Text: Spendwise -->
-  <text x="62" y="36" font-family="'Segoe UI', system-ui, Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="-0.5">
-    <tspan fill="#3b82f6">Spend</tspan><tspan fill="#1e3a5f">wise</tspan>
+  <text x="62" y="36" font-family="Manrope, 'Segoe UI', system-ui, Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="-0.5">
+    <tspan fill="#10B981">Spend</tspan><tspan fill="#0F172A">wise</tspan>
   </text>
 </svg>

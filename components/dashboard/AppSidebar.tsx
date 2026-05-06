@@ -55,7 +55,7 @@ export function AppSidebar() {
   }, [refreshCount]);
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="bg-gradient-to-b from-blue-950 via-blue-800 to-indigo-800 py-6 text-white">
+      <SidebarContent className="bg-slate-900 py-6 text-white">
         <SidebarGroup>
           <SidebarMenu>
             <Link href={"/dashboard"} className="mb-4">
@@ -64,7 +64,7 @@ export function AppSidebar() {
 
             <SidebarMenuItem
               className={clsx(" text-white", {
-                "bg-indigo-500 rounded-md": pathname === "/dashboard",
+                "bg-emerald-600/30 rounded-md": pathname === "/dashboard",
               })}
             >
               <a href="/dashboard">
@@ -94,7 +94,7 @@ export function AppSidebar() {
                         <SidebarMenuSubItem key={item.name}>
                           <SidebarMenuSubButton
                             className={clsx("text-white", {
-                              "bg-indigo-500 rounded-md":
+                              "bg-emerald-600/30 rounded-md":
                                 pathname === `/dashboard/wallets/${item.id}`,
                             })}
                             asChild
@@ -111,7 +111,7 @@ export function AppSidebar() {
             </Collapsible>
             <SidebarMenuItem
               className={clsx("", {
-                "bg-indigo-500 rounded-md": pathname === "/dashboard/stats",
+                "bg-emerald-600/30 rounded-md": pathname === "/dashboard/stats",
               })}
             >
               <a href="/dashboard/stats">
@@ -123,7 +123,7 @@ export function AppSidebar() {
             </SidebarMenuItem>
             {/* <SidebarMenuItem
               className={clsx("", {
-                "bg-indigo-500 rounded-md": pathname === "/settings",
+                "bg-emerald-600/30 rounded-md": pathname === "/settings",
               })}
             >
               <SidebarMenuButton>

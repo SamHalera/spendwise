@@ -26,7 +26,7 @@ const FiltersDate = () => {
             id="date"
             variant={"outline"}
             className={cn(
-              "justify-start text-left font-normal",
+              "justify-start text-left font-normal border border-secondary text-secondary hover:bg-secondary hover:text-white",
               !date && "text-muted-foreground"
             )}
           >

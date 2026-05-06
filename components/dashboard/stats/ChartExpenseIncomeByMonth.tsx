@@ -76,7 +76,7 @@ export const ChartExpenseIncomeByMonth = ({
             <span>Expenses/Incomes </span>
             <span>per month</span>
           </CardTitle>
-          <CardDescription className="text-blue-500 font-semibold">
+          <CardDescription className="text-emerald-500 font-semibold">
             <FilterByMonthYear
               dataValue={dataByMonth}
               setDataValue={setDataByMonth}
@@ -108,7 +108,7 @@ export const ChartExpenseIncomeByMonth = ({
                       y={props.y}
                       textAnchor={props.textAnchor}
                       dominantBaseline={props.dominantBaseline}
-                      className=" fill-blue-700"
+                      className=" fill-emerald-700"
                     >
                       {payload.type} {Number(payload.total_amount).toFixed(2)}
                     </text>

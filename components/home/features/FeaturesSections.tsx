@@ -73,8 +73,8 @@ const FeaturesSections = () => {
                     })}
                     key={item.label}
                   >
-                    <item.icon size={40} className="text-blue-500" />
-                    <span className="text-blue-500 text-2xl">{item.label}</span>
+                    <item.icon size={40} className="text-emerald-500" />
+                    <span className="text-emerald-500 text-2xl">{item.label}</span>
                   </div>
                 );
               })}
@@ -88,7 +88,7 @@ const FeaturesSections = () => {
           <InView onChange={setInView} threshold={0.5} id="monitoring">
             <div
               ref={ref}
-              className="w-[300px] h-[330px] lg:w-[650px] lg:h-[630px] bg-slate-50 rounded-lg relative flex justify-center mb-28 shadow-md"
+              className="w-[300px] h-[330px] lg:w-[650px] lg:h-[630px] bg-neutral-light rounded-lg relative flex justify-center mb-28 shadow-md"
             >
               <img src={uiTable.src} alt="" className="" />
             </div>

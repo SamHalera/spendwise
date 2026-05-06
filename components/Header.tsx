@@ -12,13 +12,13 @@ const Header = () => {
 
       <div className="flex gap-6">
         <Link
-          className="border border-blue-400 rounded-md px-4 py-2 text-blue-400 font-semibold duration-500 hover:bg-blue-400 hover:text-white"
+          className="border border-emerald-500 rounded-md px-4 py-2 text-emerald-500 font-semibold duration-500 hover:bg-emerald-500 hover:text-white"
           href={"/signup"}
         >
           signup
         </Link>
         <Link
-          className="border border-blue-400 rounded-md px-4 py-2 bg-blue-400  font-semibold duration-500 hover:bg-transparent hover:text-blue-400 text-white"
+          className="border border-emerald-500 rounded-md px-4 py-2 bg-emerald-500 font-semibold duration-500 hover:bg-transparent hover:text-emerald-500 text-white"
           href={"/signin"}
         >
           login

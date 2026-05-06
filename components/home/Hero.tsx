@@ -14,13 +14,13 @@ const Hero = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className="bg-gradient-to-b from-blue-950/50 via-blue-800/60 to-indigo-800/80 h-auto md:h-screen flex flex-col justify-center gap-20 items-center relative px-4 py-6">
+      <div className="bg-gradient-to-b from-slate-900/60 via-slate-900/70 to-slate-900/85 h-auto md:h-screen flex flex-col justify-center gap-20 items-center relative px-4 py-6">
         <div className="flex flex-col gap-4 w-2/3 text-center">
           <h1 className="text-white text-4xl lg:text-6xl xl:text-7xl font-thin">
             Leading expenses management platform
           </h1>
           <Link
-            className="self-center bg-blue-700 py-4 px-10 rounded-md text-white text-xl hover:bg-blue-500 duration-500"
+            className="self-center bg-emerald-600 py-4 px-10 rounded-md text-white text-xl hover:bg-emerald-500 duration-500"
             href={"/dashboard"}
           >
             try it!

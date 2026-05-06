@@ -20,7 +20,8 @@ export default async function PrivateLayout({
   return (
     <SidebarProvider>
       <div className="">
-        <AppSidebar />
+        <AppSidebar userName={session.user?.name} />
+
       </div>
       <div className="w-full bg-neutral-light/60 ">
         <div className="flex gap-3 items-start">

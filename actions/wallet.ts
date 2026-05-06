@@ -27,6 +27,28 @@ export const getWalletById = async (id: number) => {
     return null;
   }
 };
+export const getWalletByIdAndUser = async (id: number) => {
+  const currentUser = await getSessionUser();
+  try {
+    const wallet = await prisma.wallet.findUnique({
+      where: { id, userId: currentUser?.id },
+      include: {
+        transaction: true,
+      },
+    });
+    if (wallet) {
+      const walletsWithUpdatedTransactions = await handleTransactionStatus([
+        wallet,
+      ]);
+
+      return walletsWithUpdatedTransactions[0];
+    }
+    return null;
+  } catch (error) {
+    console.error("Error create wallet==>", error);
+    return null;
+  }
+};
 export const getWallets = async () => {
   try {
     const currentUser = await getSessionUser();

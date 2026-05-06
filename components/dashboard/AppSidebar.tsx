@@ -36,7 +36,7 @@ import { useEffect, useState } from "react";
 import { getWallets } from "@/actions/wallet";
 
 // export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
-export function AppSidebar() {
+export function AppSidebar({ userName }: { userName: string | null | undefined }) {
   const [dataWallets, setDataWallets] = useState<WalletProps[]>();
   const { refreshCount } = useRefreshStore();
   const pathname = usePathname();
@@ -62,6 +62,7 @@ export function AppSidebar() {
               <img src="/images/logo-dark.svg" alt="Spendwise" className="h-10" />
             </Link>
 
+            <h2 className=" font-bold text-xl ms-4 mb-4">{userName}</h2>
             <SidebarMenuItem
               className={clsx(" text-white", {
                 "bg-indigo-500 rounded-md": pathname === "/dashboard",

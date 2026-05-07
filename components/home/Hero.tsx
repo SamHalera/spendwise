@@ -14,7 +14,7 @@ const Hero = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className=" bg-gradient-purple h-auto md:h-screen flex flex-col justify-center gap-20 items-center relative px-4 py-6">
+      <div className=" bg-gradient-purple h-auto md:h-screen flex flex-col justify-center gap-20 items-center relative px-4 py-10">
         <div className="flex flex-col gap-6 w-2/3 text-center">
           <h1 className="text-white text-4xl lg:text-6xl xl:text-7xl font-thin">
             Faites vos comptes. Simplement.

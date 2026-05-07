@@ -18,6 +18,7 @@ import {
   LayoutDashboard,
   LogOut,
   Settings,
+  User2Icon,
   Wallet,
 } from "lucide-react";
 
@@ -36,7 +37,7 @@ import { useEffect, useState } from "react";
 import { getWallets } from "@/actions/wallet";
 
 // export function AppSidebar({ wallets }: { wallets?: WalletProps[] | null }) {
-export function AppSidebar({ userName }: { userName: string | null | undefined }) {
+export function AppSidebar() {
   const [dataWallets, setDataWallets] = useState<WalletProps[]>();
   const { refreshCount } = useRefreshStore();
   const pathname = usePathname();
@@ -55,23 +56,23 @@ export function AppSidebar({ userName }: { userName: string | null | undefined }
   }, [refreshCount]);
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="bg-slate-900 py-6 text-white">
+      <SidebarContent className="bg-gradient-purple py-6 text-white">
         <SidebarGroup>
           <SidebarMenu>
             <Link href={"/dashboard"} className="mb-4">
               <img src="/images/logo-dark.svg" alt="Spendwise" className="h-10" />
             </Link>
 
-            <h2 className=" font-bold text-xl ms-4 mb-4">{userName}</h2>
+
             <SidebarMenuItem
-              className={clsx(" text-white", {
-                "bg-emerald-600/30 rounded-md": pathname === "/dashboard",
+              className={clsx(" text-white transition-all", {
+                "bg-secondary/80 rounded-md": pathname === "/dashboard",
               })}
             >
-              <a href="/dashboard">
+              <a className="" href="/dashboard">
                 <SidebarMenuButton>
                   <LayoutDashboard />
-                  <span>Dahsboard</span>
+                  <span>Tableau de bord</span>
                 </SidebarMenuButton>
               </a>
             </SidebarMenuItem>
@@ -82,9 +83,9 @@ export function AppSidebar({ userName }: { userName: string | null | undefined }
             >
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton tooltip="Wallets">
+                  <SidebarMenuButton tooltip="Portefeuilles">
                     <Wallet />
-                    <span>Wallets</span>
+                    <span>Portefeuilles</span>
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
@@ -95,7 +96,7 @@ export function AppSidebar({ userName }: { userName: string | null | undefined }
                         <SidebarMenuSubItem key={item.name}>
                           <SidebarMenuSubButton
                             className={clsx("text-white", {
-                              "bg-emerald-600/30 rounded-md":
+                              "bg-secondary/80 rounded-md":
                                 pathname === `/dashboard/wallets/${item.id}`,
                             })}
                             asChild
@@ -112,13 +113,13 @@ export function AppSidebar({ userName }: { userName: string | null | undefined }
             </Collapsible>
             <SidebarMenuItem
               className={clsx("", {
-                "bg-emerald-600/30 rounded-md": pathname === "/dashboard/stats",
+                "bg-secondary/80 rounded-md": pathname === "/dashboard/stats",
               })}
             >
               <a href="/dashboard/stats">
                 <SidebarMenuButton>
                   <ChartNoAxesCombined />
-                  <span>Stats</span>
+                  <span>Statistiques</span>
                 </SidebarMenuButton>
               </a>
             </SidebarMenuItem>
@@ -142,13 +143,13 @@ export function AppSidebar({ userName }: { userName: string | null | undefined }
                   signOut({ callbackUrl: process.env.NEXT_PUBLIC_FRONT });
                 }}
               >
-                <LogOut /> Logout
+                <LogOut /> Déconnexion
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      {/* <SidebarFooter /> */}
     </Sidebar>
   );
 }

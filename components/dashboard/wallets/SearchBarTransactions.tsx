@@ -39,7 +39,7 @@ const SearchBarTransactions = ({
           }}
           value={inputValue}
           type="text"
-          placeholder="search a transaction ..."
+          placeholder="Rechercher une transaction..."
         />
       </div>
     </div>

@@ -20,36 +20,36 @@ body {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 222 47% 11%;
+    --primary: 254 59% 17%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 160 84% 39%;
+    --secondary: 258 55% 54%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 215 16% 47%;
-    --accent: 160 84% 94%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 258 55% 92%;
+    --accent-foreground: 254 59% 17%;
     --destructive: 351 95% 60%;
     --destructive-foreground: 0 0% 98%;
-    --tertiary: 351 89% 60%;
+    --tertiary: 340 78% 55%;
     --tertiary-foreground: 0 0% 98%;
-    --tertiary-dark: 347 77% 33%;
+    --tertiary-dark: 340 78% 35%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 160 84% 39%;
-    --chart-1: 351 95% 60%;
-    --chart-2: 160 84% 39%;
-    --chart-3: 197 37% 24%;
+    --ring: 258 55% 54%;
+    --chart-1: 340 78% 55%;
+    --chart-2: 258 55% 54%;
+    --chart-3: 254 59% 30%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --sidebar-background: 222 47% 11%;
+    --sidebar-background: 254 59% 17%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary: 258 55% 54%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 222 47% 18%;
+    --sidebar-accent: 254 59% 22%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 222 47% 20%;
-    --sidebar-ring: 160 84% 39%;
+    --sidebar-border: 254 59% 25%;
+    --sidebar-ring: 258 55% 54%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -93,5 +93,14 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  input, select, textarea, [role="combobox"] {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  input:focus, select:focus, textarea:focus, [role="combobox"]:focus,
+  input:focus-visible, select:focus-visible, textarea:focus-visible, [role="combobox"]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
   }
 }

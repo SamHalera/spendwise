@@ -15,17 +15,17 @@ import { Pencil, Plus } from "lucide-react";
 import clsx from "clsx";
 import { WalletProps } from "@/types/types";
 
-const CreateOrEditWalletModal = ({ wallet }: { wallet?: WalletProps }) => {
+const CreateOrEditWalletModal = ({ wallet, showBtns, setShowBtns }: { wallet?: WalletProps; showBtns?: boolean; setShowBtns?: React.Dispatch<SetStateAction<boolean>> }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
+      <AlertDialogTrigger asChild >
         <Button
           variant="spendwise"
           size={"icon"}
           className={clsx(
-            "bg-emerald-200 text-primary w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-emerald-400 duration-500 group",
+            "bg-secondary text-white w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-primary duration-500 group",
             {}
           )}
         >
@@ -36,7 +36,7 @@ const CreateOrEditWalletModal = ({ wallet }: { wallet?: WalletProps }) => {
         <AlertDialogHeader>
           <AlertDialogTitle>
             {" "}
-            {wallet ? "Edit wallet" : "New Wallet"}
+            {wallet ? "Modifier le portefeuille" : "Nouveau portefeuille"}
           </AlertDialogTitle>
           <AlertDialogDescription></AlertDialogDescription>
           <div>
@@ -44,7 +44,7 @@ const CreateOrEditWalletModal = ({ wallet }: { wallet?: WalletProps }) => {
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className=" border border-tertiary text-tertiary self-start hover:bg-tertiary hover:text-tertiary-foreground transition-all">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className=" border border-tertiary text-tertiary self-start hover:bg-tertiary hover:text-tertiary-foreground transition-all">Annuler</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -41,7 +41,7 @@ const FiltersDate = () => {
                 format(date.from, "dd/MM/yyyy")
               )
             ) : (
-              <span>Pick a date</span>
+              <span>Choisir une date</span>
             )}
           </Button>
         </PopoverTrigger>

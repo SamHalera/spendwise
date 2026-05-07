@@ -27,12 +27,12 @@ const items = [
 ];
 const itemsLabel = [
   {
-    label: "Easily submit expenses",
+    label: "Soumettez vos dépenses facilement",
     boundTo: "expenses",
     icon: BookmarkCheck,
   },
   {
-    label: " A clear transactions monitoring",
+    label: "Un suivi clair des transactions",
     boundTo: "monitoring",
     icon: ChartNetwork,
   },
@@ -59,9 +59,8 @@ const FeaturesSections = () => {
         <div className="flex-1">
           <div className="lg:w-2/3  lg:sticky top-48 bottom-10 mx-auto flex flex-col gap-10">
             <h3 className="text-2xl lg:text-3xl font-thin text-center lg:text-start">
-              Manage all your expenses on our platform – from travel expense
-              reports to out-of-pocket reimbursements and credit card
-              transactions.
+              Gérez toutes vos dépenses sur notre plateforme – des notes de
+              frais aux remboursements et aux transactions par carte bancaire.
             </h3>
             <div className="hidden lg:block">
               {itemsLabel.map((item) => {
@@ -73,8 +72,8 @@ const FeaturesSections = () => {
                     })}
                     key={item.label}
                   >
-                    <item.icon size={40} className="text-emerald-500" />
-                    <span className="text-emerald-500 text-2xl">{item.label}</span>
+                    <item.icon size={40} className="text-secondary" />
+                    <span className="text-secondary text-2xl">{item.label}</span>
                   </div>
                 );
               })}

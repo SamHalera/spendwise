@@ -44,7 +44,7 @@ const FiltersPeymentMethod = () => {
         >
           {method.length < 1 ? "" : method.length}
         </span>
-        <span className="text-sm text-slate-700">Payment</span>
+        <span className="text-sm text-slate-700">Paiement</span>
         {dropped ? (
           <ChevronUp className="text-slate-700" size={15} />
         ) : (

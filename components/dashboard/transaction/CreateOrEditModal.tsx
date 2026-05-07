@@ -30,7 +30,7 @@ const CreateOrEditModal = ({
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         {data ? (
-          <div className=" cursor-pointer h-10 w-10 bg-emerald-200 text-emerald-700 hover:bg-emerald-700 hover:text-emerald-200 p-3 duration-500 flex justify-center items-center rounded-full">
+          <div className=" cursor-pointer h-10 w-10 bg-secondary text-white hover:bg-secondary/70  p-3 duration-500 flex justify-center items-center rounded-full">
             <Pencil />
           </div>
         ) : (
@@ -47,7 +47,7 @@ const CreateOrEditModal = ({
             ) : (
               <HandCoins className=" text-white" />
             )}
-            New {dataLabel}
+            {dataLabel === "expense" ? "Nouvelle dépense" : "Nouveau revenu"}
           </Button>
         )}
       </AlertDialogTrigger>
@@ -55,7 +55,10 @@ const CreateOrEditModal = ({
         <AlertDialogHeader>
           <AlertDialogTitle>
             {" "}
-            {dataLabel ? `Edit ${dataLabel}` : `New ${dataLabel}`}
+            {data
+              ? `Modifier ${dataLabel === "expense" ? "la dépense" : "le revenu"}`
+              : dataLabel === "expense" ? "Nouvelle dépense" : "Nouveau revenu"
+            }
           </AlertDialogTitle>
           <AlertDialogDescription></AlertDialogDescription>
           <div>
@@ -67,7 +70,7 @@ const CreateOrEditModal = ({
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className=" border border-tertiary text-tertiary self-start hover:bg-tertiary hover:text-tertiary-foreground transition-all">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className=" border border-tertiary text-tertiary self-start hover:bg-tertiary hover:text-tertiary-foreground transition-all">Annuler</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

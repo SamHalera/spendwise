@@ -21,11 +21,13 @@ import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeClosed } from "lucide-react";
+import { useRefreshStore } from "@/stores/refresh";
 
 const LoginForm = () => {
   const [isShowPass, setIsShowPass] = useState<boolean>(false)
   const { toast } = useToast();
   const router = useRouter();
+  const { triggerRefresh } = useRefreshStore()
   const searchParms = useSearchParams();
   const prevUrl = searchParms.get("prevUrl");
   const form = useForm<z.infer<typeof signinFormSchema>>({
@@ -47,22 +49,23 @@ const LoginForm = () => {
         console.error("error");
         toast({
           variant: "destructive",
-          title: "Bad news!",
-          description: "Invalid credentials.",
+          title: "Erreur !",
+          description: "Identifiants invalides.",
         });
       }
       if (!signInData?.error) {
         const pathToRedirect = prevUrl ? `/${prevUrl}` : "/dashboard";
-
+        triggerRefresh()
         router.push("/dashboard");
+
       }
     } catch (error) {
       console.error("error==>", error);
       toast({
         variant: "destructive",
-        title: "Bad news!",
+        title: "Erreur !",
         description:
-          "Oups! Something went wrong! Sorry for that. Pleas, try again...",
+          "Oups ! Une erreur est survenue. Veuillez réessayer...",
       });
     }
   };
@@ -83,7 +86,7 @@ const LoginForm = () => {
                     Email <FormMessage />
                   </FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="meail here" {...field} />
+                    <Input type="email" placeholder="votre@email.com" {...field} />
                   </FormControl>
                 </FormItem>
               );
@@ -96,14 +99,14 @@ const LoginForm = () => {
               return (
                 <FormItem>
                   <FormLabel className="text-white text-xl flex gap-3 items-center">
-                    Password <FormMessage />
+                    Mot de passe <FormMessage />
                   </FormLabel>
                   <div className="relative">
 
                     <FormControl>
                       <Input
                         type={isShowPass ? "text" : "password"}
-                        placeholder="Password here"
+                        placeholder="Votre mot de passe"
                         {...field}
                       />
                     </FormControl>
@@ -120,7 +123,7 @@ const LoginForm = () => {
             }}
           />
           <Button size="lg" variant="custom" className="self-center">
-            Sign In
+            Se connecter
           </Button>
           {/* <Button
             type="button"
@@ -142,13 +145,13 @@ const LoginForm = () => {
           <hr></hr>
           <div className="text-center flex gap-2 items-center justify-center">
             <span className="text-center text-white italic">
-              You do not have an account yet?
+              Vous n&apos;avez pas encore de compte ?
             </span>
             <Link
-              className="text-emerald-300 font-bold hover:text-white duration-500"
+              className="text-secondary font-bold hover:text-white duration-500"
               href={"/signup"}
             >
-              Signup
+              S&apos;inscrire
             </Link>
           </div>
         </form>

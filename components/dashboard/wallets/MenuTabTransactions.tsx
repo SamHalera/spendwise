@@ -36,7 +36,7 @@ const MenuTabTransactions = ({
           }
         )}
       >
-        <BadgeEuro /> Expenses
+        <BadgeEuro /> Dépenses
       </div>
 
       <div
@@ -48,14 +48,14 @@ const MenuTabTransactions = ({
           );
         }}
         className={clsx(
-          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-emerald-600 duration-500 font-semibold cursor-pointer",
+          "flex items-center gap-4 border-b-2 text-xl pb-3 hover:text-indigo-800 duration-500 font-semibold cursor-pointer",
           {
-            "text-emerald-600 border-emerald-600": !showExpenses,
+            "text-indigo-700 border-indigo-700": !showExpenses,
             "text-muted-foreground border-transparent": showExpenses,
           }
         )}
       >
-        <HandCoins /> Incomes
+        <HandCoins /> Revenus
       </div>
     </div>
   );

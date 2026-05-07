@@ -1,7 +1,7 @@
 import React from "react";
 
 const page = () => {
-  return <div>SETTINGS</div>;
+  return <div>PARAMÈTRES</div>;
 };
 
 export default page;

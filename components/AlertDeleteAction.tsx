@@ -42,15 +42,15 @@ const AlertDeleteAction = ({
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Êtes-vous absolument sûr(e) ?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your data
-            from our servers.
+            Cette action est irréversible. Vos données seront définitivement
+            supprimées de nos serveurs.
           </AlertDialogDescription>
           <div></div>
         </AlertDialogHeader>
         <AlertDialogFooter className="">
-          <AlertDialogCancel className="bg-slate-400">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="bg-slate-400">Annuler</AlertDialogCancel>
           <AlertDialogAction
             onClick={async () => {
               await deleteToContinue(id);
@@ -59,7 +59,7 @@ const AlertDeleteAction = ({
             }}
             className="bg-tertiary/20 rounded-sm px-4 text-tertiary text-sm hover:text-tertiary-foreground hover:bg-tertiary duration-500"
           >
-            Continue
+            Confirmer
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

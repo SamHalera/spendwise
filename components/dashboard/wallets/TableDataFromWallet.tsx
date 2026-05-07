@@ -83,7 +83,7 @@ const TableDataFromWallet = ({
 
   return (
     <div className="w-full flex flex-col">
-      <div className="sticky top-2 flex flex-col justify-around items-center gap-4 z-10 bg-white py-6 px-4 rounded-md w-full">
+      <div className="sticky top-2 flex flex-col justify-around items-center gap-4 z-10 bg-white py-6 px-10 rounded-md w-full">
         <SearchBarTransactions
           inputValue={inputValue}
           setInputValue={setInputValue}
@@ -95,15 +95,15 @@ const TableDataFromWallet = ({
 
       </div>
       <Table>
-        <TableCaption>A list of your recent {label}s.</TableCaption>
+        <TableCaption>Liste de vos {label === "expense" ? "dépenses" : "revenus"} récents.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Date</TableHead>
-            <TableHead className="w-80">Label</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
+            <TableHead className="w-80">Libellé</TableHead>
+            <TableHead>Statut</TableHead>
+            <TableHead>Méthode</TableHead>
             <TableHead className="text-center flex flex-col items-center justify-center">
-              Amount{" "}
+              Montant{" "}
               <span className="font-semibold">
                 {totalAmountTransactions.toFixed(2)}€
               </span>
@@ -120,7 +120,7 @@ const TableDataFromWallet = ({
                 </TableCell>
                 <TableCell className={clsx("flex items-center gap-2", {
                   "text-tertiary": item.type === "EXPENSE",
-                  "text-emerald-500": item.type === "INCOME",
+                  "text-indigo-700": item.type === "INCOME",
                 })}>
                   {/* <ShoppingBasket /> */}
                   {item.type === "EXPENSE" ?
@@ -135,10 +135,10 @@ const TableDataFromWallet = ({
                   <span
                     className={clsx("text-xs  px-3 py-1 rounded-full", {
                       "bg-tertiary/20": item.transactionStatus === "PAST" && item.type === "EXPENSE",
-                      "bg-emerald-200": item.transactionStatus === "PAST" && item.type === "INCOME",
+                      "bg-indigo-400": item.transactionStatus === "PAST" && item.type === "INCOME",
                       "bg-tertiary-dark text-tertiary-foreground":
                         item.transactionStatus === "UPCOMING" && item.type === "EXPENSE",
-                      "bg-emerald-700 text-white":
+                      "bg-indigo-700 text-white":
                         item.transactionStatus === "UPCOMING" && item.type === "INCOME",
                     })}
                   >
@@ -149,7 +149,7 @@ const TableDataFromWallet = ({
                 <TableCell
                   className={clsx("text-right", {
                     "text-tertiary": item.type === "EXPENSE",
-                    "text-emerald-500": item.type === "INCOME",
+                    "text-indigo-500": item.type === "INCOME",
                   })}
                 >
                   {item.type === "EXPENSE" ? "-" : "+"}

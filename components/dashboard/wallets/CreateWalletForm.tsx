@@ -92,7 +92,7 @@ const CreateWalletForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Wallet ID{" "}
+                  ID du portefeuille{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
@@ -114,14 +114,14 @@ const CreateWalletForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Wallet name{" "}
+                  Nom du portefeuille{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     type="text"
-                    placeholder="Give a name for your wallet"
+                    placeholder="Donnez un nom à votre portefeuille"
                     className={clsx({
                       "border-tertiary": form.formState.errors.name,
                     })}
@@ -136,14 +136,14 @@ const CreateWalletForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Wallet balance{" "}
+                  Solde initial{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     type="string"
-                    placeholder="Give an amount or put 0"
+                    placeholder="Saisir un montant ou 0"
                     className={clsx({
                       "border-tertiary": form.formState.errors.balance,
                     })}
@@ -158,7 +158,7 @@ const CreateWalletForm = ({
             variant={"default"}
             disabled={!form.formState.isDirty}
           >
-            {wallet ? "Edit" : "Create"}
+            {wallet ? "Modifier" : "Créer"}
           </Button>
         </form>
       </Form>

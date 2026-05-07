@@ -24,26 +24,26 @@ const CardItemWalletList = ({ wallet }: { wallet: WalletProps }) => {
   return (
     <div>
       <Link href={`/dashboard/wallets/${wallet.id}`} className="group">
-        <Card className=" shadow-sm border border-slate-700 group-hover:bg-slate-800 duration-500 bg-slate-900">
+        <Card className=" shadow-lg group-hover:-translate-y-2 duration-700 bg-white">
           <CardHeader>
-            <CardTitle className="text-center mb-4 text-white">
+            <CardTitle className="text-center mb-4 text-primary">
               <span className="">{wallet.name}</span>
             </CardTitle>
             <CardDescription>
-              <div className="flex gap-3 items-center text-emerald-400 font-semibold text-xl">
-                <Coins size={30} /> Balance :{" "}
+              <div className="flex gap-3 items-center  justify-center text-primary font-semibold text-xl">
+                {/* <Coins size={30} /> */}
                 <span>{walletBalance.toFixed(2)}€</span>
               </div>
             </CardDescription>
           </CardHeader>
           <CardContent className="flex gap-6 justify-around">
             <TransactionSumUpSection
-              label="Incomes"
+              label="Revenus"
               pastBalance={incomesPastBalance}
               upcomingBalance={incomesUpcomingBalance}
             />
             <TransactionSumUpSection
-              label="Expenses"
+              label="Dépenses"
               pastBalance={expensesPastBalance}
               upcomingBalance={expensesUpcomingBalance}
             />

@@ -52,7 +52,7 @@ const FiltersStatus = () => {
             ? ""
             : computeTrueValues([showPast, showUpcoming])}
         </span>
-        <span className="text-sm text-slate-700">Status</span>
+        <span className="text-sm text-slate-700">Statut</span>
         {dropped ? (
           <ChevronUp className="text-slate-700" size={15} />
         ) : (
@@ -78,7 +78,7 @@ const FiltersStatus = () => {
               defaultChecked={showPast}
               className="checkbox checkbox-ternary checkbox-sm"
             />
-            <span className="label-text">Past</span>
+            <span className="label-text">Passé</span>
           </label>
         </div>
         <div className="form-control">
@@ -91,7 +91,7 @@ const FiltersStatus = () => {
               defaultChecked={showUpcoming}
               className="checkbox checkbox-ternary checkbox-sm"
             />
-            <span className="label-text">Upcoming</span>
+            <span className="label-text">À venir</span>
           </label>
         </div>
       </div>

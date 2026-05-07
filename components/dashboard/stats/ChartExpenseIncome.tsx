@@ -29,11 +29,11 @@ import { WalletProps } from "@/types/types";
 
 const chartConfigExpensesIncomes = {
   expenses: {
-    label: "Expenses",
+    label: "Dépenses",
     color: "hsl(var(--chart-1))",
   },
   incomes: {
-    label: "Incomes",
+    label: "Revenus",
     color: "hsl(var(--chart-2))",
   },
   label: {
@@ -55,8 +55,8 @@ export const ChartExpenseIncome = ({
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Expenses/Incomes</CardTitle>
-        <CardDescription className="text-blue-500 font-semibold">
+        <CardTitle>Dépenses/Revenus</CardTitle>
+        <CardDescription className="text-primary font-semibold">
           <FilterByMonthYear
             dataValue={dataYear}
             setDataValue={setDataYear}
@@ -90,7 +90,7 @@ export const ChartExpenseIncome = ({
               <LabelList
                 position="top"
                 offset={10}
-                className="fill-blue-700"
+                className="fill-primary"
                 fontSize={12}
                 formatter={(value: number) => value.toFixed(2)}
               />
@@ -104,7 +104,7 @@ export const ChartExpenseIncome = ({
               <LabelList
                 position="top"
                 offset={10}
-                className="fill-blue-700"
+                className="fill-emerald-700"
                 fontSize={12}
                 formatter={(value: number) => value.toFixed(2)}
               />

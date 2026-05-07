@@ -34,32 +34,32 @@ const AlertDeleteAction = ({
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className=" bg-red-100 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-red-400 duration-500 group"
+          className="border border-tertiary/10 bg-tertiary/10 w-10 h-10 p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-tertiary/70 duration-500 group"
         >
           {" "}
-          <Trash2 className="text-red-400 group-hover:text-red-200 duration-500" />
+          <Trash2 className="text-tertiary/80 group-hover:text-tertiary-foreground duration-500" />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Êtes-vous absolument sûr(e) ?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your data
-            from our servers.
+            Cette action est irréversible. Vos données seront définitivement
+            supprimées de nos serveurs.
           </AlertDialogDescription>
           <div></div>
         </AlertDialogHeader>
         <AlertDialogFooter className="">
-          <AlertDialogCancel className="bg-slate-400">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="bg-slate-400">Annuler</AlertDialogCancel>
           <AlertDialogAction
             onClick={async () => {
               await deleteToContinue(id);
               triggerRefresh()
               router.push(pathToRedirect);
             }}
-            className="bg-red-200 rounded-sm px-4 text-red-500 text-sm hover:text-red-200 hover:bg-red-500 duration-500"
+            className="bg-tertiary/20 rounded-sm px-4 text-tertiary text-sm hover:text-tertiary-foreground hover:bg-tertiary duration-500"
           >
-            Continue
+            Confirmer
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

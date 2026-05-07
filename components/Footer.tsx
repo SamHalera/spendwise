@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-500 py-6 px-10 flex flex-col gap-8 justify-center items-center">
+    <footer className="bg-gradient-purple py-6 px-10 flex flex-col gap-8 justify-center items-center">
       <div className="flex flex-col gap-6 md:gap-3 md:flex-row justify-between items-center w-full">
         <div className="flex-1">
           <img src="/images/logo-dark.svg" alt="Spendwise" className="h-10" />
@@ -24,7 +24,7 @@ const Footer = () => {
         </div>
         <div className="flex justify-center flex-1">
           <h2 className="text-white text-2xl md:w-72 text-center md:text-start">
-            Monitor your expenses with Spendwise
+            Gérez vos dépenses avec Spendwise
           </h2>
         </div>
       </div>

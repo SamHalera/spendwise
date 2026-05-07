@@ -30,24 +30,24 @@ const CreateOrEditModal = ({
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         {data ? (
-          <div className=" cursor-pointer h-10 w-10 bg-blue-200 text-blue-700 hover:bg-blue-700 hover:text-blue-200 p-3 duration-500 flex justify-center items-center rounded-full">
+          <div className=" cursor-pointer h-10 w-10 bg-secondary text-white hover:bg-secondary/70  p-3 duration-500 flex justify-center items-center rounded-full">
             <Pencil />
           </div>
         ) : (
           <Button
-            className={clsx("mb-4 border bg-transparent duration-500", {
-              "border-red-200 text-red-500 hover:bg-red-400 hover:text-white":
+            className={clsx("border bg-transparent duration-500", {
+              "bg-tertiary text-white hover:bg-tertiary-dark":
                 dataLabel === "expense",
-              "border-blue-200 text-blue-500 hover:bg-blue-400 hover:text-white":
+              " bg-secondary text-white hover:bg-emerald-400 hover:text-white":
                 dataLabel === "income",
             })}
           >
             {dataLabel === "expense" ? (
-              <BadgeEuro className=" text-red-700" />
+              <BadgeEuro className="text-white" />
             ) : (
-              <HandCoins className=" text-blue-700" />
+              <HandCoins className=" text-white" />
             )}
-            New {dataLabel}
+            {dataLabel === "expense" ? "Nouvelle dépense" : "Nouveau revenu"}
           </Button>
         )}
       </AlertDialogTrigger>
@@ -55,7 +55,10 @@ const CreateOrEditModal = ({
         <AlertDialogHeader>
           <AlertDialogTitle>
             {" "}
-            {dataLabel ? `Edit ${dataLabel}` : `New ${dataLabel}`}
+            {data
+              ? `Modifier ${dataLabel === "expense" ? "la dépense" : "le revenu"}`
+              : dataLabel === "expense" ? "Nouvelle dépense" : "Nouveau revenu"
+            }
           </AlertDialogTitle>
           <AlertDialogDescription></AlertDialogDescription>
           <div>
@@ -67,7 +70,7 @@ const CreateOrEditModal = ({
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className=" border border-red-500 text-red-500 self-start hover:bg-red-500 hover:text-white transition-all">Cancel</AlertDialogCancel>
+          <AlertDialogCancel className=" border border-tertiary text-tertiary self-start hover:bg-tertiary hover:text-tertiary-foreground transition-all">Annuler</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

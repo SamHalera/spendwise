@@ -30,13 +30,13 @@ const StatsContent = () => {
   return !wallets ? (
     <Loader />
   ) : (
-    <div>
+    <div className="m-10">
       {wallets ? (
         <>
           <div className="w-full max-w-xs mb-2">
             <FilterData wallets={wallets} setWalletData={setWalletData} />
           </div>
-          <h1 className="text-xl text-blue-700 font-semibold text-center mb-4">
+          <h1 className="text-xl text-primary font-semibold text-center mb-8">
             {walletData?.name}
           </h1>
 
@@ -49,7 +49,7 @@ const StatsContent = () => {
           </div>
         </>
       ) : (
-        <div>No values yes</div>
+        <div>Aucune donnée disponible</div>
       )}
     </div>
   );

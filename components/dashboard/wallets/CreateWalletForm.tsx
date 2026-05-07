@@ -92,7 +92,7 @@ const CreateWalletForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Wallet ID{" "}
+                  ID du portefeuille{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
@@ -100,8 +100,8 @@ const CreateWalletForm = ({
                     {...field}
                     type="hidden"
                     disabled={true}
-                    className={clsx("bg-slate-200", {
-                      "border-red-400": form.formState.errors.id,
+                    className={clsx("bg-neutral-light", {
+                      "border-tertiary": form.formState.errors.id,
                     })}
                   />
                 </FormControl>
@@ -114,16 +114,16 @@ const CreateWalletForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Wallet name{" "}
+                  Nom du portefeuille{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     type="text"
-                    placeholder="Give a name for your wallet"
+                    placeholder="Donnez un nom à votre portefeuille"
                     className={clsx({
-                      "border-red-400": form.formState.errors.name,
+                      "border-tertiary": form.formState.errors.name,
                     })}
                   />
                 </FormControl>
@@ -136,16 +136,16 @@ const CreateWalletForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Wallet balance{" "}
+                  Solde initial{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     type="string"
-                    placeholder="Give an amount or put 0"
+                    placeholder="Saisir un montant ou 0"
                     className={clsx({
-                      "border-red-400": form.formState.errors.balance,
+                      "border-tertiary": form.formState.errors.balance,
                     })}
                   />
                 </FormControl>
@@ -154,11 +154,11 @@ const CreateWalletForm = ({
           />
 
           <Button
-            className="self-end"
+            className="self-end bg-slate-900 border border-slate-900 text-white transition-all hover:bg-transparent hover:text-slate-900"
             variant={"default"}
             disabled={!form.formState.isDirty}
           >
-            {wallet ? "Edit" : "Create"}
+            {wallet ? "Modifier" : "Créer"}
           </Button>
         </form>
       </Form>

@@ -34,14 +34,14 @@ const FiltersStatus = () => {
         className={clsx(
           "flex justify-between gap-3 items-center border border-slate-200 px-4 py-1 rounded-sm cursor-pointer lg:w-36 h-[40px]",
           {
-            "bg-blue-200 shadow-md": showPast || showUpcoming,
+            "bg-emerald-100 shadow-md": showPast || showUpcoming,
             "bg-white ": !showPast && !showUpcoming,
           }
         )}
       >
         <span
           className={clsx(
-            "text-xs bg-blue-600 text-white justify-center items-center p-1 rounded-full h-5 w-5",
+            "text-xs bg-slate-900 text-white justify-center items-center p-1 rounded-full h-5 w-5",
             {
               flex: computeTrueValues([showPast, showUpcoming]) > 0,
               hidden: computeTrueValues([showPast, showUpcoming]) < 1,
@@ -52,7 +52,7 @@ const FiltersStatus = () => {
             ? ""
             : computeTrueValues([showPast, showUpcoming])}
         </span>
-        <span className="text-sm text-slate-700">Status</span>
+        <span className="text-sm text-slate-700">Statut</span>
         {dropped ? (
           <ChevronUp className="text-slate-700" size={15} />
         ) : (
@@ -61,7 +61,7 @@ const FiltersStatus = () => {
       </div>
       <div
         className={clsx(
-          " flex-col gap-1 bg-blue-100 border border-slate-200 p-3 rounded-sm shadow-lg absolute w-[150px] z-10 duration-500",
+          " flex-col gap-1 bg-neutral-light border border-slate-200 p-3 rounded-sm shadow-lg absolute w-[150px] z-10 duration-500",
           {
             "flex opacity-100 top-11": dropped,
             "hidden opacity-0 top-14": !dropped,
@@ -76,9 +76,9 @@ const FiltersStatus = () => {
               }}
               type="checkbox"
               defaultChecked={showPast}
-              className="checkbox checkbox-primary checkbox-sm"
+              className="checkbox checkbox-ternary checkbox-sm"
             />
-            <span className="label-text">Past</span>
+            <span className="label-text">Passé</span>
           </label>
         </div>
         <div className="form-control">
@@ -89,9 +89,9 @@ const FiltersStatus = () => {
               }}
               type="checkbox"
               defaultChecked={showUpcoming}
-              className="checkbox checkbox-primary checkbox-sm"
+              className="checkbox checkbox-ternary checkbox-sm"
             />
-            <span className="label-text">Upcoming</span>
+            <span className="label-text">À venir</span>
           </label>
         </div>
       </div>

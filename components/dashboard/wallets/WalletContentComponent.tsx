@@ -51,7 +51,7 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
       ) : (
         <>
           {dataWallet && (
-            <div className="mt-4 px-4">
+            <div className=" px-4">
               <CardSingleWallet wallet={dataWallet} />
             </div>
           )}
@@ -64,11 +64,12 @@ const WalletContentComponent = ({ walletId }: { walletId: number }) => {
               setDataForTable={setDataForTable}
               setDataLabel={setDataLabel}
             />
-            <div className="p-6">
-              <CreateOrEditModal dataLabel={dataLabel} walletId={walletId} />
+            <div className="px-6">
+              {/* <CreateOrEditModal dataLabel={dataLabel} walletId={walletId} /> */}
               <TableDataFromWallet
                 label={dataLabel}
                 dataForTable={dataForTable}
+                walletId={walletId}
               />
             </div>
           </div>

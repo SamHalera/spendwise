@@ -18,7 +18,7 @@ const FiltersTransactions = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" title="Filtres">
+        <Button variant="outline" size="icon" title="Filtres" className="border border-neutral text-neutral transition-all hover:bg-primary/70 rounded-full">
           <SlidersHorizontal className="h-4 w-4" />
         </Button>
       </SheetTrigger>

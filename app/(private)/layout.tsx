@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getWallets } from "@/actions/wallet";
+import { HeaderLogged } from "@/components/dashboard/HeaderLogged";
 
 export default async function PrivateLayout({
   children,
@@ -20,12 +21,13 @@ export default async function PrivateLayout({
   return (
     <SidebarProvider>
       <div className="">
-        <AppSidebar userName={session.user?.name} />
+        <AppSidebar />
 
       </div>
-      <div className="w-full">
+      <div className="w-full bg-neutral-light/60 ">
         <div className="flex gap-3 items-start">
-          <SidebarTrigger className="my-4" />
+
+          <HeaderLogged userName={session.user?.name} />
         </div>
         {children}
       </div>

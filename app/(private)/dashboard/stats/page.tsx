@@ -1,15 +1,19 @@
 import { getWallets } from "@/actions/wallet";
 import StatsContent from "@/components/dashboard/stats/StatsContent";
+import { ChartNoAxesCombined } from "lucide-react";
 import React from "react";
 
 const page = async () => {
   return (
-    <div className="p-4">
-      <h1 className="mb-4 text-2xl text-center text-blue-600 font-semibold">
-        STATISTICS
-      </h1>
-      <h2 className="text-center text-blue-400 font-semibold">
-        (Amounts are expressed in {process.env.NEXT_PUBLIC_CURRENCY})
+    <div className="py-10">
+      <div className="flex items-center justify-center gap-6 mb-10 text-primary">
+        <ChartNoAxesCombined />
+        <h1 className="text-2xl text-center">
+          STATISTIQUES
+        </h1>
+      </div>
+      <h2 className="text-center text-muted-foreground italic font-semibold">
+        (Les montants sont exprimés en {process.env.NEXT_PUBLIC_CURRENCY})
       </h2>
       <StatsContent />
     </div>

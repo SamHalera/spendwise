@@ -25,7 +25,7 @@ const FilterByMonthYear = ({
         defaultValue={dataValue}
       >
         <SelectTrigger>
-          <SelectValue placeholder="Pick a month" />
+          <SelectValue placeholder="Choisir un mois" />
         </SelectTrigger>
 
         <SelectContent>

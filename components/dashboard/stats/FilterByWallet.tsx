@@ -29,7 +29,7 @@ const FilterByWallet = ({
         }}
       >
         <SelectTrigger>
-          <SelectValue placeholder="Select a wallet" id="wallet" />
+          <SelectValue placeholder="Sélectionner un portefeuille" id="wallet" />
         </SelectTrigger>
 
         <SelectContent>

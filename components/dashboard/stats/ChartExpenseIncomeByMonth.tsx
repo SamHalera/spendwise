@@ -27,15 +27,15 @@ import { WalletProps } from "@/types/types";
 
 const chartConfigExpensesIncomes = {
   total_amount: {
-    label: "Total amount",
+    label: "Montant total",
   },
 
   expenses: {
-    label: "Expenses",
+    label: "Dépenses",
     color: "hsl(var(--chart-1))",
   },
   incomes: {
-    label: "Incomes",
+    label: "Revenus",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
@@ -73,10 +73,10 @@ export const ChartExpenseIncomeByMonth = ({
       <Card className="w-full">
         <CardHeader>
           <CardTitle className="flex gap-1 text-xl">
-            <span>Expenses/Incomes </span>
-            <span>per month</span>
+            <span>Dépenses/Revenus </span>
+            <span>par mois</span>
           </CardTitle>
-          <CardDescription className="text-blue-500 font-semibold">
+          <CardDescription className="text-primary font-semibold">
             <FilterByMonthYear
               dataValue={dataByMonth}
               setDataValue={setDataByMonth}
@@ -108,7 +108,7 @@ export const ChartExpenseIncomeByMonth = ({
                       y={props.y}
                       textAnchor={props.textAnchor}
                       dominantBaseline={props.dominantBaseline}
-                      className=" fill-blue-700"
+                      className="fill-primary"
                     >
                       {payload.type} {Number(payload.total_amount).toFixed(2)}
                     </text>
@@ -120,9 +120,9 @@ export const ChartExpenseIncomeByMonth = ({
                   className="fill-background"
                   stroke="none"
                   fontSize={12}
-                  // formatter={(value: keyof typeof chartConfigExpensesIncomes) =>
-                  //   chartConfigExpensesIncomes[value]?.label
-                  // }
+                // formatter={(value: keyof typeof chartConfigExpensesIncomes) =>
+                //   chartConfigExpensesIncomes[value]?.label
+                // }
                 />
               </Pie>
               {/* <Pie data={chartData} dataKey="expenses" /> */}

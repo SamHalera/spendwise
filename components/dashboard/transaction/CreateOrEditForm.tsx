@@ -105,7 +105,7 @@ const CreateOrEditForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Transaction ID{" "}
+                  ID de transaction{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
@@ -113,8 +113,8 @@ const CreateOrEditForm = ({
                     {...field}
                     type="number"
                     disabled={true}
-                    className={clsx("bg-slate-200", {
-                      "border-red-400": form.formState.errors.id,
+                    className={clsx("bg-neutral-light", {
+                      "border-tertiary": form.formState.errors.id,
                     })}
                   />
                 </FormControl>
@@ -127,16 +127,16 @@ const CreateOrEditForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Transaction label{" "}
+                  Libellé{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     type="text"
-                    placeholder="Give a label for your transaction"
+                    placeholder="Libellé de la transaction"
                     className={clsx({
-                      "border-red-400": form.formState.errors.label,
+                      "border-tertiary": form.formState.errors.label,
                     })}
                   />
                 </FormControl>
@@ -149,7 +149,7 @@ const CreateOrEditForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Transaction type{" "}
+                  Type{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <Select
@@ -158,12 +158,12 @@ const CreateOrEditForm = ({
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a transaction type" />
+                      <SelectValue placeholder="Sélectionner un type" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="EXPENSE">expense</SelectItem>
-                    <SelectItem value="INCOME">income</SelectItem>
+                    <SelectItem value="EXPENSE">Dépense</SelectItem>
+                    <SelectItem value="INCOME">Revenu</SelectItem>
                   </SelectContent>
                 </Select>
               </FormItem>
@@ -175,7 +175,7 @@ const CreateOrEditForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Transaction status{" "}
+                  Statut{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <FormControl>
@@ -183,8 +183,8 @@ const CreateOrEditForm = ({
                     {...field}
                     type="text"
                     disabled={true}
-                    className={clsx("bg-slate-200", {
-                      "border-red-400": form.formState.errors.id,
+                    className={clsx("bg-neutral-light", {
+                      "border-tertiary": form.formState.errors.id,
                     })}
                     value={field.value.toLowerCase()}
                   />
@@ -213,7 +213,7 @@ const CreateOrEditForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Payment Method{" "}
+                  Moyen de paiement{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <Select
@@ -222,15 +222,15 @@ const CreateOrEditForm = ({
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a payment method" />
+                      <SelectValue placeholder="Sélectionner un moyen de paiement" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="CARD">card</SelectItem>
-                    <SelectItem value="CASH">cash</SelectItem>
-                    <SelectItem value="CHEQUE">cheque</SelectItem>
+                    <SelectItem value="CARD">Carte</SelectItem>
+                    <SelectItem value="CASH">Espèces</SelectItem>
+                    <SelectItem value="CHEQUE">Chèque</SelectItem>
                     <SelectItem value="TRANSFERT_PAYMENT">
-                      transfert payment
+                      Virement
                     </SelectItem>
                   </SelectContent>
                 </Select>
@@ -243,7 +243,7 @@ const CreateOrEditForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex gap-2">
-                  Transaction date{" "}
+                  Date{" "}
                   <FormMessage className="italic text-xs font-semibold" />
                 </FormLabel>
                 <Popover>
@@ -251,7 +251,7 @@ const CreateOrEditForm = ({
                     <Button
                       variant={"outline"}
                       className={clsx(
-                        "w-[280px] justify-start text-left font-normal",
+                        "w-[280px] justify-start text-left font-normal border border-secondary text-secondary hover:bg-secondary hover:text-white",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -259,7 +259,7 @@ const CreateOrEditForm = ({
                       {field.value ? (
                         dayjs(field.value).format("DD/MM/YYYY")
                       ) : (
-                        <span>Pick a date</span>
+                        <span>Choisir une date</span>
                       )}
                     </Button>
                   </PopoverTrigger>
@@ -283,16 +283,16 @@ const CreateOrEditForm = ({
               return (
                 <FormItem>
                   <FormLabel className="flex gap-2">
-                    Transaction amount{" "}
+                    Montant{" "}
                     <FormMessage className="italic text-xs font-semibold" />
                   </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       type="text"
-                      placeholder="Give an amount"
+                      placeholder="Saisir un montant"
                       className={clsx({
-                        "border-red-400": form.formState.errors.amount,
+                        "border-tertiary": form.formState.errors.amount,
                       })}
                     />
                   </FormControl>
@@ -302,11 +302,11 @@ const CreateOrEditForm = ({
           />
 
           <Button
-            className="self-end"
+            className="self-end bg-slate-900 border border-slate-900 text-white transition-all hover:bg-transparent hover:text-slate-900"
             variant={"default"}
             disabled={!form.formState.isDirty}
           >
-            {data ? "Edit" : "Create"}
+            {data ? "Modifier" : "Créer"}
           </Button>
         </form>
       </Form>

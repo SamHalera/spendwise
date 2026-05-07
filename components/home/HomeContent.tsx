@@ -18,13 +18,13 @@ const HomeContent = async () => {
     redirect("/dashboard");
   }
   return (
-    <>
+    <div className="bg-slate-100">
       <Hero />
       {/* <MockupSection /> */}
       <FeaturesSections />
       <OptionsSection />
       <LastOption />
-    </>
+    </div>
   );
 };
 

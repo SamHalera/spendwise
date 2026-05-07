@@ -34,11 +34,11 @@ import { WalletProps } from "@/types/types";
 
 const chartTransactiosConfig = {
   expenses: {
-    label: "Expenses",
+    label: "Dépenses",
     color: "hsl(var(--chart-1))",
   },
   incomes: {
-    label: "Incomes",
+    label: "Revenus",
     color: "hsl(var(--chart-2))",
   },
   method: {},
@@ -57,7 +57,7 @@ export const ChartTransactionsByMethod = ({
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>My payment methods</CardTitle>
+        <CardTitle>Mes moyens de paiement</CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>

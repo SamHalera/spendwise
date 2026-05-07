@@ -3,7 +3,7 @@ import React from "react";
 import imageSignup from "@/public/images/image-signup.jpg";
 const page = () => {
   return (
-    <div className="flex h-auto lg:h-screen mt-20">
+    <div className="flex h-auto lg:h-screen mt-10">
       <div
         className="hidden lg:block flex-1 h-screen"
         style={{
@@ -16,7 +16,7 @@ const page = () => {
           <img src="/images/logo-dark.svg" alt="Spendwise" className="h-14" />
           <div>
             <h1 className="text-white text-6xl text-center">
-              Leading expenses management platform
+              La plateforme de gestion des dépenses de référence
             </h1>
           </div>
         </div>

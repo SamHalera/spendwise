@@ -4,8 +4,8 @@ import imgThirdOption from "@/public/images/third-option.avif";
 export const homeOptions = [
   {
     id: 1,
-    title: "Gestion des dépenses",
-    text: "Toutes vos dépenses en un coup d'œil. Fini de courir après les justificatifs. La soumission de notes de frais n'a jamais été aussi simple.",
+    title: "Géstion des dépenses",
+    text: "Créez votre compte, ajoutez vos premières opérations, et redécouvrez à quoi ressemble une vraie vue d'ensemble sur vos finances. Aucune carte bancaire demandée, aucune connexion à vos comptes — vous restez maître de vos données, du début à la fin.",
     imgSrc: imgFirstOption.src,
   },
   // {

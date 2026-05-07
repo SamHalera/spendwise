@@ -18,7 +18,7 @@ const HomeContent = async () => {
     redirect("/dashboard");
   }
   return (
-    <div className="bg-slate-100">
+    <div className="bg-slate-100 mt-16">
       <Hero />
       {/* <MockupSection /> */}
       <FeaturesSections />

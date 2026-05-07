@@ -55,7 +55,7 @@ const LoginForm = () => {
       }
       if (!signInData?.error) {
         const pathToRedirect = prevUrl ? `/${prevUrl}` : "/dashboard";
-        triggerRefresh()
+
         router.push("/dashboard");
 
       }

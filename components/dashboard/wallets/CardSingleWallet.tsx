@@ -38,7 +38,7 @@ const CardSingleWallet = ({ wallet }: { wallet: WalletProps }) => {
   };
 
   return (
-    <div className="w-1/3 relative shadow-md flex flex-col gap-6  justify-between px-10 py-8 my-9 bg-white rounded-xl mb-4">
+    <div className="lg:w-1/3 relative shadow-md flex flex-col gap-6  justify-between px-10 py-8 my-9 bg-white rounded-xl mb-4">
       <EllipsisVertical onClick={() => setShowBtns(!showBtns)} className="absolute top-4 right-2 cursor-pointer hover:bg-slate-100 duration-700 rounded-md py-2 w-7 h-7" size={20} />
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between gap-2 font-semibold ">

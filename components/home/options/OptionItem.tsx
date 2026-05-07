@@ -15,7 +15,7 @@ const OptionItem = ({
 }) => {
   return (
     <div
-      className={clsx("lg:px-10 h-screen w-full flex flex-col justify-end", {
+      className={clsx("lg:px-6 w-full flex flex-col ", {
         "bg-white": index % 2 === 0,
         "bg-slate-200": index % 2 !== 0,
       })}

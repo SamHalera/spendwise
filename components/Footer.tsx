@@ -24,7 +24,7 @@ const Footer = () => {
         </div>
         <div className="flex justify-center flex-1">
           <h2 className="text-white text-2xl md:w-72 text-center md:text-start">
-            Gérez vos dépenses avec Spendwise
+            Suivez vos dépenses avec Spendwise
           </h2>
         </div>
       </div>

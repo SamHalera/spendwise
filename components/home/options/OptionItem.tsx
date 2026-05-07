@@ -16,7 +16,7 @@ const OptionItem = ({
   return (
     <div
       className={clsx("lg:px-10 h-screen w-full flex flex-col justify-end", {
-        "bg-gradient-purple": index % 2 === 0,
+        "bg-white": index % 2 === 0,
         "bg-slate-200": index % 2 !== 0,
       })}
     >
@@ -28,7 +28,7 @@ const OptionItem = ({
           }
         )}
       >
-        <div className="flex flex-col gap-5 text-white p-10 lg:w-1/3">
+        <div className="flex flex-col gap-5 text-primary p-10 lg:w-1/3">
           <h2 className="text-3xl font-semibold">{title}</h2>
           <p className="text-xl">{text}</p>
           <Link

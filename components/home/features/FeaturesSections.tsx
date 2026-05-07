@@ -27,12 +27,12 @@ const items = [
 ];
 const itemsLabel = [
   {
-    label: "Soumettez vos dépenses facilement",
+    label: "Ajouter une dépense ou un revenu prend deux clics. Spendwise classe automatiquement par catégorie, agrège les totaux, met à jour les vues. Vous vous concentrez sur ce qui compte : faire vos comptes, pas les administrer.",
     boundTo: "expenses",
     icon: BookmarkCheck,
   },
   {
-    label: "Un suivi clair des transactions",
+    label: "Marquez une opération comme récurrente, et elle apparaît automatiquement chaque mois. Modifiez le montant, la date ou désactivez-la quand votre situation évolue. Plus jamais de copier-coller le 1er du mois.",
     boundTo: "monitoring",
     icon: ChartNetwork,
   },
@@ -58,10 +58,10 @@ const FeaturesSections = () => {
       >
         <div className="flex-1">
           <div className="lg:w-2/3  lg:sticky top-48 bottom-10 mx-auto flex flex-col gap-10">
-            <h3 className="text-2xl lg:text-3xl font-thin text-center lg:text-start">
-              Gérez toutes vos dépenses sur notre plateforme – des notes de
-              frais aux remboursements et aux transactions par carte bancaire.
+            <h3 className="text-2xl text-primary lg:text-3xl font-thin text-center lg:text-start">
+              La saisie qui ne fait pas perdre de temps
             </h3>
+
             <div className="hidden lg:block">
               {itemsLabel.map((item) => {
                 return (
@@ -72,7 +72,7 @@ const FeaturesSections = () => {
                     })}
                     key={item.label}
                   >
-                    <item.icon size={40} className="text-secondary" />
+                    {/* <item.icon size={40} className="text-secondary" /> */}
                     <span className="text-secondary text-2xl">{item.label}</span>
                   </div>
                 );
